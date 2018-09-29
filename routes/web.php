@@ -16,6 +16,4 @@ Route::get('/', function () {
 });
 
 $api = app('Dingo\Api\Routing\Router');
-$api->version('v1', function ($api) {
-    $api->get('helloworld', 'App\Api\Controllers\HelloController@index');
-});
+require __DIR__.'/admin/V1/test.php';
