@@ -15,10 +15,10 @@ class CreateAdminActionsTable extends Migration
     {
         Schema::create('admin_actions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100)->unique()->comment('权限名称');
-            $table->enum('type', [1,2,3])->comment('类型 1-一级 2-二级 3-三级');
+            $table->string('name', 100)->nullable(false)->unique()->comment('权限名称');
+            $table->enum('type', [1,2,3])->nullable(false)->comment('类型 1-一级 2-二级 3-三级');
             $table->integer('parent_id')->default(0)->comment('上级ID');
-            $table->string('ts_action', 100)->unique()->comment('权限标示');
+            $table->string('ts_action', 100)->nullable(false)->unique()->comment('权限标示');
             $table->timestamps();
         });
     }
