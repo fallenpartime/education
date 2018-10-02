@@ -26,7 +26,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Frameworks\\": "frameworks/"
+            "Frameworks\\": "frameworks/",
+            "Admin\\": "admin/"
         }
     },
     "autoload-dev": {
