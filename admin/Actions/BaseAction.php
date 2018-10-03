@@ -45,6 +45,12 @@ class BaseAction
         return $result;
     }
 
+    protected function createView($view, $result)
+    {
+        $result = $this->initAdminResult($result);
+        return view($view, $result);
+    }
+
     public function run()
     {}
 }

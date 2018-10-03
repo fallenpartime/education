@@ -12,7 +12,9 @@ class IndexAction extends BaseAction
 {
     public function run()
     {
-        $actionName = $this->request->route()->getName();
-        return view('admin.test.index', ['content'=>$actionName]);
+        $result = [
+            'menu'  =>  ['manageCenter', 'authorityCenter', 'authorities']
+        ];
+        return $this->createView('admin.test.index', $result);
     }
 }

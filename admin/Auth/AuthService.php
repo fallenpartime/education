@@ -47,7 +47,9 @@ class AuthService
             'user_id'       =>  1,
             'username'      =>  'manager',
             'role_id'       =>  99,
-            'group_list'    =>  [1]
+            'group_list'    =>  [1],
+            'is_manager'    =>  1,
+            'is_super'      =>  1
         ];
         $this->isMaster = 1;
         $this->isSuper = 1;

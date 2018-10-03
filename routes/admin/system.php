@@ -12,3 +12,9 @@ Route::get('/admin/check', [
 Route::get('/admin/qrcode', [
     'uses' => '\App\Http\Admin\Controllers\Site\SiteController@qrcode'
 ])->name('admin.qrcode');
+
+Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(function () {
+    Route::get('/admin/authorities', [
+        'uses' => '\App\Http\Admin\Controllers\System\SystemController@authorities'
+    ])->name('admin.authorities');
+});
