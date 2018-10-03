@@ -16,5 +16,8 @@ Route::get('/admin/qrcode', [
 Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(function () {
     Route::get('/admin/authorities', [
         'uses' => '\App\Http\Admin\Controllers\System\SystemController@authorities'
-    ])->name('admin.authorities');
+    ])->name('authorities');
+    Route::match(['get', 'post'], '/admin/authorityInfo', [
+        'uses' => '\App\Http\Admin\Controllers\System\SystemController@authorityInfo'
+    ])->name('authorityInfo');
 });

@@ -32,7 +32,8 @@ class AdminMenuConfig
         return [
             'manageCenter'  =>  [
                 'authorityCenter'   =>  [
-                    'authorities'   =>  route('admin.authorities', ['status'=>1])
+                    'authorities'       =>  route('authorities'),
+                    'authorityInfo'     =>  route('authorityInfo', ['work_no'=>1])
                 ],
             ],
         ];

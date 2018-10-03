@@ -6,6 +6,7 @@
  */
 namespace Frameworks\Tool\Http;
 
+use Admin\Component\CommonTool;
 use Illuminate\Http\Request;
 
 class HttpTool
@@ -68,6 +69,67 @@ class HttpTool
             default:
                 return null;
         }
+    }
+
+    /**
+     * 安全获取参数
+     * @param int $requestMethod
+     * @param int $paramType
+     * @param $paramName
+     * @param bool $required
+     * @param null $defaultValue
+     * @return int|null|string
+     */
+    public function getSafeParam($requestMethod = 2, $paramType = 1, $paramName, $required = false, $defaultValue = null)
+    {
+        if (!in_array($requestMethod, HttpConfig::getMethodList())) {
+            return null;
+        }
+        $intType = HttpConfig::PARAM_NUMBER_TYPE;
+        $txtType = HttpConfig::PARAM_TEXT_TYPE;
+        $pi_InValid = null;
+        $params = self::getParams($requestMethod);
+        if($paramType == $intType) {
+            $pi_InValid = HttpConfig::PARAM_NUMBER_DEFAULT;
+        } else if($paramType == $txtType) {
+            $pi_InValid = HttpConfig::PARAM_TEXT_DEFAULT;
+        }
+        if ($required == false && $defaultValue != null) {
+            $t_Val = $defaultValue;
+        } else {
+            $t_Val = $pi_InValid;
+        }
+        if($paramValue = array_get($params, $paramName)) {
+            $t_Val = trim($paramValue);
+        }
+        if ($intType == $paramType)  {
+            // Integer
+            if (CommonTool::is_digital($t_Val)) {
+                return $t_Val;
+            } else {
+                return $defaultValue;
+            }
+        } else if ($txtType == $paramType) {
+            $t_Val = strip_tags($t_Val);
+            $t_Val = addslashes($t_Val);
+            return $t_Val;
+        }
+        return null;
+    }
+
+    public function getGetSafeParam($paramName, $paramType = 1, $required = false, $defaultValue = null)
+    {
+        return $this->getSafeParam(HttpConfig::METHOD_GET, $paramType, $paramName, $required, $defaultValue);
+    }
+
+    public function getPostSafeParam($paramName, $paramType = 1, $required = false, $defaultValue = null)
+    {
+        return $this->getSafeParam(HttpConfig::METHOD_POST, $paramType, $paramName, $required, $defaultValue);
+    }
+
+    public function getBothSafeParam($paramName, $paramType = 1, $required = false, $defaultValue = null)
+    {
+        return $this->getSafeParam(HttpConfig::METHOD_BOTH, $paramType, $paramName, $required, $defaultValue);
     }
 
     /**
