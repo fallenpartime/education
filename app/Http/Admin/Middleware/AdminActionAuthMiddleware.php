@@ -2,6 +2,7 @@
 
 namespace App\Http\Admin\Middleware;
 
+use Admin\Auth\AuthService;
 use Closure;
 
 class AdminActionAuthMiddleware
@@ -15,7 +16,11 @@ class AdminActionAuthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $routeAction = $request->route()->getName();
-        return $next($request);
+        $authService = new AuthService($request);
+        list($status, $response) = $authService->validateCurrentAction();
+        if ($status) {
+            return $next($request);
+        }
+        return $response;
     }
 }

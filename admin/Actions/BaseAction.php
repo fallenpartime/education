@@ -6,6 +6,7 @@
  */
 namespace Admin\Actions;
 
+use Admin\Auth\AuthService;
 use Frameworks\Tool\Http\HttpTool;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class BaseAction
 {
     protected $request = null;
     protected $httpTool = null;
+    protected $authService = null;
 
     public function __construct(Request $request)
     {
@@ -25,6 +27,22 @@ class BaseAction
             $this->httpTool = new HttpTool($this->request);
         }
         return $this->httpTool;
+    }
+
+    protected function getAuthService()
+    {
+        if (empty($this->authService)) {
+            $this->authService = new AuthService($this->request);
+        }
+        return $this->authService;
+    }
+
+    protected function initAdminResult($result)
+    {
+        $service = $this->getAuthService();
+        $result['admin_info'] = $service->getAdminInfo();
+        $result['ts_list'] = $service->getActionList();
+        return $result;
     }
 
     public function run()

@@ -17,6 +17,10 @@ class AdminLoginAuthMiddleware
     public function handle($request, Closure $next)
     {
         $authService = new AuthService($request);
-        return $next($request);
+        list($status, $redirectUrl, $adminInfo) = $authService->validateLogin();
+        if ($status) {
+            return $next($request);
+        }
+        return redirect($redirectUrl);
     }
 }
