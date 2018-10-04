@@ -16,7 +16,7 @@ class IndexAction extends BaseAction
         $list = AdminUserGroup::all();
         $result = [
             'list'  =>  $list,
-            'menu'  =>  ['manageCenter', 'groupCenter', 'groups']
+            'menu'  =>  ['manageCenter', 'groupManage', 'groups']
         ];
         return $this->createView('admin.system.group.index', $result);
     }

@@ -46,7 +46,7 @@ class DetailAction extends BaseAction
             'relate_menu'   => $authorityService->relateMenu([1,2]),
             'first_menu'    => $firstId,
             'second_menu'   => $secondId,
-            'menu'  =>  ['manageCenter', 'authorityCenter', 'authorityInfo'],
+            'menu'  =>  ['manageCenter', 'authorityManage', 'authorityInfo'],
             'actionUrl'     => route('authorityInfo', ['work_no'=>2]),
             'redirectUrl'   => route('authorities'),
         ];

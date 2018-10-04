@@ -17,7 +17,7 @@ class IndexAction extends BaseAction
         $list = $service->relateMenu([1,2,3]);
         $result = [
             'list'  =>  $list,
-            'menu'  =>  ['manageCenter', 'authorityCenter', 'authorities']
+            'menu'  =>  ['manageCenter', 'authorityManage', 'authorities']
         ];
         return $this->createView('admin.system.authority.index', $result);
     }

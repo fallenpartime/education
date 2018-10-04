@@ -22,7 +22,8 @@ class AdminMenuConfig
 //                'projectLogManage'=>''
 //            ],
             'manageCenter'  =>  [
-                'authorityCenter'   =>  '',
+                'groupManage'       =>  '',
+                'authorityManage'   =>  '',
             ],
         ];
     }
@@ -31,7 +32,11 @@ class AdminMenuConfig
     {
         return [
             'manageCenter'  =>  [
-                'authorityCenter'   =>  [
+                'groupManage'   =>  [
+                    'groups'            =>  route('groups'),
+                    'groupInfo'         =>  route('groupInfo', ['work_no'=>1])
+                ],
+                'authorityManage'   =>  [
                     'authorities'       =>  route('authorities'),
                     'authorityInfo'     =>  route('authorityInfo', ['work_no'=>1])
                 ],
