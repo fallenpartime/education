@@ -36,7 +36,6 @@ class DBTool
 
     public static function getSingle($table, $columns, $where)
     {
-
         $processor = DB::table($table);
         if (!empty($columns)) {
             $processor = $processor->select($columns);
