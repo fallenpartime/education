@@ -32,13 +32,25 @@ abstract class BaseProcessor
         return $this->getSingle($where, $columns);
     }
 
-    public function store($data)
+    public function insert($data)
     {
         $model = new $this->tableClass;
         foreach ($data as $dname => $datum) {
             $model->$dname = $datum;
         }
-        return $model->save();
+        $status = $model->save();
+        return [$status, $model];
+    }
+
+    public function update($id, $data)
+    {
+        $tableClass = new $this->tableClass;
+        $model = $tableClass::find($id);
+        foreach ($data as $dname => $datum) {
+            $model->$dname = $datum;
+        }
+        $status = $model->save();
+        return [$status, $id];
     }
 
     public function remove($condition)

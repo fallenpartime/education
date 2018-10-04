@@ -44,6 +44,7 @@
                     </div>
                 </div>
             </div>
+            @include('admin.system.authority.checked_list')
         </div>
         <!-- 提交 -->
         <div class="container-fluid main-content">

@@ -3,7 +3,7 @@
     <div class="container-fluid main-nav clearfix">
         <div class="nav-collapse" style="position:relative;">
             <img src="/assets/logo/logo.png" style="height: 35px;width: 150px;position: absolute;left:20px;top:18px;"/>
-            <ul class="nav">
+            <ul class="nav" @if(!empty($admin_info['is_manager']))style="text-align: right !important;padding-right: 20px;"@endif>
                 @if(!empty($admin_info['is_manager'] || in_array('manageCenter', $ts_list)))
                 <li class="dropdown">
                     <a data-toggle="dropdown" href="#" @if(in_array('manageCenter', $menu)) class="current"@endif >

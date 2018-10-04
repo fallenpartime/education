@@ -13,12 +13,13 @@ class AuthorityService
     /**
      * 关联权限
      * @param array $types
+     * @param int $withUrl
      * @param array $columns
      * @return array|mixed
      */
-    public function relateMenu($types = [1,2,3], $columns = ['id', 'parent_id', 'type', 'name', 'ts_action'])
+    public function relateMenu($types = [1,2,3], $withUrl = 0, $columns = ['id', 'parent_id', 'type', 'name', 'ts_action'])
     {
-        $integration = new RelateAuthoritiesIntegration($types, $columns);
+        $integration = new RelateAuthoritiesIntegration($types, $withUrl, $columns);
         list($status, $message, $count, $list) = $integration->process();
         return !empty($status)? $list: [];
     }

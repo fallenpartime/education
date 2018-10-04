@@ -7,7 +7,6 @@
 namespace App\Http\Admin\Actions\System\Authority;
 
 use Admin\Actions\BaseAction;
-use Admin\Models\System\AdminAction;
 use Admin\Services\Authority\AuthorityService;
 use Admin\Services\Authority\Processor\AdminActionProcessor;
 use Admin\Traits\ApiActionTrait;
@@ -86,7 +85,6 @@ class DetailAction extends BaseAction
         $tsName = $httpTool->getBothSafeParam('ts_name');
         $tsAction = trim($_REQUEST['ts_action']);
         $type = $httpTool->getBothSafeParam('type', HttpConfig::PARAM_NUMBER_TYPE);
-        $processor = new AdminActionProcessor();
         $record = $this->authority;
         if (!empty($id)) {
             if (empty($record)) {
@@ -109,7 +107,6 @@ class DetailAction extends BaseAction
         } elseif ($type != 1) {
             $this->errorJson(500, '请选择一级权限');
         }
-        $memo = '后台权限信息';
         if($second_id){
             $parent_id = $second_id;
         }else{
@@ -122,19 +119,22 @@ class DetailAction extends BaseAction
             'ts_action' =>  $tsAction,
             'name'      =>  $tsName,
         ];
-
-        if (!empty($record)) {
-            $memo = '修改'.$memo;
-            $res = AdminAction::where('id', $id)->update($data);
-        } else {
-            $memo = '添加'.$memo;
-            $res = $processor->store($data);
-        }
-        $memo .= ";res=>".($res? 1: 0);
-//        CommonService::masterLog(10, !empty($record)? $id: $res, $memo, $this->admin_info);
+        list($res, $id) = empty($id)? $this->store($data): $this->update($data);
         if ($res) {
             $this->successJson();
         }
         $this->errorJson(500, '提交失败');
+    }
+
+    protected function store($data)
+    {
+        list($res, $model) = (new AdminActionProcessor())->insert($data);
+        $insertId = $res? $model->id: 0;
+        return [$res, $insertId];
+    }
+
+    protected function update($data)
+    {
+        return (new AdminActionProcessor())->update($this->authority->id, $data);
     }
 }

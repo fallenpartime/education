@@ -7,17 +7,19 @@
 namespace Admin\Services\Authority\Integration;
 
 use Admin\Base\Processor\BaseWorkProcessor;
-use Illuminate\Support\Facades\DB;
+use Admin\Models\System\AdminAction;
 
 class RelateAuthoritiesIntegration extends BaseWorkProcessor
 {
     protected $_menu = [];
     protected $_type = [];
+    protected $withUrl = 0;
 
-    public function __construct($type, $columns = '')
+    public function __construct($type, $withUrl = 0, $columns = '')
     {
         $this->_type = $type;
-        $this->_menu = DB::table("admin_actions")->select($columns)->whereIn('type', $type)->get();
+        $this->withUrl = $withUrl;
+        $this->_menu = AdminAction::whereIn('type', $type)->select($columns)->get();
     }
 
     protected function separate()
@@ -26,6 +28,9 @@ class RelateAuthoritiesIntegration extends BaseWorkProcessor
         foreach ($this->_menu as $menu) {
             $menuId = $menu->id;
             $menuType = $menu->type;
+            if ($this->withUrl) {
+                $menu->edit_url = route('authorityInfo', ['work_no'=>1, 'id'=>$menuId]);
+            }
             if ($menuType == 1) {
                 $mainMenuList[$menuId] = ['menu'=>$menu, 'length'=>0, 'list'=>[]];
             }

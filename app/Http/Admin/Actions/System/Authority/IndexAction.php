@@ -14,7 +14,7 @@ class IndexAction extends BaseAction
     public function run()
     {
         $service = new AuthorityService();
-        $list = $service->relateMenu([1,2,3]);
+        $list = $service->relateMenu([1,2,3], 1);
         $result = [
             'list'  =>  $list,
             'menu'  =>  ['manageCenter', 'authorityManage', 'authorities']
