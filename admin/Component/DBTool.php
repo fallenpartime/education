@@ -10,16 +10,22 @@ use Illuminate\Support\Facades\DB;
 
 class DBTool
 {
-    public static function getList($table, $columns, $where, $limit)
+    public static function getTableProcessor($table, $where)
     {
         $processor = DB::table($table);
-        if (!empty($columns)) {
-            $processor = $processor->select($columns);
-        }
         if (!empty($where)) {
             foreach ($where as $key => $item) {
                 $processor->where($key, $item);
             }
+        }
+        return $processor;
+    }
+
+    public static function getList($table, $columns, $where, $limit)
+    {
+        $processor = self::getTableProcessor($table, $where);
+        if (!empty($columns)) {
+            $processor = $processor->select($columns);
         }
         if (is_array($limit)) {
             $countLimit = count($limit);
@@ -36,15 +42,15 @@ class DBTool
 
     public static function getSingle($table, $columns, $where)
     {
-        $processor = DB::table($table);
+        $processor = self::getTableProcessor($table, $where);
         if (!empty($columns)) {
             $processor = $processor->select($columns);
         }
-        if (!empty($where)) {
-            foreach ($where as $key => $item) {
-                $processor->where($key, $item);
-            }
-        }
         return $processor->first();
+    }
+
+    public static function count($table, $where)
+    {
+        return self::getTableProcessor($table, $where)->count();
     }
 }

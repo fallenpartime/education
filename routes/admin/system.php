@@ -20,4 +20,16 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
     Route::match(['get', 'post'], '/admin/authorityInfo', [
         'uses' => '\App\Http\Admin\Controllers\System\SystemController@authorityInfo'
     ])->name('authorityInfo');
+    Route::get('/admin/groups', [
+        'uses' => '\App\Http\Admin\Controllers\System\SystemController@groups'
+    ])->name('groups');
+    Route::match(['get', 'post'], '/admin/groupInfo', [
+        'uses' => '\App\Http\Admin\Controllers\System\SystemController@groupInfo'
+    ])->name('groupInfo');
+    Route::get('/admin/roles', [
+        'uses' => '\App\Http\Admin\Controllers\System\SystemController@roles'
+    ])->name('roles');
+    Route::match(['get', 'post'], '/admin/roleInfo', [
+        'uses' => '\App\Http\Admin\Controllers\System\SystemController@roleInfo'
+    ])->name('roleInfo');
 });

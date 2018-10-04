@@ -6,6 +6,8 @@ use App\Http\Admin\Actions\System\Authority\DetailAction;
 use App\Http\Admin\Actions\System\Authority\IndexAction;
 use App\Http\Admin\Actions\System\Group\IndexAction as GroupIndexAction;
 use App\Http\Admin\Actions\System\Group\DetailAction as GroupDetailAction;
+use App\Http\Admin\Actions\System\Role\IndexAction as RoleIndexAction;
+use App\Http\Admin\Actions\System\Role\DetailAction as RoleDetailAction;
 use App\Http\Admin\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -30,5 +32,15 @@ class SystemController extends Controller
     public function groupInfo(Request $request)
     {
         return (new GroupDetailAction($request))->run();
+    }
+
+    public function roles(Request $request)
+    {
+        return (new RoleIndexAction($request))->run();
+    }
+
+    public function roleInfo(Request $request)
+    {
+        return (new RoleDetailAction($request))->run();
     }
 }
