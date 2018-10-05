@@ -33,7 +33,7 @@ class IndexAction extends BaseAction
                     'no'        =>  $item->role_no,
                     'name'      =>  $item->name,
                     'actions'   =>  $item->actions,
-                    'indexTag'  =>  AdminConfig::getIndexUrl($item->index_action),
+                    'indexTag'  =>  AdminConfig::getIndexUrl($item->index_action, 'title'),
                     'group_desc'    =>  [],
                     'group_ext'     =>  [],
                     'created_at'    =>  $item->created_at,

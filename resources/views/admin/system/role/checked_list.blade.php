@@ -2,7 +2,7 @@
     <div class="col-lg-6" style="float:left;">
         <div class="widget-container fluid-height clearfix">
             <div class="widget-content padded clearfix">
-                <p>权限列表</p>
+                <p>角色权限</p>
                 <table class="table table-bordered table-striped table-hover" id="">
                     <thead>
                     <th width="33%">一级权限</th>
@@ -68,7 +68,7 @@
     <div class="col-lg-6" style="float:left;">
         <div class="widget-container fluid-height clearfix">
             <div class="widget-content padded clearfix">
-                <p>权限列表</p>
+                <p>分组权限</p>
                 <table class="table table-bordered table-striped table-hover" id="">
                     <thead>
                     <th width="33%">一级权限</th>

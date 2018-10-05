@@ -28,7 +28,7 @@
                                             {{ $value['no'] }}
                                         </td>
                                         <td>
-                                            {{ $value['name'] }}
+                                            {{ $value['name'] }}<br>
                                             入口：{{ $value['indexTag'] }}
                                         </td>
                                         <td style="word-break:break-all; text-align: left;">

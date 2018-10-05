@@ -11,7 +11,7 @@ class AdminConfig
     public static function indexUrlList()
     {
         return [
-            'index'       => ['title'=>'入口', 'url'=>''],
+            'index'       => ['title'=>'首页', 'url'=>''],
         ];
     }
 
