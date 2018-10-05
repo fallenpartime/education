@@ -2,13 +2,20 @@
 
 namespace App\Http\Admin\Controllers\System;
 
+use App\Http\Admin\Actions\Master\DetailAction;
+use App\Http\Admin\Actions\Master\IndexAction;
 use App\Http\Admin\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class MasterController extends Controller
 {
-    public function index(Request $request)
+    public function owners(Request $request)
     {
+        return (new IndexAction($request))->run();
+    }
 
+    public function ownerInfo(Request $request)
+    {
+        return (new DetailAction($request))->run();
     }
 }

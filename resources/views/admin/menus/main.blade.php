@@ -10,6 +10,11 @@
                         <span aria-hidden="true" class="se7en-tables"></span>权限中心<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
+                        @if(!empty($admin_info['is_manager'] || in_array('ownerManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'manageCenter.ownerManage') }}" @if(in_array('ownerManage', $menu)) class="current"@endif>用户管理</a>
+                            </li>
+                        @endif
                         @if(!empty($admin_info['is_manager'] || in_array('groupManage', $ts_list)))
                             <li>
                                 <a href="{{ array_get($menu_urls, 'manageCenter.groupManage') }}" @if(in_array('groupManage', $menu)) class="current"@endif>分组管理</a>
