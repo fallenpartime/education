@@ -18,7 +18,6 @@ class CreateAdminUserInfosTable extends Migration
             $table->integer('user_id')->unique()->comment('用户ID');
             $table->integer('role_id')->default(0)->comment('角色ID');
             $table->ipAddress('ip')->nullable()->comment('登录IP');
-            $table->string('index_action')->nullable()->comment('登录action');
             $table->tinyInteger('is_admin')->default(0)->comment('是否允许登录 0-否 1-是');
             $table->tinyInteger('is_owner')->default(0)->comment('是否显示为执行人 0-否 1-是');
             $table->tinyInteger('is_super')->default(0)->comment('是否超级管理员 0-否 1-是');

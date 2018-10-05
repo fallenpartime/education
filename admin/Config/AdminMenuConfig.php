@@ -23,6 +23,7 @@ class AdminMenuConfig
 //            ],
             'manageCenter'  =>  [
                 'groupManage'       =>  '',
+                'roleManage'        =>  '',
                 'authorityManage'   =>  '',
             ],
         ];
@@ -35,6 +36,10 @@ class AdminMenuConfig
                 'groupManage'   =>  [
                     'groups'            =>  route('groups'),
                     'groupInfo'         =>  route('groupInfo', ['work_no'=>1])
+                ],
+                'roleManage'   =>  [
+                    'roles'             =>  route('roles'),
+                    'roleInfo'          =>  route('roleInfo', ['work_no'=>1])
                 ],
                 'authorityManage'   =>  [
                     'authorities'       =>  route('authorities'),

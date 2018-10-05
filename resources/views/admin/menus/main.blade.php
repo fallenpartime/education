@@ -15,6 +15,11 @@
                                 <a href="{{ array_get($menu_urls, 'manageCenter.groupManage') }}" @if(in_array('groupManage', $menu)) class="current"@endif>分组管理</a>
                             </li>
                         @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('roleManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'manageCenter.roleManage') }}" @if(in_array('roleManage', $menu)) class="current"@endif>角色管理</a>
+                            </li>
+                        @endif
                         @if(!empty($admin_info['is_manager'] || in_array('authorityManage', $ts_list)))
                         <li>
                             <a href="{{ array_get($menu_urls, 'manageCenter.authorityManage') }}" @if(in_array('authorityManage', $menu)) class="current"@endif>权限管理</a>
