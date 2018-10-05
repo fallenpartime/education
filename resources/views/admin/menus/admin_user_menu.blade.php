@@ -23,6 +23,14 @@
                                 </dl>
                             </a>
                         @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('ownerAuthority', $ts_list)))
+                            <a href="javascript:;">
+                                <dl class="btn btn-lg btn-primary-outline">
+                                    <dt><img src="/assets/images/manage.png"></dt>
+                                    <dd @if(in_array('ownerAuthority', $menu)) style="color:#007aff;"@endif>用户权限</dd>
+                                </dl>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
