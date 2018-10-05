@@ -38,7 +38,7 @@
                                             {{ $value['group_desc'] }}
                                         </td>
                                         <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
-                                            {{ $value['group_ext'] }}
+                                            @json($value['group_ext'])
                                         </td>
                                         <td>
                                             {{ $value['created_at'] }}
