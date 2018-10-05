@@ -22,6 +22,7 @@ class AdminMenuConfig
 //                'projectLogManage'=>''
 //            ],
             'manageCenter'  =>  [
+                'ownerManage'       =>  '',
                 'groupManage'       =>  '',
                 'roleManage'        =>  '',
                 'authorityManage'   =>  '',
@@ -33,6 +34,10 @@ class AdminMenuConfig
     {
         return [
             'manageCenter'  =>  [
+                'ownerManage'   =>  [
+                    'owners'            =>  route('owners'),
+                    'ownerInfo'         =>  route('ownerInfo', ['work_no'=>1])
+                ],
                 'groupManage'   =>  [
                     'groups'            =>  route('groups'),
                     'groupInfo'         =>  route('groupInfo', ['work_no'=>1])
