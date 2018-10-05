@@ -12,6 +12,7 @@ use Admin\Models\System\AdminUserRole;
 
 class IndexAction extends BaseAction
 {
+
     public function run()
     {
         $list = AdminUserRole::with('accesses')->get();
