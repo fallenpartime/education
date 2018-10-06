@@ -8,12 +8,20 @@
         <div class="col-lg-12">
             <div class="widget-container fluid-height clearfix search-window">
                 <form action="">
+                    <p class="inputs">
+                        <span class="special">用户名：</span>
+                        <input type="text" name="name" value="{{ array_get($urlParams, 'name') }}">
+                    </p>
+                    <p class="inputs">
+                        <span class="special">电话：</span>
+                        <input type="text" name="phone" value="{{ array_get($urlParams, 'phone') }}">
+                    </p>
                     <p class="select" style="width: 300px;">
                         <span class="special">显示为执行人：</span>
                         <select name="is_owner">
                             <option value="">全部</option>
-                            <option value="1" @if(array_get($urlParams, 'is_owner') == 1)selected="selected"@endif>是</option>
-                            <option value="2" @if(array_get($urlParams, 'is_owner') == 2)selected="selected"@endif>否</option>
+                            <option value="2" @if(array_get($urlParams, 'is_owner') == 2)selected="selected"@endif>是</option>
+                            <option value="1" @if(array_get($urlParams, 'is_owner') == 1)selected="selected"@endif>否</option>
                         </select>
                     </p>
                     <button class="sub">搜索</button>
@@ -64,6 +72,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ $value['edit_url'] }}" style="display: block;">编辑信息</a>
+                                            <a href="{{ $value['auth_url'] }}" style="display: block;">编辑权限</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -9,19 +9,14 @@ namespace App\Http\Admin\Actions\Master;
 use Admin\Actions\BaseAction;
 use Admin\Config\AdminConfig;
 use Admin\Models\System\AdminUserInfo;
-use Frameworks\Tool\Http\HttpConfig;
 
 class IndexAction extends BaseAction
 {
     public function run()
     {
         $httpTool = $this->getHttpTool();
-        $isOwner = $httpTool->getBothSafeParam('is_owner', HttpConfig::PARAM_NUMBER_TYPE);
-        $model = AdminUserInfo::with('role');
-        $urlParams = [];
-        if ($isOwner > 0) {
-            list($model, $urlParams) = $this->whereModel($model, $httpTool->getParams(), $urlParams);
-        }
+        $model = AdminUserInfo::with(['user', 'role']);
+        list($model, $urlParams) = $this->whereModel($model, $httpTool->getParams(), []);
         $list = $model->get();
         $result = [
             'list'  =>  $this->processList($list),
@@ -33,11 +28,32 @@ class IndexAction extends BaseAction
 
     protected function whereModel($model, $params = [], $urlParams = [])
     {
-        $isOwner = intval($params['is_owner']);
+        $isOwner = intval(array_get($params, 'is_owner'));
         if ($isOwner > 0) {
             $ownerValue = $isOwner - 1;
             $model = $model->where('is_owner', $ownerValue);
             $urlParams['is_owner'] = $isOwner;
+        }
+        $name = array_get($params, 'name');
+        $phone = array_get($params, 'phone');
+        $search = [];
+        if (!empty($name)) {
+            $search['name'] = $name;
+            $urlParams['name'] = $name;
+        }
+        if (!empty($phone)) {
+            $search['phone'] = $phone;
+            $urlParams['phone'] = $phone;
+        }
+        if (!empty($search)) {
+            $model = $model->whereHas('user', function($query) use ($search) {
+                if (!empty($search['name'])) {
+                    $query->where('name', $search['name']);
+                }
+                if (!empty($search['phone'])) {
+                    $query->where('phone', $search['phone']);
+                }
+            });
         }
         return [$model, $urlParams];
     }
@@ -57,6 +73,7 @@ class IndexAction extends BaseAction
                     'phone' =>  '',
                     'status_desc'   =>  $this->getStatusDescription($item),
                     'edit_url'      =>  route('ownerInfo', ['work_no'=>1, 'id'=>$item->id]),
+                    'auth_url'      =>  route('ownerAuthority', ['work_no'=>1, 'id'=>$item->id]),
                     'indexTag'      =>  AdminConfig::getIndexUrl($item->index_action, 'title'),
                     'created_at'    =>  $item->created_at,
                 ];

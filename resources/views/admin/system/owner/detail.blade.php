@@ -10,6 +10,7 @@
                 <div class="widget-container fluid-height clearfix">
                     <div class="col-sm-6 col-md-6 col-lg-6 downline-box">
                         <form id="userForm" action="" method="post" onsubmit="return false">
+                            {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ !empty($record)? $record->id: 0 }}">
                             <div class="bank-infos" style="min-height: 350px; height: auto;">
                                 <div class="p-boxs" style="padding-top: 30px;">

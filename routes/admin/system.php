@@ -38,4 +38,7 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
     Route::match(['get', 'post'], '/admin/ownerInfo', [
         'uses' => '\App\Http\Admin\Controllers\System\MasterController@ownerInfo'
     ])->name('ownerInfo');
+    Route::match(['get', 'post'], '/admin/ownerAuthority', [
+        'uses' => '\App\Http\Admin\Controllers\System\MasterController@ownerAuthority'
+    ])->name('ownerAuthority');
 });

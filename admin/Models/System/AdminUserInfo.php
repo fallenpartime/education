@@ -17,4 +17,9 @@ class AdminUserInfo extends Model
     {
         return $this->hasOne(AdminUserRole::class, 'role_no', 'role_id');
     }
+
+    public function userAction()
+    {
+        return $this->hasOne(AdminUserAction::class, 'user_id', 'user_id');
+    }
 }
