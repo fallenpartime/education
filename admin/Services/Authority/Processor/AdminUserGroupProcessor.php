@@ -13,4 +13,13 @@ class AdminUserGroupProcessor extends BaseProcessor
 {
     protected $tableName = 'admin_user_groups';
     protected $tableClass = AdminUserGroup::class;
+
+    public function getSingleByNo($groupNo, $columns = [])
+    {
+        if (empty($groupNo)) {
+            return '';
+        }
+        $where = ['group_no' => $groupNo];
+        return $this->getSingle($where, $columns);
+    }
 }

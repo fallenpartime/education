@@ -49,7 +49,7 @@
                                     ?>
                                     <tr>
                                         <td>
-                                            <input type="checkbox" name="{{ $groupModel->tip }}" value="{{ $groupModel->group_no }}" @if(!empty($access))checked="checked"@endif/>&nbsp;{{ $groupModel->name }}分组</td>
+                                            <input type="checkbox" class="group-list" name="{{ $groupModel->tip }}" value="{{ $groupModel->group_no }}" @if(!empty($access))checked="checked"@endif/>&nbsp;{{ $groupModel->name }}分组</td>
                                         </td>
                                         <td style="text-align: left">
                                             <input type="checkbox" name="{{ $groupModel->tip }}_leader" value="1" @if(!empty($access) && $access->is_leader ==1)checked="checked"@endif/>是否组长
@@ -124,5 +124,30 @@
                 )
             }
         }
+    </script>
+    <script>
+        $(".group-list").each(function (i, elem) {
+            $(elem).click(function () {
+                var checked = $(this).prop("checked")
+                var groupVal = $(this).val()
+                $.post(
+                    '{{ $groupAuthorityUrl }}',
+                    {group_id: groupVal},
+                    function (result) {
+                        result = JSON.parse(result)
+                        var authList = result.data.list;
+                        for (var i in authList) {
+                            console.log(authList[i]);
+                            if (checked == true) {
+                                $("[class='group-auth'][value="+authList[i]+"]").prop("checked", true);
+                            } else {
+                                $("[class='group-auth'][value="+authList[i]+"]").attr("checked", false);
+                            }
+                        }
+                    }
+                )
+
+            })
+        })
     </script>
 @endsection

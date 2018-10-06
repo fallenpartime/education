@@ -13,6 +13,7 @@ use Admin\Models\System\AdminUserRole;
 use Admin\Models\System\AdminUserRoleAccess;
 use Admin\Services\Authority\AuthorityService;
 use Admin\Services\Authority\Integration\RelateAuthoritiesCheckedIntegration;
+use Admin\Services\Authority\Processor\AdminUserGroupProcessor;
 use Admin\Services\Authority\Processor\AdminUserRoleAccessProcessor;
 use Admin\Services\Authority\Processor\AdminUserRoleProcessor;
 use Admin\Traits\ApiActionTrait;
@@ -32,11 +33,13 @@ class DetailAction extends BaseAction
         if (!empty($id)) {
             $this->_role = AdminUserRole::find($id);
         }
-        if ($workNo == 1 || $workNo == 2) {
+        if ($workNo == 1 || $workNo == 2 || $workNo == 3) {
             if ($workNo == 1) {
                 return $this->showInfo();
-            } else {
+            } else if($workNo == 2) {
                 $this->process();
+            } else {
+                $this->showGroupAuthority();
             }
         }
         $this->errorJson(500, '请求类型不匹配');
@@ -58,6 +61,7 @@ class DetailAction extends BaseAction
             'menu'  =>  ['manageCenter', 'roleManage', 'roleInfo'],
             'actionUrl'         => route('roleInfo', ['work_no'=>2]),
             'redirectUrl'       => route('roles'),
+            'groupAuthorityUrl' => route('roleInfo', ['work_no'=>3]),
         ];
         return $this->createView('admin.system.role.detail', $result);
     }
@@ -143,10 +147,6 @@ class DetailAction extends BaseAction
         list($res, $id) = empty($id)? $this->store($data): $this->update($data);
         $this->storeAccess($id);
         $this->successJson();
-//        if ($res) {
-//            $this->successJson();
-//        }
-//        $this->errorJson(500, '提交失败');
     }
 
     protected function getActionJson()
@@ -198,5 +198,19 @@ class DetailAction extends BaseAction
     protected function update($data)
     {
         return (new AdminUserRoleProcessor())->update($this->_role->id, $data);
+    }
+
+    protected function showGroupAuthority()
+    {
+        $httpTool = $this->getHttpTool();
+        $data = ['list'=>[]];
+        $groupId = $httpTool->getBothSafeParam('group_id', HttpConfig::PARAM_NUMBER_TYPE);
+        if ($groupId > 0) {
+            $group = (new AdminUserGroupProcessor())->getSingleByNo($groupId);
+            if (!empty($group) && !empty($group->actions)) {
+                $data['list'] = json_decode($group->actions);
+            }
+        }
+        $this->successJson('', $data);
     }
 }

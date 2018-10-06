@@ -97,21 +97,21 @@
                                             <?php $operateModel = $operateIem['menu']; ?>
                                             <tr>
                                                 @if($countSecond == 0 && $operateSecond == 0)
-                                                    <td rowspan="{{ $secondLength }}"><input type="checkbox" name="group_checked[]" disabled="disabled" value="{{ $topModel->ts_action }}" @if($topModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $topModel->name }}({{ $topModel->ts_action }})</td>
+                                                    <td rowspan="{{ $secondLength }}"><input type="checkbox" class="group-auth" name="group_checked[]" disabled="disabled" value="{{ $topModel->ts_action }}" @if($topModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $topModel->name }}({{ $topModel->ts_action }})</td>
                                                 @endif
                                                 @if($operateSecond == 0)
-                                                    <td rowspan="{{ $operateLength }}"><input type="checkbox" name="group_checked[]" disabled="disabled" value="{{ $secondModel->ts_action }}" @if($secondModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $secondModel->name }}({{ $secondModel->ts_action }})</td>
+                                                    <td rowspan="{{ $operateLength }}"><input type="checkbox" class="group-auth" name="group_checked[]" disabled="disabled" value="{{ $secondModel->ts_action }}" @if($secondModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $secondModel->name }}({{ $secondModel->ts_action }})</td>
                                                 @endif
-                                                <td><input type="checkbox" name="group_checked[]" disabled="disabled" value="{{ $operateModel->ts_action }}" @if($operateModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $operateModel->name }}({{ $operateModel->ts_action }})</td>
+                                                <td><input type="checkbox" class="group-auth" name="group_checked[]" disabled="disabled" value="{{ $operateModel->ts_action }}" @if($operateModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $operateModel->name }}({{ $operateModel->ts_action }})</td>
                                                 <?php $operateSecond++; ?>
                                             </tr>
                                         @endforeach
                                     @else
                                         <tr>
                                             @if($countSecond == 0 && $operateSecond == 0)
-                                                <td rowspan="{{ $secondLength }}"><input type="checkbox" name="group_checked[]" disabled="disabled" value="{{ $topModel->ts_action }}" @if($topModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $topModel->name }}({{ $topModel->ts_action }})</td>
+                                                <td rowspan="{{ $secondLength }}"><input type="checkbox" class="group-auth" name="group_checked[]" disabled="disabled" value="{{ $topModel->ts_action }}" @if($topModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $topModel->name }}({{ $topModel->ts_action }})</td>
                                             @endif
-                                            <td rowspan="{{ $operateLength }}"><input type="checkbox" name="group_checked[]" disabled="disabled" value="{{ $secondModel->ts_action }}" @if($secondModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $secondModel->name }}({{ $secondModel->ts_action }})</td>
+                                            <td rowspan="{{ $operateLength }}"><input type="checkbox" class="group-auth" name="group_checked[]" disabled="disabled" value="{{ $secondModel->ts_action }}" @if($secondModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $secondModel->name }}({{ $secondModel->ts_action }})</td>
                                             <td></td>
                                         </tr>
                                     @endif
@@ -119,7 +119,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td><input type="checkbox" name="group_checked[]" disabled="disabled" value="{{ $topModel->ts_action }}" @if($topModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $topModel->name }}({{ $topModel->ts_action }})</td>
+                                    <td><input type="checkbox" class="group-auth" name="group_checked[]" disabled="disabled" value="{{ $topModel->ts_action }}" @if($topModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $topModel->name }}({{ $topModel->ts_action }})</td>
                                     <td rowspan="1"></td>
                                     <td rowspan="1"></td>
                                 </tr>

@@ -12,6 +12,6 @@ class IndexAction extends BaseAction
 {
     public function run()
     {
-        //
+
     }
 }
