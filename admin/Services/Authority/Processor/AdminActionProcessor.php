@@ -13,4 +13,22 @@ class AdminActionProcessor extends BaseProcessor
 {
     protected $tableName = "admin_actions";
     protected $tableClass = AdminAction::class;
+
+    public function getSingleByName($name, $columns = [])
+    {
+        if (empty($name)) {
+            return '';
+        }
+        $where = ['name' => $name];
+        return $this->getSingle($where, $columns);
+    }
+
+    public function getSingleByAction($action, $columns = [])
+    {
+        if (empty($action)) {
+            return '';
+        }
+        $where = ['ts_action' => $action];
+        return $this->getSingle($where, $columns);
+    }
 }

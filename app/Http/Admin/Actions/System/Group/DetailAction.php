@@ -104,15 +104,60 @@ class DetailAction extends BaseAction
         return json_encode(array_unique($actions));
     }
 
+    protected function validateRepeat(AdminUserGroupProcessor $processor, $data, $isUpdate = 0)
+    {
+        $record = $processor->getSingleByNo($data['group_no']);
+        if (!empty($record)) {
+            if ($isUpdate) {
+                if ($record->id != $this->_group->id) {
+                    return [false, $record->id];
+                }
+            } else {
+                return [false, 0];
+            }
+        }
+        $record = $processor->getSingleByName($data['name']);
+        if (!empty($record)) {
+            if ($isUpdate) {
+                if ($record->id != $this->_group->id) {
+                    return [false, $record->id];
+                }
+            } else {
+                return [false, 0];
+            }
+        }
+        $record = $processor->getSingleByTip($data['tip']);
+        if (!empty($record)) {
+            if ($isUpdate) {
+                if ($record->id != $this->_group->id) {
+                    return [false, $record->id];
+                }
+            } else {
+                return [false, 0];
+            }
+        }
+        return [true, 0];
+    }
+
     protected function store($data)
     {
-        list($res, $model) = (new AdminUserGroupProcessor())->insert($data);
+        $processor = new AdminUserGroupProcessor();
+        list($res, $errorId) = $this->validateRepeat($processor, $data);
+        if ($res == false) {
+            return [$res, 0];
+        }
+        list($res, $model) = $processor->insert($data);
         $insertId = $res? $model->id: 0;
         return [$res, $insertId];
     }
 
     protected function update($data)
     {
-        return (new AdminUserGroupProcessor())->update($this->_group->id, $data);
+        $processor = new AdminUserGroupProcessor();
+        list($res, $errorId) = $this->validateRepeat($processor, $data, 1);
+        if ($res == false) {
+            return [$res, 0];
+        }
+        return $processor->update($this->_group->id, $data);
     }
 }

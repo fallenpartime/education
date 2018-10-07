@@ -63,18 +63,22 @@ class DetailAction extends BaseAction
         if(empty($this->_owner)){
             $this->errorJson(500, '后台用户信息不存在');
         }
-        (new AdminUserProcessor())->update($this->_user->id, $userData);
+        $adminUserProcessor = new AdminUserProcessor();
+        list($res, $errorId, $message) = $this->validateRepeat($adminUserProcessor, $userData, 1);
+        if ($res == false) {
+            $this->errorJson(500, $message);
+        }
+        $adminUserProcessor->update($this->_user->id, $userData);
         (new AdminUserInfoProcessor())->update($this->_owner->id, $ownerData);
         $this->successJson();
     }
 
     protected function saveUser($userData, $ownerData)
     {
-        $name = $userData['name'];
         $adminUserProcessor = new AdminUserProcessor();
-        $user = $adminUserProcessor->getSingleByName($name);
-        if (!empty($user)) {
-            $this->errorJson(500, '后台用户已存在');
+        list($res, $errorId, $message) = $this->validateRepeat($adminUserProcessor, $userData);
+        if ($res == false) {
+            $this->errorJson(500, $message);
         }
         list($status, $user) = $adminUserProcessor->insert($userData);
         if (empty($user)) {
@@ -135,6 +139,31 @@ class DetailAction extends BaseAction
             $ownerData['is_super'] = !empty($isSuper)? $isSuper: 0;
         }
         return [$userData, $ownerData];
+    }
+
+    protected function validateRepeat(AdminUserProcessor $processor, $data, $isUpdate = 0)
+    {
+        $record = $processor->getSingleByName($data['name']);
+        if (!empty($record)) {
+            if ($isUpdate) {
+                if ($record->id != $this->_user->id) {
+                    return [false, $record->id];
+                }
+            } else {
+                return [false, 0, '后台用户名已存在'];
+            }
+        }
+        $record = $processor->getSingleByPhone($data['phone']);
+        if (!empty($record)) {
+            if ($isUpdate) {
+                if ($record->id != $this->_user->id) {
+                    return [false, $record->id];
+                }
+            } else {
+                return [false, 0, '后台用户电话已存在'];
+            }
+        }
+        return [true, 0];
     }
 
     protected function process()

@@ -128,13 +128,31 @@ class DetailAction extends BaseAction
 
     protected function store($data)
     {
-        list($res, $model) = (new AdminActionProcessor())->insert($data);
+        $processor = new AdminActionProcessor();
+        $actionRecord = $processor->getSingleByAction($data['ts_action']);
+        if (!empty($actionRecord)) {
+            return [false, 0];
+        }
+        $nameRecord = $processor->getSingleByName($data['name']);
+        if (!empty($nameRecord)) {
+            return [false, 0];
+        }
+        list($res, $model) = $processor->insert($data);
         $insertId = $res? $model->id: 0;
         return [$res, $insertId];
     }
 
     protected function update($data)
     {
-        return (new AdminActionProcessor())->update($this->authority->id, $data);
+        $processor = new AdminActionProcessor();
+        $actionRecord = $processor->getSingleByAction($data['ts_action']);
+        if (!empty($actionRecord) && $actionRecord->id != $this->authority->id) {
+            return [false, 0];
+        }
+        $nameRecord = $processor->getSingleByName($data['name']);
+        if (!empty($nameRecord) && $actionRecord->id != $this->authority->id) {
+            return [false, 0];
+        }
+        return $processor->update($this->authority->id, $data);
     }
 }

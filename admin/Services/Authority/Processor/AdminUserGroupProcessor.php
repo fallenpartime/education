@@ -22,4 +22,22 @@ class AdminUserGroupProcessor extends BaseProcessor
         $where = ['group_no' => $groupNo];
         return $this->getSingle($where, $columns);
     }
+
+    public function getSingleByName($name, $columns = [])
+    {
+        if (empty($name)) {
+            return '';
+        }
+        $where = ['name' => $name];
+        return $this->getSingle($where, $columns);
+    }
+
+    public function getSingleByTip($tip, $columns = [])
+    {
+        if (empty($tip)) {
+            return '';
+        }
+        $where = ['tip' => $tip];
+        return $this->getSingle($where, $columns);
+    }
 }

@@ -22,4 +22,13 @@ class AdminUserProcessor extends BaseProcessor
         $where = ['name' => $name];
         return $this->getSingle($where, $columns);
     }
+
+    public function getSingleByPhone($phone, $columns = [])
+    {
+        if (empty($phone)) {
+            return '';
+        }
+        $where = ['phone' => $phone];
+        return $this->getSingle($where, $columns);
+    }
 }

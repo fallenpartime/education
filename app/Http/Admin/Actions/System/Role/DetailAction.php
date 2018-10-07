@@ -188,16 +188,51 @@ class DetailAction extends BaseAction
         }
     }
 
+    protected function validateRepeat(AdminUserRoleProcessor $processor, $data, $isUpdate = 0)
+    {
+        $record = $processor->getSingleByNo($data['role_no']);
+        if (!empty($record)) {
+            if ($isUpdate) {
+                if ($record->id != $this->_role->id) {
+                    return [false, $record->id];
+                }
+            } else {
+                return [false, 0];
+            }
+        }
+        $record = $processor->getSingleByName($data['name']);
+        if (!empty($record)) {
+            if ($isUpdate) {
+                if ($record->id != $this->_role->id) {
+                    return [false, $record->id];
+                }
+            } else {
+                return [false, 0];
+            }
+        }
+        return [true, 0];
+    }
+
     protected function store($data)
     {
-        list($res, $model) = (new AdminUserRoleProcessor())->insert($data);
+        $processor = new AdminUserRoleProcessor();
+        list($res, $errorId) = $this->validateRepeat($processor, $data);
+        if ($res == false) {
+            return [$res, 0];
+        }
+        list($res, $model) = $processor->insert($data);
         $insertId = $res? $model->id: 0;
         return [$res, $insertId];
     }
 
     protected function update($data)
     {
-        return (new AdminUserRoleProcessor())->update($this->_role->id, $data);
+        $processor = new AdminUserRoleProcessor();
+        list($res, $errorId) = $this->validateRepeat($processor, $data, 1);
+        if ($res == false) {
+            return [$res, 0];
+        }
+        return $processor->update($this->_role->id, $data);
     }
 
     protected function showGroupAuthority()
