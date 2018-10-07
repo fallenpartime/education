@@ -12,7 +12,7 @@
                     <ul class="dropdown-menu">
                         @if(!empty($admin_info['is_manager'] || in_array('schoolDistrictManage', $ts_list)))
                             <li>
-                                <a href="{{ array_get($menu_urls, 'manageCenter.schoolDistrictManage') }}" @if(in_array('schoolDistrictManage', $menu)) class="current"@endif>学区管理</a>
+                                <a href="{{ array_get($menu_urls, 'schoolCenter.schoolDistrictManage') }}" @if(in_array('schoolDistrictManage', $menu)) class="current"@endif>学区管理</a>
                             </li>
                         @endif
                     </ul>

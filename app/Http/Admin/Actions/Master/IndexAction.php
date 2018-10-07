@@ -74,12 +74,13 @@ class IndexAction extends BaseAction
                     'status_desc'   =>  $this->getStatusDescription($item),
                     'edit_url'      =>  route('ownerInfo', ['work_no'=>1, 'id'=>$item->id]),
                     'auth_url'      =>  route('ownerAuthority', ['work_no'=>1, 'id'=>$item->id]),
-                    'indexTag'      =>  AdminConfig::getIndexUrl($item->index_action, 'title'),
+                    'indexTag'      =>  '',
                     'created_at'    =>  $item->created_at,
                 ];
                 if (!empty($item->role)) {
                     $unitOwner['role_no']  = $item->role->role_no;
                     $unitOwner['role_name'] = $item->role->name;
+                    $unitOwner['indexTag'] = AdminConfig::getIndexUrl($item->role->index_action, 'title');
                 }
                 if (!empty($item->user)) {
                     $unitOwner['name']  = $item->user->name;

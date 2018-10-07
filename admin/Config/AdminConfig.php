@@ -12,10 +12,11 @@ class AdminConfig
     {
         return [
             'index'       => ['title'=>'首页', 'url'=>''],
+            'owners'      => ['title'=>'管理员列表', 'url'=>route('owners')],
         ];
     }
 
-    public static function getIndexUrl($indexTag, $columnName = 'url')
+    public static function getIndexUrl($indexTag, $columnName = 'url', $withDefault = 1)
     {
         $indexUrls = self::indexUrlList();
         if (empty($indexTag)) {

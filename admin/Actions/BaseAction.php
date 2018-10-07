@@ -55,7 +55,15 @@ class BaseAction
     protected function getPageParams()
     {
         $page = $this->getHttpTool()->getBothSafeParam('page', HttpConfig::PARAM_NUMBER_TYPE);
+        $page = $page > 0? $page: 1;
         return [$page, 20];
+    }
+
+    protected function pageModel($model, $page, $pageSize)
+    {
+        $offset = ($page - 1) * $pageSize;
+        $model = $model->offset($offset)->limit($pageSize);
+        return $model;
     }
 
     public function run()

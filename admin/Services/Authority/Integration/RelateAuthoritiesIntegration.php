@@ -50,14 +50,16 @@ class RelateAuthoritiesIntegration extends BaseWorkProcessor
     {
         if (in_array(3, $this->_type)) {
             foreach ($operateMenuList as $operateKey => $item) {
-                $parentId = $item['parent_id'];
+                $menuItem = $item['menu'];
+                $parentId = $menuItem->parent_id;
                 $subMenuList[$parentId]['list'][$operateKey] = $item;
                 $subMenuList[$parentId]['length']++;
             }
         }
         foreach ($subMenuList as $subKey => $item) {
+            $menuItem = $item['menu'];
             $item['length'] = $item['length'] == 0? 1: $item['length'];
-            $parentId = $item['parent_id'];
+            $parentId = $menuItem->parent_id;
             $mainMenuList[$parentId]['list'][$subKey] = $item;
             $mainMenuList[$parentId]['length'] += $item['length'];
         }

@@ -28,7 +28,7 @@
                                     ?>
                                     @if(!empty($operateList))
                                         @foreach($operateList as $operateItem)
-                                            <?php $operateModel = $operateIem['menu']; ?>
+                                            <?php $operateModel = $operateItem['menu']; ?>
                                             <tr>
                                                 @if($countSecond == 0 && $operateSecond == 0)
                                                     <td rowspan="{{ $secondLength }}"><input type="checkbox" name="auth_checked[]" value="{{ $topModel->ts_action }}" @if($topModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $topModel->name }}({{ $topModel->ts_action }})</td>
@@ -94,7 +94,7 @@
                                     ?>
                                     @if(!empty($operateList))
                                         @foreach($operateList as $operateItem)
-                                            <?php $operateModel = $operateIem['menu']; ?>
+                                            <?php $operateModel = $operateItem['menu']; ?>
                                             <tr>
                                                 @if($countSecond == 0 && $operateSecond == 0)
                                                     <td rowspan="{{ $secondLength }}"><input type="checkbox" class="group-auth" name="group_checked[]" disabled="disabled" value="{{ $topModel->ts_action }}" @if($topModel->is_checked)checked="checked"@endif/>&nbsp;&nbsp;{{ $topModel->name }}({{ $topModel->ts_action }})</td>

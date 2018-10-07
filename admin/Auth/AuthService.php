@@ -120,9 +120,8 @@ class AuthService
      */
     public function destroyLogin()
     {
-        $session = $this->request->getSession();
-        $session->forget('admin_info');
-        $session->forget('ts_list');
+        $this->session->remove('admin_info');
+        $this->session->remove('ts_list');
         return true;
     }
 }

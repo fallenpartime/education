@@ -7,12 +7,24 @@
 namespace App\Http\Admin\Actions\System;
 
 use Admin\Actions\BaseAction;
+use Admin\Config\AdminConfig;
+use Admin\Services\Authority\Processor\AdminUserRoleProcessor;
 
 class IndexAction extends BaseAction
 {
     public function run()
     {
-        dd($this->getHttpTool()->getSession('admin_info'));
-        exit('index');
+        $admin_info = $this->getAuthService()->getAdminInfo();
+        $roleId = $admin_info['role_id'];
+        $admin_url = route('admin.login');
+        if ($roleId > 0) {
+            $role = (new AdminUserRoleProcessor())->getSingleByNo($roleId);
+            $indexAction = $role->index_action;
+            if (!empty($indexAction)) {
+                $admin_url = AdminConfig::getIndexUrl($indexAction, 'url', 0);
+            }
+        }
+        header("location: {$admin_url}");
+        exit;
     }
 }

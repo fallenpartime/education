@@ -34,17 +34,17 @@
                                         ?>
                                         @if(!empty($operateList))
                                             @foreach($operateList as $operateItem)
-                                            <?php $operateModel = $operateIem['menu']; ?>
-                                            <tr>
-                                                @if($countSecond == 0 && $operateSecond == 0)
-                                                    <td rowspan="{{ $secondLength }}"><a href="{{ $topModel->edit_url }}" target="_blank">{{ $topModel->name }}</a>({{ $topModel->ts_action }})</td>
-                                                @endif
-                                                @if($operateSecond == 0)
-                                                    <td rowspan="{{ $operateLength }}"><a href="{{ $secondModel->edit_url }}" target="_blank">{{ $secondModel->name }}</a>({{ $secondModel->ts_action }})</td>
-                                                @endif
+                                                <?php $operateModel = $operateItem['menu']; ?>
+                                                <tr>
+                                                    @if($countSecond == 0 && $operateSecond == 0)
+                                                        <td rowspan="{{ $secondLength }}"><a href="{{ $topModel->edit_url }}" target="_blank">{{ $topModel->name }}</a>({{ $topModel->ts_action }})</td>
+                                                    @endif
+                                                    @if($operateSecond == 0)
+                                                        <td rowspan="{{ $operateLength }}"><a href="{{ $secondModel->edit_url }}" target="_blank">{{ $secondModel->name }}</a>({{ $secondModel->ts_action }})</td>
+                                                    @endif
                                                     <td><a href="{{ $operateModel->edit_url }}" target="_blank">{{ $operateModel->name }}</a>({{ $operateModel->ts_action }})</td>
-                                                <?php $operateSecond++; ?>
-                                            </tr>
+                                                    <?php $operateSecond++; ?>
+                                                </tr>
                                             @endforeach
                                         @else
                                             <tr>

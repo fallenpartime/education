@@ -25,4 +25,15 @@ class CommonTool
         }
         return true;
     }
+
+    public static function combineArray($params = [], $space = '=')
+    {
+        if (empty($params) || !is_array($params)) {
+            return [];
+        }
+        foreach ($params as $key => $item) {
+            $params[$key] = "{$key}{$space}{$item}";
+        }
+        return $params;
+    }
 }
