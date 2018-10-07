@@ -21,28 +21,28 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
     Route::get('/admin/authorities', [
         'uses' => '\App\Http\Admin\Controllers\System\SystemController@authorities'
     ])->name('authorities');
-    Route::match(['get', 'post'], '/admin/authorityInfo', [
+    Route::match(['get', 'post'], '/admin/authority/info', [
         'uses' => '\App\Http\Admin\Controllers\System\SystemController@authorityInfo'
     ])->name('authorityInfo');
     Route::get('/admin/groups', [
         'uses' => '\App\Http\Admin\Controllers\System\SystemController@groups'
     ])->name('groups');
-    Route::match(['get', 'post'], '/admin/groupInfo', [
+    Route::match(['get', 'post'], '/admin/group/info', [
         'uses' => '\App\Http\Admin\Controllers\System\SystemController@groupInfo'
     ])->name('groupInfo');
     Route::get('/admin/roles', [
         'uses' => '\App\Http\Admin\Controllers\System\SystemController@roles'
     ])->name('roles');
-    Route::match(['get', 'post'], '/admin/roleInfo', [
+    Route::match(['get', 'post'], '/admin/role/info', [
         'uses' => '\App\Http\Admin\Controllers\System\SystemController@roleInfo'
     ])->name('roleInfo');
     Route::get('/admin/owners', [
         'uses' => '\App\Http\Admin\Controllers\System\MasterController@owners'
     ])->name('owners');
-    Route::match(['get', 'post'], '/admin/ownerInfo', [
+    Route::match(['get', 'post'], '/admin/owner/info', [
         'uses' => '\App\Http\Admin\Controllers\System\MasterController@ownerInfo'
     ])->name('ownerInfo');
-    Route::match(['get', 'post'], '/admin/ownerAuthority', [
+    Route::match(['get', 'post'], '/admin/owner/authority', [
         'uses' => '\App\Http\Admin\Controllers\System\MasterController@ownerAuthority'
     ])->name('ownerAuthority');
 });
