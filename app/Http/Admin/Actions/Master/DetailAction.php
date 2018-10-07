@@ -163,7 +163,7 @@ class DetailAction extends BaseAction
                 $this->errorJson(500, '后台用户电话已存在');
             }
         }
-        return [true, 0];
+        return [true, 0, ''];
     }
 
     protected function process()

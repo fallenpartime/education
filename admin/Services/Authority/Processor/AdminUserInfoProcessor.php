@@ -13,4 +13,13 @@ class AdminUserInfoProcessor extends BaseProcessor
 {
     protected $tableName = 'admin_user_infos';
     protected $tableClass = AdminUserInfo::class;
+
+    public function getSingleByUserId($userId, $columns = [])
+    {
+        if (empty($userId)) {
+            return '';
+        }
+        $where = ['user_id' => $userId];
+        return $this->getSingle($where, $columns);
+    }
 }

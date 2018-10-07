@@ -13,4 +13,13 @@ class AdminUserRoleAccessProcessor extends BaseProcessor
 {
     protected $tableName = 'admin_user_role_accesses';
     protected $tableClass = AdminUserRoleAccess::class;
+
+    public function getListByNo($roleNo, $columns = [])
+    {
+        if (empty($roleNo)) {
+            return '';
+        }
+        $where = ['role_no' => $roleNo];
+        return $this->getList($where, $columns);
+    }
 }

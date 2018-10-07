@@ -7,6 +7,7 @@
 namespace Admin\Auth;
 
 use Frameworks\Tool\CompareTool;
+use Frameworks\Tool\Http\SessionTool;
 use Illuminate\Http\Request;
 
 class AuthService
@@ -15,6 +16,7 @@ class AuthService
     protected $adminInfo = [];
     protected $actionList = [];
     protected $currentAction = '';
+    protected $session = null;
     public $isMaster = 0;
     public $isSuper = 0;
 
@@ -36,6 +38,7 @@ class AuthService
     protected function _init(Request $request)
     {
         $this->_clear();
+        $this->session = new SessionTool($request);
         $this->currentAction = $request->route()->getName();
         $this->initAdminInfo();
         $this->initActionList();
@@ -43,21 +46,14 @@ class AuthService
 
     protected function initAdminInfo()
     {
-        $this->adminInfo = [
-            'user_id'       =>  1,
-            'username'      =>  'manager',
-            'role_id'       =>  99,
-            'group_list'    =>  [1],
-            'is_manager'    =>  1,
-            'is_super'      =>  1
-        ];
-        $this->isMaster = 1;
-        $this->isSuper = 1;
+        $this->adminInfo = $this->session->get('admin_info');
+        $this->isMaster = $this->adminInfo['is_manager'];
+        $this->isSuper = $this->adminInfo['is_super'];
     }
 
     protected function initActionList()
     {
-        $this->actionList = [];
+        $this->actionList = $this->session->get('ts_list');
     }
 
     public function getAdminInfo()
@@ -116,5 +112,17 @@ class AuthService
             return CompareTool::compareValues($method, CompareTool::METHOD_IN_ARRAY, $action, $actionList);
         }
         return in_array($action, $actionList);
+    }
+
+    /**
+     * 注销登录session 销毁
+     * @return bool
+     */
+    public function destroyLogin()
+    {
+        $session = $this->request->getSession();
+        $session->forget('admin_info');
+        $session->forget('ts_list');
+        return true;
     }
 }

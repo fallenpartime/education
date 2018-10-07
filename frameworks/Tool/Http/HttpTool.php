@@ -15,6 +15,7 @@ class HttpTool
     private $_get_params = null;
     private $_post_params = null;
     private $_both_params = null;
+    private $_session = null;
 
     public static function getInstance(Request $request)
     {
@@ -24,6 +25,7 @@ class HttpTool
     public function __construct(Request $request)
     {
         $this->_request = $request;
+        $this->_session = new SessionTool($request);
     }
 
     /**
@@ -130,6 +132,21 @@ class HttpTool
     public function getBothSafeParam($paramName, $paramType = 1, $required = false, $defaultValue = null)
     {
         return $this->getSafeParam(HttpConfig::METHOD_BOTH, $paramType, $paramName, $required, $defaultValue);
+    }
+
+    public function setSession($key, $value)
+    {
+        $this->_session->set($key, $value);
+    }
+
+    public function removeSession($key)
+    {
+        $this->_session->remove($key);
+    }
+
+    public function getSession($key)
+    {
+        return $this->_session->get($key);
     }
 
     /**

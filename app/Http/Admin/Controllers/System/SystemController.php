@@ -2,6 +2,7 @@
 
 namespace App\Http\Admin\Controllers\System;
 
+use App\Http\Admin\Actions\System\IndexAction as LoginIndexAction;
 use App\Http\Admin\Actions\System\Authority\DetailAction;
 use App\Http\Admin\Actions\System\Authority\IndexAction;
 use App\Http\Admin\Actions\System\Group\IndexAction as GroupIndexAction;
@@ -13,6 +14,11 @@ use Illuminate\Http\Request;
 
 class SystemController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        return (new LoginIndexAction($request))->run();
+    }
 
     public function authorities(Request $request)
     {
