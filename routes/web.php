@@ -19,3 +19,4 @@ $api = app('Dingo\Api\Routing\Router');
 require __DIR__.'/admin/V1/test.php';
 require __DIR__.'/admin/system.php';
 require __DIR__.'/admin/school.php';
+require __DIR__.'/admin/article.php';

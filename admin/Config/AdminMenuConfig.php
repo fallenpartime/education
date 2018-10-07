@@ -12,6 +12,9 @@ class AdminMenuConfig
     public static function menuList()
     {
         return [
+            'articleCenter'  =>  [
+                'newsManage'  =>  '',
+            ],
             'schoolCenter'  =>  [
                 'schoolDistrictManage'  =>  '',
                 'schoolManage'          =>  '',
@@ -28,6 +31,11 @@ class AdminMenuConfig
     public static function children()
     {
         return [
+            'articleCenter' =>  [
+                'newsManage'    =>  [
+                    'news'      =>  route('news'),
+                ]
+            ],
             'schoolCenter'  =>  [
                 'schoolDistrictManage'  =>  [
                     'districts'     =>  route('districts'),

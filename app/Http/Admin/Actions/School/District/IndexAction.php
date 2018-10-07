@@ -9,7 +9,7 @@ namespace App\Http\Admin\Actions\School\District;
 use Admin\Actions\BaseAction;
 use Admin\Models\School\SchoolDistrict;
 use Admin\Services\Common\CommonService;
-use Admin\Services\Sql\School\SchoolDistrictProcessor;
+use Admin\Services\Sql\School\SchoolDistrictSqlProcessor;
 
 class IndexAction extends BaseAction
 {
@@ -19,7 +19,7 @@ class IndexAction extends BaseAction
         $url = route('districts');
         list($page, $pageSize) = $this->getPageParams();
         $requestParams = $httpTool->getParams();
-        list($model, $urlParams, $url) = (new SchoolDistrictProcessor())->getListSql(new SchoolDistrict(), $requestParams, $url);
+        list($model, $urlParams, $url) = (new SchoolDistrictSqlProcessor())->getListSql(new SchoolDistrict(), $requestParams, $url);
         $list = [];
         $total = $model->count();
         if ($total > 0) {

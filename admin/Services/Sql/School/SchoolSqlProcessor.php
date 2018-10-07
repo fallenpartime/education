@@ -9,7 +9,7 @@ namespace Admin\Services\Sql\School;
 use Admin\Base\Processor\BaseSqlProcessor;
 use Admin\Services\Sql\BaseSqlDelegation;
 
-class SchoolProcessor extends BaseSqlProcessor implements BaseSqlDelegation
+class SchoolSqlProcessor extends BaseSqlProcessor implements BaseSqlDelegation
 {
     public function getListSql($model, $params, $url, $options = [])
     {

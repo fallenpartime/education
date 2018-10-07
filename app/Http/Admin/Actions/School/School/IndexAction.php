@@ -9,7 +9,7 @@ namespace App\Http\Admin\Actions\School\School;
 use Admin\Actions\BaseAction;
 use Admin\Models\School\School;
 use Admin\Services\Common\CommonService;
-use Admin\Services\Sql\School\SchoolProcessor;
+use Admin\Services\Sql\School\SchoolSqlProcessor;
 
 class IndexAction extends BaseAction
 {
@@ -19,7 +19,7 @@ class IndexAction extends BaseAction
         $url = route('schools');
         list($page, $pageSize) = $this->getPageParams();
         $requestParams = $httpTool->getParams();
-        list($model, $urlParams, $url) = (new SchoolProcessor())->getListSql(new School(), $requestParams, $url);
+        list($model, $urlParams, $url) = (new SchoolSqlProcessor())->getListSql(new School(), $requestParams, $url);
         $list = [];
         $total = $model->count();
         if ($total > 0) {

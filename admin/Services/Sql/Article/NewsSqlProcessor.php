@@ -1,15 +1,15 @@
 <?php
 /**
- * 学校学区
- * Date: 2018/10/7
- * Time: 20:05
+ * 教育新闻文章列表
+ * Date: 2018/10/8
+ * Time: 2:19
  */
-namespace Admin\Services\Sql\School;
+namespace Admin\Services\Sql\Article;
 
 use Admin\Base\Processor\BaseSqlProcessor;
 use Admin\Services\Sql\BaseSqlDelegation;
 
-class SchoolDistrictProcessor extends BaseSqlProcessor implements BaseSqlDelegation
+class NewsSqlProcessor extends BaseSqlProcessor implements BaseSqlDelegation
 {
     public function getListSql($model, $params, $url, $options = [])
     {
