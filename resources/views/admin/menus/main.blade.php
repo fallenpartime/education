@@ -4,6 +4,20 @@
         <div class="nav-collapse" style="position:relative;">
             <img src="/assets/logo/logo.png" style="height: 35px;width: 150px;position: absolute;left:20px;top:18px;"/>
             <ul class="nav" @if(!empty($admin_info['is_manager']))style="text-align: right !important;padding-right: 20px;"@endif>
+                @if(!empty($admin_info['is_manager'] || in_array('schoolCenter', $ts_list)))
+                <li class="dropdown">
+                    <a data-toggle="dropdown" href="#" @if(in_array('schoolCenter', $menu)) class="current"@endif >
+                        <span aria-hidden="true" class="se7en-tables"></span>学校管理中心<b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @if(!empty($admin_info['is_manager'] || in_array('schoolDistrictManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'manageCenter.schoolDistrictManage') }}" @if(in_array('schoolDistrictManage', $menu)) class="current"@endif>学区管理</a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+                @endif
                 @if(!empty($admin_info['is_manager'] || in_array('manageCenter', $ts_list)))
                 <li class="dropdown">
                     <a data-toggle="dropdown" href="#" @if(in_array('manageCenter', $menu)) class="current"@endif >

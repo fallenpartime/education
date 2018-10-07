@@ -12,15 +12,9 @@ class AdminMenuConfig
     public static function menuList()
     {
         return [
-//            'servicePlatform'   =>  '',
-//            'platformManage'=>[
-//                'toManageProjectList'   =>Yii::$app->urlManager->createUrl(['platform/manage/toManageProjectList']),
-//                'toSimpleProjectList'   =>Yii::$app->urlManager->createUrl(['platform/manage/toSimpleProjectList']),
-//                'toManageEarlyendList'  =>Yii::$app->urlManager->createUrl(['platform/manage/toManageEarlyendList']),
-//                'toManageChangeMoneyList'   =>Yii::$app->urlManager->createUrl(['platform/manage/toManageChangeMoneyList']),
-//                'toManageProjectItemList'   =>Yii::$app->urlManager->createUrl(['platform/manage/toManageProjectItemList']),
-//                'projectLogManage'=>''
-//            ],
+            'schoolCenter'  =>  [
+                'schoolDistrictManage'  =>  '',
+            ],
             'manageCenter'  =>  [
                 'ownerManage'       =>  '',
                 'groupManage'       =>  '',
@@ -33,6 +27,12 @@ class AdminMenuConfig
     public static function children()
     {
         return [
+            'schoolCenter'  =>  [
+                'schoolDistrictManage'  =>  [
+                    'districts'     =>  route('districts'),
+                    'districtInfo'  =>  route('districtInfo', ['work_no'=>1])
+                ],
+            ],
             'manageCenter'  =>  [
                 'ownerManage'   =>  [
                     'owners'            =>  route('owners'),

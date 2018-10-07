@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Admin\Controllers;
+
+use App\Http\Admin\Actions\School\District\DetailAction;
+use App\Http\Admin\Actions\School\District\IndexAction;
+use Illuminate\Http\Request;
+
+class DistrictController extends Controller
+{
+    public function index(Request $request)
+    {
+        return (new IndexAction($request))->run();
+    }
+
+    public function detail(Request $request)
+    {
+        return (new DetailAction($request))->run();
+    }
+}

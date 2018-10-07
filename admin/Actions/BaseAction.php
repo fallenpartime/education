@@ -7,6 +7,7 @@
 namespace Admin\Actions;
 
 use Admin\Auth\AuthService;
+use Frameworks\Tool\Http\HttpConfig;
 use Frameworks\Tool\Http\HttpTool;
 use Illuminate\Http\Request;
 
@@ -49,6 +50,12 @@ class BaseAction
     {
         $result = $this->initAdminResult($result);
         return view($view, $result);
+    }
+
+    protected function getPageParams()
+    {
+        $page = $this->getHttpTool()->getBothSafeParam('page', HttpConfig::PARAM_NUMBER_TYPE);
+        return [$page, 20];
     }
 
     public function run()
