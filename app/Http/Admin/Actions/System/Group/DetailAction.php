@@ -110,30 +110,30 @@ class DetailAction extends BaseAction
         if (!empty($record)) {
             if ($isUpdate) {
                 if ($record->id != $this->_group->id) {
-                    return [false, $record->id];
+                    $this->errorJson(500, '分组编号已存在');
                 }
             } else {
-                return [false, 0];
+                $this->errorJson(500, '分组编号已存在');
             }
         }
         $record = $processor->getSingleByName($data['name']);
         if (!empty($record)) {
             if ($isUpdate) {
                 if ($record->id != $this->_group->id) {
-                    return [false, $record->id];
+                    $this->errorJson(500, '分组名已存在');
                 }
             } else {
-                return [false, 0];
+                $this->errorJson(500, '分组名已存在');
             }
         }
         $record = $processor->getSingleByTip($data['tip']);
         if (!empty($record)) {
             if ($isUpdate) {
                 if ($record->id != $this->_group->id) {
-                    return [false, $record->id];
+                    $this->errorJson(500, '分组Tip已存在');
                 }
             } else {
-                return [false, 0];
+                $this->errorJson(500, '分组Tip已存在');
             }
         }
         return [true, 0];

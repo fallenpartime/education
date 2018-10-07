@@ -131,11 +131,11 @@ class DetailAction extends BaseAction
         $processor = new AdminActionProcessor();
         $actionRecord = $processor->getSingleByAction($data['ts_action']);
         if (!empty($actionRecord)) {
-            return [false, 0];
+            $this->errorJson(500, '权限标示已存在');
         }
         $nameRecord = $processor->getSingleByName($data['name']);
         if (!empty($nameRecord)) {
-            return [false, 0];
+            $this->errorJson(500, '权限名已存在');
         }
         list($res, $model) = $processor->insert($data);
         $insertId = $res? $model->id: 0;
@@ -147,11 +147,11 @@ class DetailAction extends BaseAction
         $processor = new AdminActionProcessor();
         $actionRecord = $processor->getSingleByAction($data['ts_action']);
         if (!empty($actionRecord) && $actionRecord->id != $this->authority->id) {
-            return [false, 0];
+            $this->errorJson(500, '权限标示已存在');
         }
         $nameRecord = $processor->getSingleByName($data['name']);
         if (!empty($nameRecord) && $actionRecord->id != $this->authority->id) {
-            return [false, 0];
+            $this->errorJson(500, '权限名已存在');
         }
         return $processor->update($this->authority->id, $data);
     }

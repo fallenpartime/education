@@ -147,20 +147,20 @@ class DetailAction extends BaseAction
         if (!empty($record)) {
             if ($isUpdate) {
                 if ($record->id != $this->_user->id) {
-                    return [false, $record->id];
+                    $this->errorJson(500, '后台用户名已存在');
                 }
             } else {
-                return [false, 0, '后台用户名已存在'];
+                $this->errorJson(500, '后台用户名已存在');
             }
         }
         $record = $processor->getSingleByPhone($data['phone']);
         if (!empty($record)) {
             if ($isUpdate) {
                 if ($record->id != $this->_user->id) {
-                    return [false, $record->id];
+                    $this->errorJson(500, '后台用户电话已存在');
                 }
             } else {
-                return [false, 0, '后台用户电话已存在'];
+                $this->errorJson(500, '后台用户电话已存在');
             }
         }
         return [true, 0];
