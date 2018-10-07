@@ -14,6 +14,7 @@ class AdminMenuConfig
         return [
             'schoolCenter'  =>  [
                 'schoolDistrictManage'  =>  '',
+                'schoolManage'          =>  '',
             ],
             'manageCenter'  =>  [
                 'ownerManage'       =>  '',
@@ -31,6 +32,10 @@ class AdminMenuConfig
                 'schoolDistrictManage'  =>  [
                     'districts'     =>  route('districts'),
                     'districtInfo'  =>  route('districtInfo', ['work_no'=>1])
+                ],
+                'schoolManage'          =>  [
+                    'schools'     =>  route('schools'),
+                    'schoolInfo'  =>  route('schoolInfo', ['work_no'=>1])
                 ],
             ],
             'manageCenter'  =>  [

@@ -15,6 +15,11 @@
                                 <a href="{{ array_get($menu_urls, 'schoolCenter.schoolDistrictManage') }}" @if(in_array('schoolDistrictManage', $menu)) class="current"@endif>学区管理</a>
                             </li>
                         @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('schoolManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'schoolCenter.schoolManage') }}" @if(in_array('schoolManage', $menu)) class="current"@endif>学校管理</a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
                 @endif

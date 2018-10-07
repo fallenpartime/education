@@ -4,11 +4,12 @@
  * Date: 2018/10/7
  * Time: 10:58
  */
-namespace App\Http\Admin\Actions\School\District;
+namespace App\Http\Admin\Actions\School\School;
 
 use Admin\Actions\BaseAction;
+use Admin\Models\School\School;
 use Admin\Models\School\SchoolDistrict;
-use Admin\Services\School\Processor\SchoolDistrictProcessor;
+use Admin\Services\School\Processor\SchoolProcessor;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -16,7 +17,7 @@ class DetailAction extends BaseAction
 {
     use ApiActionTrait;
 
-    protected $_district = null;
+    protected $_school = null;
 
     public function run()
     {
@@ -24,7 +25,7 @@ class DetailAction extends BaseAction
         $id = $httpTool->getBothSafeParam('id', HttpConfig::PARAM_NUMBER_TYPE);
         $workNo = $httpTool->getBothSafeParam('work_no', HttpConfig::PARAM_NUMBER_TYPE);
         if (!empty($id)) {
-            $this->_district = SchoolDistrict::find($id);
+            $this->_school = School::find($id);
         }
         if ($workNo == 1 || $workNo == 2) {
             if ($workNo == 1) {
@@ -39,24 +40,25 @@ class DetailAction extends BaseAction
     protected function showInfo()
     {
         $result = [
-            'record'            =>  $this->_district,
-            'menu'  =>  ['schoolCenter', 'districtManage', 'districtInfo'],
-            'actionUrl'         => route('districtInfo', ['work_no'=>2]),
-            'redirectUrl'       => route('districts'),
+            'record'            =>  $this->_school,
+            'districts'         =>  SchoolDistrict::all(['id', 'no', 'name']),
+            'menu'  =>  ['schoolCenter', 'schoolManage', 'schoolInfo'],
+            'actionUrl'         => route('schoolInfo', ['work_no'=>2]),
+            'redirectUrl'       => route('schools'),
         ];
-        return $this->createView('admin.school.district.detail', $result);
+        return $this->createView('admin.school.school.detail', $result);
     }
 
-    protected function validateRepeat(SchoolDistrictProcessor $processor, $data, $isUpdate = 0)
+    protected function validateRepeat(SchoolProcessor $processor, $data, $isUpdate = 0)
     {
         $record = $processor->getSingleByNo($data['no']);
         if (!empty($record)) {
             if ($isUpdate) {
-                if ($record->id != $this->_district->id) {
-                    $this->errorJson(500, '学区编号已存在');
+                if ($record->id != $this->_school->id) {
+                    $this->errorJson(500, '学校编号已存在');
                 }
             } else {
-                $this->errorJson(500, '学区编号已存在');
+                $this->errorJson(500, '学校编号已存在');
             }
         }
     }
@@ -67,22 +69,30 @@ class DetailAction extends BaseAction
         $id = $httpTool->getBothSafeParam('id', HttpConfig::PARAM_NUMBER_TYPE);
         $name = $httpTool->getBothSafeParam('name');
         $no = $httpTool->getBothSafeParam('no');
+        $address = $httpTool->getBothSafeParam('address');
+        $districtNo = $httpTool->getBothSafeParam('district_no');
         $name = trim($name);
         $no = trim($no);
+        $address = trim($address);
         if(empty($name)){
-            $this->errorJson(500, '学区名为空');
+            $this->errorJson(500, '学校名为空');
         }
         if(empty($no)){
-            $this->errorJson(500, '学区编号为空');
+            $this->errorJson(500, '学校编号为空');
         }
-        if (!empty($id) && empty($this->_district)) {
+        if(empty($address)){
+            $this->errorJson(500, '学校地址为空');
+        }
+        if (!empty($id) && empty($this->_school)) {
             $this->errorJson(500, '记录不存在');
         }
         $data = [
             'name'  =>  $name,
             'no'    =>  $no,
+            'address'       =>  $address,
+            'district_no'   =>  $districtNo,
         ];
-        $res = empty($this->_district)? $this->save($data): $this->update($data);
+        $res = empty($this->_school)? $this->save($data): $this->update($data);
         if ($res) {
             $this->successJson();
         }
@@ -91,20 +101,20 @@ class DetailAction extends BaseAction
 
     protected function save($data)
     {
-        $processor = new SchoolDistrictProcessor();
+        $processor = new SchoolProcessor();
         $this->validateRepeat($processor, $data);
-        list($status, $user) = $processor->insert($data);
+        list($status, $school) = $processor->insert($data);
         if (empty($status)) {
-            $this->errorJson(500, '学区创建失败');
+            $this->errorJson(500, '学校创建失败');
         }
         $this->successJson();
     }
 
     protected function update($data)
     {
-        $processor = new SchoolDistrictProcessor();
+        $processor = new SchoolProcessor();
         $this->validateRepeat($processor, $data, 1);
-        $processor->update($this->_district->id, $data);
+        $processor->update($this->_school->id, $data);
         $this->successJson();
     }
 }
