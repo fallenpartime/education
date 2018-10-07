@@ -12,13 +12,11 @@ use Admin\Services\Authority\AuthorityService;
 use Admin\Services\Authority\Processor\AdminUserInfoProcessor;
 use Admin\Services\Authority\Processor\AdminUserProcessor;
 use Admin\Services\Authority\Processor\AdminUserRoleAccessProcessor;
-use Frameworks\Tool\Http\SessionTool;
 
 class LoginAction extends BaseAction
 {
     public function run()
     {
-        $httpTool = $this->getHttpTool();
         $authService = new AuthService($this->request);
         $authService->destroyLogin();
         return $this->pwdLogin();

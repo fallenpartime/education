@@ -7,6 +7,7 @@
 namespace App\Http\Admin\Actions\System\Authority;
 
 use Admin\Actions\BaseAction;
+use Admin\Models\System\AdminAction;
 use Admin\Services\Authority\AuthorityService;
 use Admin\Services\Authority\Processor\AdminActionProcessor;
 use Admin\Traits\ApiActionTrait;
@@ -54,20 +55,19 @@ class DetailAction extends BaseAction
 
     private function getParentId($authorization)
     {
-        $processor = new AdminActionProcessor();
         $firstId = $secondId = 0;
         if (!empty($authorization)) {
-            $parentId = array_get($authorization, 'parent_id');
-            $type = array_get($authorization, '$type');
+            $parentId = $authorization->parent_id;
+            $type = $authorization->type;
             if($type == 2){
                 $firstId = $parentId;
             }else if($type == 3){
-                $parentAuth = $processor->getSingleById($parentId);
-                if(array_get($parentAuth, 'type') == 2){
+                $parentAuth = AdminAction::find($parentId);
+                if (!empty($parentAuth) && $parentAuth->type == 2) {
                     $secondId = $parentId;
-                    $parentAuth = $processor->getSingleById(array_get($parentAuth, 'parent_id'));
-                    if(array_get($parentAuth, 'type') == 1){
-                        $firstId = array_get($parentAuth, 'id');
+                    $parentAuth = AdminAction::find($parentAuth->parent_id);
+                    if (!empty($parentAuth) && $parentAuth->type == 1) {
+                        $firstId = $parentAuth->id;
                     }
                 }
             }
