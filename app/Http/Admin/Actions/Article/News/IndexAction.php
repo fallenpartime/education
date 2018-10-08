@@ -25,6 +25,7 @@ class IndexAction extends BaseAction
             $list = $this->pageModel($model, $page, $pageSize)->with('district')->select(['id', 'type', 'title', 'is_show', 'name', 'address', 'is_show', 'created_at'])->get();
             $list = $this->processList($list);
         }
+        
 //        list($url, $pageList) = CommonService::pagination($total, $pageSize, $page, $url);
 //        list($operateList, $operateUrl) = $this->allowOperate();
 //        $result = [
