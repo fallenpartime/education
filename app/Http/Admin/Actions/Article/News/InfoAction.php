@@ -17,7 +17,7 @@ class InfoAction extends BaseAction
     use ApiActionTrait;
 
     protected $_article = null;
-    protected $_type = 0;
+    protected $_type = 1;
 
     public function run()
     {
@@ -27,20 +27,11 @@ class InfoAction extends BaseAction
         $this->_type = $httpTool->getBothSafeParam('type', HttpConfig::PARAM_NUMBER_TYPE);
         if (!empty($id)) {
             $this->_article = Article::find($id);
-            if (!empty($this->_article)) {
-                $this->_type = $this->_article->type;
-            }
         }
         if ($workNo == 1 || $workNo == 2) {
             if ($workNo == 1) {
-                if (empty($this->_article) && $this->_type <= 0) {
-                    $this->redirect("文章类型不能为空");
-                }
                 return $this->showInfo();
             } else {
-                if ($this->_type <= 0) {
-                    $this->errorJson(500, '文章类型不能为空');
-                }
                 $this->process();
             }
         }
