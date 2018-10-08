@@ -66,6 +66,11 @@ class BaseAction
         return $model;
     }
 
+    protected function redirect($message)
+    {
+        exit("<script>alert('{$message}');location.href=document.referrer;</script>");
+    }
+
     public function run()
     {}
 }

@@ -7,8 +7,38 @@
 namespace App\Http\Admin\Actions\Article\Operate;
 
 use Admin\Actions\BaseAction;
+use Admin\Models\Article;
+use Admin\Services\Article\Processor\ArticleProcessor;
+use Admin\Traits\ApiActionTrait;
+use Frameworks\Tool\Http\HttpConfig;
 
 class ShowAction extends BaseAction
 {
+    use ApiActionTrait;
 
+    protected $_article = null;
+
+    public function run()
+    {
+        $httpTool = $this->getHttpTool();
+        $id = $httpTool->getBothSafeParam('id', HttpConfig::PARAM_NUMBER_TYPE);
+        if (!empty($id)) {
+            $this->_article = Article::find($id);
+        }
+        if (empty($this->_article)) {
+            $this->errorJson(500, '文章不存在');
+        }
+        $this->process();
+    }
+
+    protected function process()
+    {
+        $showValue = $this->_article->is_show;
+        $showValue = ($showValue + 1) % 2;
+        $res = (new ArticleProcessor())->update($this->_article->id, ['is_show'=>$showValue]);
+        if ($res) {
+            $this->successJson();
+        }
+        $this->errorJson(500, '提交失败');
+    }
 }

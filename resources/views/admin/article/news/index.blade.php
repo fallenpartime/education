@@ -60,18 +60,20 @@
     @if($operateList['change_show'])
         <script>
             function changeShow(id) {
-                $.post(
-                    '{{ $operateUrl['change_url'] }}',
-                    {id: id},
-                    function (result) {
-                        result = JSON.parse(result)
-                        if (result.code == 200) {
-                            location.href = '{{ $redirectUrl }}';
-                        } else {
-                            alert(result.msg)
+                if (confirm('确定提交？')) {
+                    $.post(
+                        '{{ $operateUrl['change_url'] }}',
+                        {id: id},
+                        function (result) {
+                            result = JSON.parse(result)
+                            if (result.code == 200) {
+                                location.href = '{{ $redirectUrl }}';
+                            } else {
+                                alert(result.msg)
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         </script>
     @endif

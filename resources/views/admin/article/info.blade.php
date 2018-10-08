@@ -17,7 +17,10 @@
         <div class="row" style="margin-bottom: 20px;">
             <div class="col-lg-12">
                 <div class="widget-container fluid-height clearfix search-window">
-                    <form action="" method="post" onsubmit="return false;">
+                    <form id="articleForm" action="" method="post" onsubmit="return false;">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{ !empty($record)? $record->id: '' }}">
+                        <input type="hidden" name="type" value="{{ $articleType }}" />
                         <div class="medical-box col-sm-10 col-md-10 col-lg-10" style="height: auto; padding-bottom: 5px;">
                             <p>
                                 文章配置
@@ -26,11 +29,11 @@
                                 <div class="medical-div">
                                     <p style="width: 50%; display: inline; margin-right: 10px;">
                                         <span>文章标题:</span>
-                                        <input type="text" name="title" value="" required="required" placeholder="请输入文章标题" style="width: 40%;"/>
+                                        <input type="text" name="title" value="{{ !empty($record)? $record->title: '' }}" required="required" placeholder="请输入文章标题" style="width: 40%;"/>
                                     </p>
                                     <p style="width: 100%; margin-top: 20px;">
                                         <span>发布时间:</span>
-                                        <input name="pubdate" type="text" class="Wdate" id="sdt1" value="" style="width: 160px;" onfocus="WdatePicker({isShowWeek:true,readOnly:'true',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2010-10-01 00:00:00',maxDate:'2099-12-31 59:59:59'})" />
+                                        <input name="pubdate" type="text" class="Wdate" value="{{ !empty($record)? $record->deleted_at: '' }}" style="width: 160px;" onfocus="WdatePicker({isShowWeek:true,readOnly:'true',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2010-10-01 00:00:00',maxDate:'2099-12-31 23:59:59'})" />
                                     </p><br/>
                                     <p style="margin-bottom: 0;float: left">
                                         <span>头图:<font style="color: grey;">(文章要设置为热文需上传头图，头图尺寸为：86*60)</font></span>
@@ -42,7 +45,7 @@
                                     </div>
                                     <p style="width: 100%;">
                                         <span style="width: 150px;">文章内容:</span>
-                                        <textarea class="analysis" id="content" name="content" style="width: 100%; padding: 0 10px;"></textarea>
+                                        <textarea class="analysis" id="content" name="content" style="width: 100%; padding: 0 10px;">{{ !empty($record)? $record->content: '' }}</textarea>
                                     </p><br/>
 
                                 </div>
@@ -50,14 +53,12 @@
                         </div>
 
                         <p class="deposit">
-                            <input type="hidden" name="id" value="">
-                            <input type="submit" name="submit" value="保存" />
+                            <input type="submit" name="submit" value="保存" onclick="articleSave();"/>
                         </p>
                     </form>
                 </div>
             </div>
         </div>
-
     </div>
     <script>
         var uploadhandle = new ImgUploader({
@@ -66,17 +67,36 @@
             container: 'list-container',
             url      : uploadUrl,
             imgNum   : 1,
-            key      : 'main_files'
+            key      : 'list_pic'
         })
     </script>
     <script>
-        // initPictureList(uploadhandle, 'container', 'main_files', 'http://static.huijiayi.com.cn/liwudao/upload/image/20180928/7869849425.jpg', 'http://static.huijiayi.com.cn/liwudao/upload/image/20180928/7869849425.jpg', 1);
-        // initPictureList(uploadhandle, 'container', 'main_files', 'http://static.huijiayi.com.cn/liwudao/upload/image/20180928/7869849425.jpg', 'http://static.huijiayi.com.cn/liwudao/upload/image/20180928/7869849425.jpg', 1);
+        @if(!empty($record) && !empty($record->list_pic))
+        initPictureList(uploadhandle, 'list-container', 'list_pic', '{{ $record->list_pic }}', '{{ $record->list_pic }}', 1);
+        @endif
     </script>
     <script type="text/javascript">
         var ue = UE.getEditor('content');
         ue.ready(function() {
             ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
         });
+    </script>
+    <script>
+        function articleSave() {
+            if (confirm('确定提交？')) {
+                $.post(
+                    '{{ $actionUrl }}',
+                    $('#articleForm').serialize(),
+                    function (result) {
+                        result = JSON.parse(result)
+                        if (result.code == 200) {
+                            location.href=document.referrer;
+                        } else {
+                            alert(result.msg)
+                        }
+                    }
+                )
+            }
+        }
     </script>
 @endsection

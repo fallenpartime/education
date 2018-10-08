@@ -7,6 +7,7 @@
 namespace App\Http\Admin\Controllers\Article;
 
 use App\Http\Admin\Actions\Article\Operate\DetailAction;
+use App\Http\Admin\Actions\Article\Operate\InfoAction;
 use App\Http\Admin\Actions\Article\Operate\ShowAction;
 use App\Http\Admin\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -20,6 +21,15 @@ class OperateController extends Controller
     public function detail(Request $request)
     {
         return (new DetailAction($request))->run();
+    }
+
+    /**
+     * 新闻详情
+     * @param Request $request
+     */
+    public function info(Request $request)
+    {
+        return (new InfoAction($request))->run();
     }
 
     /**

@@ -18,7 +18,7 @@ class UploadAction extends BaseAction
     {
         $processor = new UploadProcessor();
         list($status, $message, $path, $originalName, $targetFileName) = $processor->_init($this->request)->process();
-        $pathUrl = asset('storage/'.$path);
+        $pathUrl = '/storage/'.$path;
         $result = [
             'jsonrpc'   =>  '2.0',
             'result'    =>  '',

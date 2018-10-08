@@ -22,8 +22,8 @@ class Article extends Model
         return array_get($this->attributes, 'operate_list', []);
     }
 
-    public function listPicture()
+    public function picture()
     {
-        return $this->hasOne(ArticlePicture::class. 'article_id', 'id')->where('type', '=', 0);
+        return $this->hasOne(ArticlePicture::class)->where('type', '=', 0);
     }
 }
