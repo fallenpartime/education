@@ -64,7 +64,7 @@ class IndexAction extends BaseAction
         ];
         $list[$key]->allow_operate_change = 0;
         $authService = $this->getAuthService();
-        if ($authService->isMaster || $authService->validateAction('articleInfo')) {
+        if ($authService->isMaster || $authService->validateAction('articleNewsInfo')) {
             $operateList['allow_operate_edit'] = 1;
         }
         $authService = $this->getAuthService();
@@ -78,7 +78,7 @@ class IndexAction extends BaseAction
     protected function processList($list)
     {
         foreach ($list as $key => $item) {
-            $list[$key]->edit_url = route('articleInfo', ['work_no'=>1, 'id'=>$item->id]);
+            $list[$key]->edit_url = route('articleNewsInfo', ['work_no'=>1, 'id'=>$item->id]);
             $list = $this->listAllowOperate($list, $key);
         }
         return $list;

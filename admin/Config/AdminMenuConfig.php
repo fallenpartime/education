@@ -33,8 +33,8 @@ class AdminMenuConfig
         return [
             'articleCenter' =>  [
                 'newsManage'    =>  [
-                    'news'          =>  route('news'),
-                    'articleInfo'   =>  route('articleInfo', ['work_no'=>1, 'type'=>1]),
+                    'news'              =>  route('news'),
+                    'articleNewsInfo'   =>  route('articleNewsInfo', ['work_no'=>1, 'type'=>1]),
                 ]
             ],
             'schoolCenter'  =>  [

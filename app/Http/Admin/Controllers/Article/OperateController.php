@@ -24,15 +24,6 @@ class OperateController extends Controller
     }
 
     /**
-     * 新闻详情
-     * @param Request $request
-     */
-    public function info(Request $request)
-    {
-        return (new InfoAction($request))->run();
-    }
-
-    /**
      * 新闻显示状态修改
      * @param Request $request
      */

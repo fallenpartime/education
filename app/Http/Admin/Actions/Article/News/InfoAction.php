@@ -4,7 +4,7 @@
  * Date: 2018/10/8
  * Time: 22:43
  */
-namespace App\Http\Admin\Actions\Article\Operate;
+namespace App\Http\Admin\Actions\Article\News;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Article;
@@ -51,11 +51,11 @@ class InfoAction extends BaseAction
     {
         $result = [
             'record'            =>  $this->_article,
-            'articleType'       =>  $this->_type,
-            'menu'              =>  ['articleCenter', 'newsManage', 'articleInfo'],
-            'actionUrl'         => route('articleInfo', ['work_no'=>2, 'type'=>$this->_type]),
+            'articleType'       =>  1,
+            'menu'              =>  ['articleCenter', 'newsManage', 'articleNewsInfo'],
+            'actionUrl'         => route('articleNewsInfo', ['work_no'=>2, 'type'=>$this->_type]),
         ];
-        return $this->createView('admin.article.info', $result);
+        return $this->createView('admin.article.news.info', $result);
     }
 
     protected function process()
