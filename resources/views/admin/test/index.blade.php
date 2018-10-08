@@ -15,8 +15,8 @@
         </div>
     </div>
     <script>
-        var url = '/admin/upload';
-        var uphandle = new ImgUploader({
+        var url = '{{ route('upload') }}';
+        var uploadhandle = new ImgUploader({
             handler  : 'upbtn',
             target   : 'utbtn-ipt',
             container: 'container',

@@ -7,6 +7,8 @@
 namespace App\Http\Admin\Actions\Article\News;
 
 use Admin\Actions\BaseAction;
+use Admin\Models\Article;
+use Admin\Services\Sql\Article\NewsSqlProcessor;
 
 class IndexAction extends BaseAction
 {
@@ -16,13 +18,13 @@ class IndexAction extends BaseAction
         $url = route('news');
         list($page, $pageSize) = $this->getPageParams();
         $requestParams = $httpTool->getParams();
-//        list($model, $urlParams, $url) = (new SchoolSqlProcessor())->getListSql(new School(), $requestParams, $url);
-//        $list = [];
-//        $total = $model->count();
-//        if ($total > 0) {
-//            $list = $this->pageModel($model, $page, $pageSize)->with('district')->select(['id', 'type', 'no', 'district_no', 'name', 'address', 'is_show', 'created_at'])->get();
-//            $list = $this->processList($list);
-//        }
+        list($model, $urlParams, $url) = (new NewsSqlProcessor())->getListSql(new Article(), $requestParams, $url);
+        $list = [];
+        $total = $model->count();
+        if ($total > 0) {
+            $list = $this->pageModel($model, $page, $pageSize)->with('district')->select(['id', 'type', 'title', 'is_show', 'name', 'address', 'is_show', 'created_at'])->get();
+            $list = $this->processList($list);
+        }
 //        list($url, $pageList) = CommonService::pagination($total, $pageSize, $page, $url);
 //        list($operateList, $operateUrl) = $this->allowOperate();
 //        $result = [
@@ -44,5 +46,10 @@ class IndexAction extends BaseAction
             'redirectUrl'   => route('news'),
         ];
         return $this->createView('admin.article.news.index', $result);
+    }
+
+    protected function processList($list)
+    {
+
     }
 }

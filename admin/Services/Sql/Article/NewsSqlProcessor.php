@@ -14,6 +14,7 @@ class NewsSqlProcessor extends BaseSqlProcessor implements BaseSqlDelegation
     public function getListSql($model, $params, $url, $options = [])
     {
         $urlParams = ['search'=>'search'];
+        $model = $model->where('type', 1);
         $url .= '?'.implode('&', $urlParams);
         return [$model, $urlParams, $url];
     }
