@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/assets/stylesheets/imgUploader.min.css">
+<script src="/assets/javascripts/imgUploader.min.js"></script>
 <script>
     function initPictureList(handle, id, name, srcUrl, thumbUrl, withDelete) {
         $("#"+id).prepend('<div class="imguploader-doneitem" style="width: 100px;height: 100px">\n' +
