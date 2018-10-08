@@ -28,4 +28,5 @@
         initPictureList(uploadhandle, 'container', 'main_files', 'http://static.huijiayi.com.cn/liwudao/upload/image/20180928/7869849425.jpg', 'http://static.huijiayi.com.cn/liwudao/upload/image/20180928/7869849425.jpg', 1);
         initPictureList(uploadhandle, 'container', 'main_files', 'http://static.huijiayi.com.cn/liwudao/upload/image/20180928/7869849425.jpg', 'http://static.huijiayi.com.cn/liwudao/upload/image/20180928/7869849425.jpg', 1);
     </script>
+
 @endsection
