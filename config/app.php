@@ -160,6 +160,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
     ],
 
     /*
