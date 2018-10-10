@@ -9,6 +9,7 @@ namespace App\Http\Admin\Actions\Master;
 use Admin\Actions\BaseAction;
 use Admin\Models\System\AdminUserInfo;
 use Admin\Services\Authority\AuthorityService;
+use Admin\Services\Authority\Integration\OwnerAuthoritiesIntegration;
 use Admin\Services\Authority\Integration\RelateAuthoritiesCheckedIntegration;
 use Admin\Services\Authority\Processor\AdminUserActionProcessor;
 use Admin\Traits\ApiActionTrait;
@@ -93,7 +94,7 @@ class AuthorityAction extends BaseAction
 
     protected function parseUserMenu($menus)
     {
-        $userActions = $this->getUserActions();
+        list($stauts, $message, $userActions) = (new OwnerAuthoritiesIntegration($this->_owner))->process();
         if (!empty($userActions)) {
             list($status, $count, $menus) = (new RelateAuthoritiesCheckedIntegration($menus, $userActions))->process();
         }

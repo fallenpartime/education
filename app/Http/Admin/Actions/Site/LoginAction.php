@@ -9,6 +9,7 @@ namespace App\Http\Admin\Actions\Site;
 use Admin\Actions\BaseAction;
 use Admin\Auth\AuthService;
 use Admin\Services\Authority\AuthorityService;
+use Admin\Services\Authority\Integration\OwnerAuthoritiesIntegration;
 use Admin\Services\Authority\Processor\AdminUserInfoProcessor;
 use Admin\Services\Authority\Processor\AdminUserProcessor;
 use Admin\Services\Authority\Processor\AdminUserRoleAccessProcessor;
@@ -63,7 +64,10 @@ class LoginAction extends BaseAction
                 $roleId = $owner->role_id;
                 $isManger = $roleId == 1? 1: 0;
                 $isSuper = $owner->is_super;
-                $ts_list = AuthorityService::getActionList($userId);
+                $ts_list = [];
+                if ($roleId > 0) {
+                    list($stauts, $message, $ts_list) = (new OwnerAuthoritiesIntegration($owner))->process();
+                }
                 $groupList = $this->parseRoleAccess($roleId);
                 $admin_info = array(
                     'userid' 	=> $userId,
