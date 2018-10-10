@@ -66,32 +66,6 @@ class AuthorityAction extends BaseAction
         return $this->createView('admin.system.owner.authority', $result);
     }
 
-    protected function getUserActions()
-    {
-        $userActionList = array_merge($this->getGroupActions(), $this->getRoleActions());
-        $userActionList = array_unique($userActionList);
-        $userAction = $this->_userAction;
-        if (!empty($userAction) && !empty($userAction->actions)) {
-            $actionList = json_decode($userAction->actions, true);
-            $allowList = array_get($actionList, 'allow');
-            $banList = array_get($actionList, 'ban');
-            if (!empty($allowList)) {
-                $userActionList = array_merge($userActionList, $allowList);
-            }
-            if (!empty($banList)) {
-                foreach ($banList as $item) {
-                    $pos = array_search($item, $userActionList);
-                    if ($pos === false) {
-                        continue;
-                    }
-                    unset($userActionList[$pos]);
-                }
-            }
-        }
-        $userActionList = array_unique($userActionList);
-        return $userActionList;
-    }
-
     protected function parseUserMenu($menus)
     {
         list($stauts, $message, $userActions) = (new OwnerAuthoritiesIntegration($this->_owner))->process();
