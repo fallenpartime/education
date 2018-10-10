@@ -30,7 +30,7 @@ class AuthorityAction extends BaseAction
         $id = $httpTool->getBothSafeParam('id', HttpConfig::PARAM_NUMBER_TYPE);
         $workNo = $httpTool->getBothSafeParam('work_no', HttpConfig::PARAM_NUMBER_TYPE);
         if (!empty($id)) {
-            $this->_owner = AdminUserInfo::find($id);
+            $this->_owner = AdminUserInfo::with(['user', 'role', 'userAction'])->find($id);
             if (!empty($this->_owner)) {
                 $this->_user = $this->_owner->user;
                 $this->_role = $this->_owner->role;
