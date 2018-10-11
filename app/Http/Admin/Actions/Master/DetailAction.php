@@ -174,11 +174,16 @@ class DetailAction extends BaseAction
         $username = trim($username);
         $phone = $httpTool->getBothSafeParam('phone');
         $phone = trim($phone);
+        $roleId = $httpTool->getBothSafeParam('role_id', HttpConfig::PARAM_NUMBER_TYPE);
+        $isAdmin = $httpTool->getBothSafeParam('is_admin', HttpConfig::PARAM_NUMBER_TYPE);
         if(empty($username)){
             $this->errorJson(500, '用户名为空');
         }
         if(empty($phone)){
             $this->errorJson(500, '电话不能为空');
+        }
+        if(empty($roleId) && !empty($isAdmin)){
+            $this->errorJson(500, '未配置角色前不允许登录');
         }
         if (!empty($id) && empty($this->_owner)) {
             $this->errorJson(500, '记录不存在');
