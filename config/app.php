@@ -163,6 +163,7 @@ return [
         Stevenyangecho\UEditor\UEditorServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Overtrue\LaravelWechat\ServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
     ],
 
     /*
@@ -213,6 +214,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'EasyWeChat' => Overtrue\LaravelWechat\Facade::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
     ],
 
 ];
