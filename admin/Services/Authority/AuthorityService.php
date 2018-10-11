@@ -23,9 +23,4 @@ class AuthorityService
         list($status, $message, $count, $list) = $integration->process();
         return !empty($status)? $list: [];
     }
-
-    public static function getActionList($userId)
-    {
-        return [];
-    }
 }
