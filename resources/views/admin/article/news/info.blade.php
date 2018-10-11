@@ -72,7 +72,7 @@
     </script>
     <script>
         @if(!empty($record) && !empty($record->list_pic))
-        initPictureList(uploadhandle, 'list-container', 'list_pic', '{{ $record->list_pic }}', '{{ $record->list_pic }}', 1);
+        initPictureList(uploadhandle, 'list-up', 'list_pic', '{{ $record->list_pic }}', '{{ $record->list_pic }}', 1);
         @endif
     </script>
     <script type="text/javascript">

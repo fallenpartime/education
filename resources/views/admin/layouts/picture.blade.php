@@ -3,7 +3,7 @@
 <script>
     var uploadUrl = '{{ route('upload') }}';
     function initPictureList(handle, id, name, srcUrl, thumbUrl, withDelete) {
-        $("#"+id).prepend('<div class="imguploader-doneitem" style="width: 100px;height: 100px">\n' +
+        $("#"+id).before('<div class="imguploader-doneitem" style="width: 100px;height: 100px">\n' +
             '      <a class="fancybox" href="'+srcUrl+'" rel="group">\n' +
             '        <img src="'+thumbUrl+'">\n' +
             '      </a>\n' + (withDelete? '      <span class="imguploader-delbtn">×</span>\n': '') +
