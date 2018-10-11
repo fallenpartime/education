@@ -31,6 +31,7 @@ class OwnerAuthoritiesIntegration extends BaseWorkProcessor
 
     public function _init($owner)
     {
+        $this->_clear();
         $this->_owner = $owner;
         if (!empty($owner)) {
             $this->_user = $owner->user;
