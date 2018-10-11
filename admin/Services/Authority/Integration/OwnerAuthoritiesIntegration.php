@@ -42,7 +42,7 @@ class OwnerAuthoritiesIntegration extends BaseWorkProcessor
 
     protected function getUserActions()
     {
-        $userActionList = array_merge($this->getGroupActions(), $this->getRoleActions());
+        list($status, $message, $userActionList) = (new RoleAuthoritiesIntegration($this->_role))->process();
         $userActionList = array_unique($userActionList);
         $userAction = $this->_userAction;
         if (!empty($userAction) && !empty($userAction->actions)) {
@@ -65,34 +65,4 @@ class OwnerAuthoritiesIntegration extends BaseWorkProcessor
         $userActionList = array_unique($userActionList);
         return $userActionList;
     }
-
-    protected function getGroupActions()
-    {
-        $groupActions = [];
-        if (!empty($this->_role)) {
-            $accesses = $this->_role->accesses;
-            if (!empty($accesses)) {
-                foreach ($accesses as $access) {
-                    $groupActionList = [];
-                    $group = $access->group;
-                    if (!empty($group) && !empty($group->actions)) {
-                        $groupActionList = json_decode($group->actions, true);
-                    }
-                    $groupActions = array_merge($groupActions, $groupActionList);
-                }
-            }
-        }
-        $groupActions = array_unique($groupActions);
-        return $groupActions;
-    }
-
-    protected function getRoleActions()
-    {
-        $roleActions = [];
-        if (!empty($this->_role) && !empty($this->_role->actions)) {
-            $roleActions = json_decode($this->_role->actions, true);
-        }
-        return $roleActions;
-    }
-
 }

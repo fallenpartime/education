@@ -18,7 +18,7 @@ class CreateAdminUserGroupsTable extends Migration
             $table->integer('group_no')->default(0)->unique()->comment('分组编号');
             $table->string('name', 100)->unique()->comment('分组名称');
             $table->string('tip', 50)->nullable(false)->unique()->comment('分组提示');
-            $table->json('actions')->nullable()->comment('权限');
+            $table->text('actions')->nullable()->comment('权限');
             $table->timestamps();
             $table->index('group_no');
         });

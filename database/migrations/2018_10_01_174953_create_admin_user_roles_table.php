@@ -18,7 +18,7 @@ class CreateAdminUserRolesTable extends Migration
             $table->integer('role_no')->default(0)->unique()->comment('角色编号');
             $table->string('name', 100)->unique()->comment('角色名称');
             $table->string('index_action')->nullable()->comment('登录action');
-            $table->json('actions')->nullable()->comment('权限');
+            $table->text('actions')->nullable()->comment('权限');
             $table->timestamps();
             $table->index('role_no');
         });

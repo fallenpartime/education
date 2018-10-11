@@ -16,7 +16,7 @@ class CreateAdminUserActionsTable extends Migration
         Schema::create('admin_user_actions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->default(0)->unique()->comment('用户ID');
-            $table->json('actions')->nullable()->comment('权限');
+            $table->text('actions')->nullable()->comment('权限');
             $table->timestamps();
             $table->index('user_id');
         });
