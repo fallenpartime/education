@@ -54,8 +54,6 @@ class LoginAction extends BaseAction
         if (md5($user->salt.$pwd) == $user->pwd) {
             $userId = $user->id;
             $name = $user->name;
-//            $ownerProcessor = new AdminUserInfoProcessor();
-//            $owner = $ownerProcessor->getSingleByUserId($userId);
             $owner = AdminUserInfo::with(['user', 'role', 'userAction'])->where('user_id', $userId)->first();
             if (empty($owner)) {
                 return view('admin.site.loginpwd', ['result_msg'=>'登录信息不存在']);

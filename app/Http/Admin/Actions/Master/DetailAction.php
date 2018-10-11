@@ -172,8 +172,13 @@ class DetailAction extends BaseAction
         $id = $httpTool->getBothSafeParam('id', HttpConfig::PARAM_NUMBER_TYPE);
         $username = $httpTool->getBothSafeParam('name');
         $username = trim($username);
+        $phone = $httpTool->getBothSafeParam('phone');
+        $phone = trim($phone);
         if(empty($username)){
             $this->errorJson(500, '用户名为空');
+        }
+        if(empty($phone)){
+            $this->errorJson(500, '电话不能为空');
         }
         if (!empty($id) && empty($this->_owner)) {
             $this->errorJson(500, '记录不存在');

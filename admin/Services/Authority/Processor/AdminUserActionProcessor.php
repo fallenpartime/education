@@ -14,4 +14,13 @@ class AdminUserActionProcessor extends BaseProcessor
 {
     protected $tableName = "admin_user_actions";
     protected $tableClass = AdminUserAction::class;
+
+    public function getSingleByUserId($userId, $columns = [])
+    {
+        if (empty($userId)) {
+            return '';
+        }
+        $where = ['user_id' => $userId];
+        return $this->getSingle($where, $columns);
+    }
 }
