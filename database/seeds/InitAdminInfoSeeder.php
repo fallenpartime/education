@@ -29,7 +29,7 @@ class InitAdminInfoSeeder extends Seeder
         list($status, $access) = $accessProcessor->insert(['group_no'=>$group->group_no, 'role_no'=>$role->role_no]);
         // 用户信息
         $userProcessor = new AdminUserProcessor();
-        list($status, $user) = $userProcessor->insert(['name'=>'adminc', 'phone'=>'', 'pwd'=>'65c21e07a6b79fe43e624e0e853d94dd', 'salt'=>'61d17b104905d7474c4f917627ba7fab']);
+        list($status, $user) = $userProcessor->insert(['name'=>'adminc', 'phone'=>'13212345678', 'pwd'=>'65c21e07a6b79fe43e624e0e853d94dd', 'salt'=>'61d17b104905d7474c4f917627ba7fab']);
         // 用户详情信息
         $userInfoProcessor = new AdminUserInfoProcessor();
         list($status, $userInfo) = $userInfoProcessor->insert(['user_id'=>$user->id, 'role_id'=>$role->role_no, 'is_admin'=>1]);
