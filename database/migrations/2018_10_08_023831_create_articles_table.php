@@ -23,7 +23,6 @@ class CreateArticlesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->index('type');
-            $table->index('title');
             $table->index('is_show');
         });
     }
