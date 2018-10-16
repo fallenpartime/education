@@ -19,7 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('title', 255)->default('')->comment('标题');
             $table->text('content')->nullable()->comment('文章内容');
             $table->tinyInteger('is_show')->default(0)->comment('是否显示 0-否 1-是');
-            $table->string('list_pic')->nullable()->comment('头图地址');
+            $table->string('list_pic')->nullable()->comment('列表图片地址');
             $table->timestamps();
             $table->softDeletes();
             $table->index('type');
