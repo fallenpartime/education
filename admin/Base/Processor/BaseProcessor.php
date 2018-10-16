@@ -53,6 +53,12 @@ abstract class BaseProcessor
         return [$status, $id];
     }
 
+    public function destroy($id)
+    {
+        $tableClass = new $this->tableClass;
+        return $tableClass::destroy($id);
+    }
+
     public function remove($condition)
     {
         $tableClass = new $this->tableClass;
