@@ -24,8 +24,8 @@ class CreateActivitiesTable extends Migration
             $table->timestamp('published_at')->nullable(true)->comment('发布时间');
             $table->timestamps();
             $table->softDeletes();
-            $this->index('type');
-            $this->index('is_show');
+            $table->index('type');
+            $table->index('is_show');
         });
     }
 
