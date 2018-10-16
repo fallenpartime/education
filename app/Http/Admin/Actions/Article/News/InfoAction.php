@@ -125,7 +125,9 @@ class InfoAction extends BaseAction
                 return $status;
             }
         } else {
-            if ($imageUrl != $this->_article['pic']) {
+            if (empty($imageUrl)) {
+                $this->clearImage($articleId);
+            } else if($imageUrl != $this->_article['pic']) {
                 $this->clearImage($articleId);
                 if (!empty($data)) {
                     list($status, $picture) = $this->getPictureProcessor()->insert($data);
