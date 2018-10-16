@@ -15,7 +15,6 @@ class AddDescriptionToArticles extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->string('description', 255)->after('title')->default('')->comment('文章描述');
-            $table->index('description');
         });
     }
 
@@ -27,7 +26,6 @@ class AddDescriptionToArticles extends Migration
     public function down()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->dropIndex('articles_description_index');
             $table->dropColumn('description');
         });
     }
