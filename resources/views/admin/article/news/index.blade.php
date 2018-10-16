@@ -16,8 +16,9 @@
                                 <th width="10%">ID</th>
                                 <th width="25%">标题</th>
                                 <th width="10%">显示状态</th>
-                                <th width="20%">创建时间</th>
-                                <th width="20%">发布时间</th>
+                                <th width="15%">创建时间</th>
+                                <th width="15%">发布时间</th>
+                                <th width="10%">列表头图</th>
                                 <th width="15%">操作</th>
                             </thead>
                             <tbody style="text-align: center;">
@@ -37,6 +38,11 @@
                                     </td>
                                     <td>
                                         {{ $value->published_at }}
+                                    </td>
+                                    <td>
+                                        @if(!empty($value->list_pic))
+                                            <a href="{{ $value->list_pic }}" target="_blank"><img src="{{ $value->list_pic }}" style="width: 100px; height: 100px;"/></a>
+                                        @endif
                                     </td>
                                     <td>
                                         @if($value->operate_list['allow_operate_edit'])

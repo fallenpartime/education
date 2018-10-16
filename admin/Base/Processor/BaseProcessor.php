@@ -54,5 +54,8 @@ abstract class BaseProcessor
     }
 
     public function remove($condition)
-    {}
+    {
+        $tableClass = new $this->tableClass;
+        return $tableClass::where($condition)->delete();
+    }
 }

@@ -23,15 +23,19 @@
                         <input type="hidden" name="type" value="{{ $articleType }}" />
                         <div class="medical-box col-sm-10 col-md-10 col-lg-10" style="height: auto; padding-bottom: 5px;">
                             <p>
-                                文章配置
+                                教育新闻配置
                             </p>
                             <div class="medical-list">
                                 <div class="medical-div">
                                     <p style="width: 50%; display: inline; margin-right: 10px;">
                                         <span>文章标题:</span>
                                         <input type="text" name="title" value="{{ !empty($record)? $record->title: '' }}" required="required" placeholder="请输入文章标题" style="width: 40%;"/>
-                                    </p>
-                                    <p style="width: 100%; margin-top: 20px;">
+                                    </p><br/>
+                                    <p style="width: 50%; margin-top: 20px; margin-right: 10px;">
+                                        <span>文章简介:</span>
+                                        <textarea name="description" required="required" placeholder="请输入文章简介">{{ !empty($record)? $record->description: '' }}</textarea>
+                                    </p><br/>
+                                    <p style="width: 100%;">
                                         <span>发布时间:</span>
                                         <input name="pubdate" type="text" class="Wdate" value="{{ !empty($record)? $record->deleted_at: '' }}" style="width: 160px;" onfocus="WdatePicker({isShowWeek:true,readOnly:'true',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2010-10-01 00:00:00',maxDate:'2099-12-31 23:59:59'})" />
                                     </p><br/>
@@ -45,7 +49,7 @@
                                     </div>
                                     <p style="width: 100%;">
                                         <span style="width: 150px;">文章内容:</span>
-                                        <textarea class="analysis" id="content" name="content" style="width: 100%; padding: 0 10px;">{{ !empty($record)? $record->content: '' }}</textarea>
+                                        <textarea class="analysis" id="content" name="content" required="required" placeholder="请输入文章内容" style="width: 100%; padding: 0 10px;">{{ !empty($record)? $record->content: '' }}</textarea>
                                     </p><br/>
 
                                 </div>
