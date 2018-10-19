@@ -1,29 +1,29 @@
 <?php
 /**
- * 文章列表
- * Date: 2018/10/8
- * Time: 2:06
+ * 教研活动控制器
+ * Date: 2018/10/20
+ * Time: 1:28
  */
 namespace App\Http\Admin\Controllers\Article;
 
-use App\Http\Admin\Actions\Article\News\IndexAction;
-use App\Http\Admin\Actions\Article\News\InfoAction;
+use App\Http\Admin\Actions\Article\Teching\IndexAction;
+use App\Http\Admin\Actions\Article\Teching\InfoAction;
 use App\Http\Admin\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class TechingController extends Controller
 {
     /**
-     * 教育新闻
+     * 教研活动列表
      * @param Request $request
      */
-    public function news(Request $request)
+    public function index(Request $request)
     {
         return (new IndexAction($request))->run();
     }
 
     /**
-     * 新闻详情
+     * 教研活动详情
      * @param Request $request
      */
     public function info(Request $request)
