@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', '教育新闻详情-教育新闻-文章管理中心')
+@section('title', '教育资讯配置-教育新闻-文章管理中心')
 @section('body_content')
     @include('UEditor::head')
     @include('admin.layouts.picture')
@@ -23,7 +23,7 @@
                         <input type="hidden" name="type" value="{{ $articleType }}" />
                         <div class="medical-box col-sm-10 col-md-10 col-lg-10" style="height: auto; padding-bottom: 5px;">
                             <p>
-                                教育新闻配置
+                                教育资讯配置
                             </p>
                             <div class="medical-list">
                                 <div class="medical-div">

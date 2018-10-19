@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', '教育新闻列表-教育新闻-文章管理中心')
+@section('title', '教育资讯列表-教育新闻-文章管理中心')
 @section('body_content')
     <link href="/assets/stylesheets/common.css" media="all" rel="stylesheet" type="text/css" />
     <link href="/assets/stylesheets/font-awesome.css" media="all" rel="stylesheet" type="text/css" />
@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="widget-container fluid-height clearfix">
                     <div class="widget-content padded clearfix">
-                        <p>教育新闻列表</p>
+                        <p>教育资讯列表</p>
                         <table class="table table-bordered table-striped" id="dataTable1">
                             <thead>
                                 <th width="10%">ID</th>

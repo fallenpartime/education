@@ -12,7 +12,7 @@
                     <ul class="dropdown-menu">
                         @if(!empty($admin_info['is_manager'] || in_array('newsManage', $ts_list)))
                             <li>
-                                <a href="{{ array_get($menu_urls, 'articleCenter.newsManage') }}" @if(in_array('newsManage', $menu)) class="current"@endif>教育新闻</a>
+                                <a href="{{ array_get($menu_urls, 'articleCenter.newsManage') }}" @if(in_array('newsManage', $menu)) class="current"@endif>教育资讯</a>
                             </li>
                         @endif
                     </ul>

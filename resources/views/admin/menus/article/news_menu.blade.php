@@ -3,7 +3,7 @@
         <div class="widget-container fluid-height clearfix">
             <div class="col-lg-11">
                 <div class="heading">
-                    <span style="font-size: 14px;color: #333;font-weight: 600;display: block;float: left;padding:4px 0;">教育新闻管理</span>
+                    <span style="font-size: 14px;color: #333;font-weight: 600;display: block;float: left;padding:4px 0;">教育资讯管理</span>
                 </div>
                 <div class="widget-content padded">
                     <div class="row" style="font-size: 0;">
@@ -11,7 +11,7 @@
                             <a href="{{ route('news') }}">
                                 <dl class="btn btn-lg btn-primary-outline">
                                     <dt><img src="/assets/images/manage.png"></dt>
-                                    <dd @if(in_array('news', $menu)) style="color:#007aff;"@endif>教育新闻列表</dd>
+                                    <dd @if(in_array('news', $menu)) style="color:#007aff;"@endif>教育资讯列表</dd>
                                 </dl>
                             </a>
                         @endif
@@ -19,7 +19,7 @@
                             <a href="{{ route('articleNewsInfo', ['work_no'=>1]) }}">
                                 <dl class="btn btn-lg btn-primary-outline">
                                     <dt><img src="/assets/images/manage.png"></dt>
-                                    <dd @if(in_array('articleNewsInfo', $menu)) style="color:#007aff;"@endif>教育新闻配置</dd>
+                                    <dd @if(in_array('articleNewsInfo', $menu)) style="color:#007aff;"@endif>教育资讯配置</dd>
                                 </dl>
                             </a>
                         @endif
