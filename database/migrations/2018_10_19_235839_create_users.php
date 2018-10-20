@@ -16,7 +16,7 @@ class CreateUsers extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nick_name', 100)->default('')->comment('用户昵称');
-            $table->string('openid')->default('')->comment('openid');
+            $table->string('openid', 100)->default('')->comment('openid');
             $table->string('unionid')->default('')->comment('unionid');
             $table->string('phone')->default('')->comment('用户电话');
             $table->string('face')->default('')->comment('用户头像');
