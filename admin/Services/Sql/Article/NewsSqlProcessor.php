@@ -31,9 +31,21 @@ class NewsSqlProcessor extends BaseSqlProcessor implements BaseSqlDelegation
         }
         // 结束时间
         $endTime = trim(array_get($params, 'end_time'));
-        if (!empty($fromTime)) {
+        if (!empty($endTime)) {
             $model = $model->where('created_at', '<=', $endTime);
             $urlParams['end_time'] = $endTime;
+        }
+        // 发布时间-开始时间
+        $fromTime = trim(array_get($params, 'from_publish_time'));
+        if (!empty($fromTime)) {
+            $model = $model->where('published_at', '>=', $fromTime);
+            $urlParams['from_publish_time'] = $fromTime;
+        }
+        // 发布时间-结束时间
+        $endTime = trim(array_get($params, 'end_publish_time'));
+        if (!empty($endTime)) {
+            $model = $model->where('published_at', '<=', $endTime);
+            $urlParams['end_publish_time'] = $endTime;
         }
         $model->orderBy('created_at', 'DESC');
         $url .= '?'.implode('&', $urlParams);
