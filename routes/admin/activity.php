@@ -11,15 +11,6 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
         'uses' => '\App\Http\Admin\Controllers\Activity\OperateController@open'
     ])->name('activityOpen');
 });
-// 投票问题
-Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(function () {
-    Route::get('/admin/activity/questions', [
-        'uses' => '\App\Http\Admin\Controllers\Activity\QuestionController@index'
-    ])->name('questions');
-    Route::match(['get', 'post'], '/admin/activity/question/info', [
-        'uses' => '\App\Http\Admin\Controllers\Activity\QuestionController@info'
-    ])->name('activityQuestionInfo');
-});
 // 网络投票活动
 Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(function () {
     Route::get('/admin/activity/polls', [
@@ -28,4 +19,10 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
     Route::match(['get', 'post'], '/admin/activity/poll/info', [
         'uses' => '\App\Http\Admin\Controllers\Activity\PollController@info'
     ])->name('activityPollInfo');
+    Route::get('/admin/activity/poll/questions', [
+        'uses' => '\App\Http\Admin\Controllers\Activity\PollController@questions'
+    ])->name('activityPollQuestions');
+    Route::match(['get', 'post'], '/admin/activity/poll/question/info', [
+        'uses' => '\App\Http\Admin\Controllers\Activity\PollController@questionInfo'
+    ])->name('activityPollQuestionInfo');
 });

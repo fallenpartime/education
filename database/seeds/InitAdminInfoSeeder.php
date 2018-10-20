@@ -54,11 +54,37 @@ class InitAdminInfoSeeder extends Seeder
             ]],
             ['name'=>'文章管理中心', 'type'=>1, 'action'=>'articleCenter', 'list'=>[
                 ['name'=>'文章操作', 'type'=>2, 'action'=>'operateArticle', 'list'=>[
-                    ['name'=>'文章显示状态修改', 'type'=>3, 'action'=>'articleShow']
+                    ['name'=>'文章显示状态修改', 'type'=>3, 'action'=>'articleShow'],
+                    ['name'=>'文章作废', 'type'=>3, 'action'=>'articleRemove']
                 ]],
                 ['name'=>'教育资讯管理', 'type'=>2, 'action'=>'newsManage', 'list'=>[
                     ['name'=>'教育资讯列表', 'type'=>3, 'action'=>'news'],
                     ['name'=>'教育资讯配置', 'type'=>3, 'action'=>'articleNewsInfo'],
+                ]],
+                ['name'=>'中高考政策管理', 'type'=>2, 'action'=>'examManage', 'list'=>[
+                    ['name'=>'中高考政策列表', 'type'=>3, 'action'=>'exams'],
+                    ['name'=>'中高考政策配置', 'type'=>3, 'action'=>'articleExamInfo'],
+                ]],
+                ['name'=>'社会实践记录管理', 'type'=>2, 'action'=>'practiceManage', 'list'=>[
+                    ['name'=>'社会实践记录列表', 'type'=>3, 'action'=>'practices'],
+                    ['name'=>'社会实践记录配置', 'type'=>3, 'action'=>'articlePracticeInfo'],
+                ]],
+                ['name'=>'教研活动管理', 'type'=>2, 'action'=>'techingManage', 'list'=>[
+                    ['name'=>'教研活动列表', 'type'=>3, 'action'=>'techings'],
+                    ['name'=>'教研活动配置', 'type'=>3, 'action'=>'articleTechingInfo'],
+                ]],
+            ]],
+            ['name'=>'活动管理中心', 'type'=>1, 'action'=>'activityCenter', 'list'=>[
+                ['name'=>'活动操作', 'type'=>2, 'action'=>'operateActivity', 'list'=>[
+                    ['name'=>'活动显示状态修改', 'type'=>3, 'action'=>'activityShow'],
+                    ['name'=>'活动作废', 'type'=>3, 'action'=>'activityRemove'],
+                    ['name'=>'活动开启状态修改', 'type'=>3, 'action'=>'activityOpen'],
+                ]],
+                ['name'=>'网络投票管理', 'type'=>2, 'action'=>'pollManage', 'list'=>[
+                    ['name'=>'网络投票列表', 'type'=>3, 'action'=>'polls'],
+                    ['name'=>'网络投票配置', 'type'=>3, 'action'=>'activityPollInfo'],
+                    ['name'=>'网络投票问题列表', 'type'=>3, 'action'=>'activityPollQuestions'],
+                    ['name'=>'网络投票问题配置', 'type'=>3, 'action'=>'activityPollQuestionInfo'],
                 ]],
             ]],
         ];

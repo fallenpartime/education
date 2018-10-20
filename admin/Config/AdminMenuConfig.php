@@ -20,7 +20,6 @@ class AdminMenuConfig
             ],
             'activityCenter'  =>  [
                 'pollManage'  =>  '',
-                'questionManage'  =>  '',
             ],
             'schoolCenter'  =>  [
                 'schoolDistrictManage'  =>  '',
@@ -58,12 +57,10 @@ class AdminMenuConfig
             ],
             'activityCenter'  =>  [
                 'pollManage'  =>  [
-                    'polls'             =>  route('polls'),
-                    'activityPollInfo'  =>  route('activityPollInfo', ['work_no'=>1]),
-                ],
-                'questionManage'  =>  [
-                    'questions'             =>  route('questions'),
-                    'activityQuestionInfo'  =>  route('activityQuestionInfo', ['work_no'=>1]),
+                    'polls'                 =>  route('polls'),
+                    'activityPollInfo'      =>  route('activityPollInfo', ['work_no'=>1]),
+                    'activityPollQuestions'     =>  route('activityPollQuestions'),
+                    'activityPollQuestionInfo'  =>  route('activityPollQuestionInfo', ['work_no'=>1]),
                 ],
             ],
             'schoolCenter'  =>  [

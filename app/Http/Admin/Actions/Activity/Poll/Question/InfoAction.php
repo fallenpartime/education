@@ -4,7 +4,7 @@
  * Date: 2018/10/20
  * Time: 22:34
  */
-namespace App\Http\Admin\Actions\Activity\Question;
+namespace App\Http\Admin\Actions\Activity\Poll\Question;
 
 use Admin\Actions\BaseAction;
 

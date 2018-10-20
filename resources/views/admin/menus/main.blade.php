@@ -44,11 +44,6 @@
                                 <a href="{{ array_get($menu_urls, 'activityCenter.pollManage') }}" @if(in_array('pollManage', $menu)) class="current"@endif>网络投票管理</a>
                             </li>
                         @endif
-                        @if(!empty($admin_info['is_manager'] || in_array('questionManage', $ts_list)))
-                            <li>
-                                <a href="{{ array_get($menu_urls, 'activityCenter.questionManage') }}" @if(in_array('questionManage', $menu)) class="current"@endif>投票问题管理</a>
-                            </li>
-                        @endif
                     </ul>
                 </li>
                 @endif
