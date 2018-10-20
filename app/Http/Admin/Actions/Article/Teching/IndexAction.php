@@ -62,7 +62,6 @@ class IndexAction extends BaseAction
             'allow_operate_edit' => 0,
             'allow_operate_change' => 0
         ];
-        $list[$key]->allow_operate_change = 0;
         $authService = $this->getAuthService();
         if ($authService->isMaster || $authService->validateAction('articleTechingInfo')) {
             $operateList['allow_operate_edit'] = 1;

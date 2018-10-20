@@ -41,7 +41,7 @@
                     <ul class="dropdown-menu">
                         @if(!empty($admin_info['is_manager'] || in_array('pollManage', $ts_list)))
                             <li>
-                                <a href="{{ array_get($menu_urls, 'activityCenter.pollManage') }}" @if(in_array('pollManage', $menu)) class="current"@endif>网络投票管理</a>
+                                <a href="{{ array_get($menu_urls, 'activityCenter.pollManage') }}" @if(in_array('pollManage', $menu)) class="current"@endif>网络投票活动</a>
                             </li>
                         @endif
                     </ul>

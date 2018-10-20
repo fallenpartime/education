@@ -23,6 +23,22 @@
                                 </dl>
                             </a>
                         @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('activityPollQuestions', $ts_list)))
+                            <a href="{{ route('activityPollQuestions') }}">
+                                <dl class="btn btn-lg btn-primary-outline">
+                                    <dt><img src="/assets/images/manage.png"></dt>
+                                    <dd @if(in_array('activityPollQuestions', $menu)) style="color:#007aff;"@endif>问题列表</dd>
+                                </dl>
+                            </a>
+                        @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('activityPollQuestionInfo', $ts_list)))
+                            <a href="{{ route('activityPollQuestionInfo', ['work_no'=>1]) }}">
+                                <dl class="btn btn-lg btn-primary-outline">
+                                    <dt><img src="/assets/images/manage.png"></dt>
+                                    <dd @if(in_array('activityPollQuestionInfo', $menu)) style="color:#007aff;"@endif>问题配置</dd>
+                                </dl>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

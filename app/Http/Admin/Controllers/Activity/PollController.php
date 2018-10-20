@@ -29,7 +29,7 @@ class PollController extends Controller
      * 网络投票活动详情
      * @param Request $request
      */
-    public function remove(Request $request)
+    public function info(Request $request)
     {
         return (new InfoAction($request))->run();
     }
