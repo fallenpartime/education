@@ -1,25 +1,25 @@
 <?php
 /**
- * 教育新闻列表
+ * 中高考政策
  * Date: 2018/10/8
  * Time: 1:58
  */
-namespace App\Http\Admin\Actions\Article\News;
+namespace App\Http\Admin\Actions\Article\Exam;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Article;
 use Admin\Services\Common\CommonService;
-use Admin\Services\Sql\Article\NewsSqlProcessor;
+use Admin\Services\Sql\Article\ExamSqlProcessor;
 
 class IndexAction extends BaseAction
 {
     public function run()
     {
         $httpTool = $this->getHttpTool();
-        $url = route('news');
+        $url = route('exams');
         list($page, $pageSize) = $this->getPageParams();
         $requestParams = $httpTool->getParams();
-        list($model, $urlParams, $url) = (new NewsSqlProcessor())->getListSql(new Article(), $requestParams, $url);
+        list($model, $urlParams, $url) = (new ExamSqlProcessor())->getListSql(new Article(), $requestParams, $url);
         $list = [];
         $total = $model->count();
         if ($total > 0) {
@@ -32,12 +32,12 @@ class IndexAction extends BaseAction
             'list'          => $list,
             'pageList'      => $pageList,
             'urlParams'     => $urlParams,
-            'menu'          => ['articleCenter', 'newsManage', 'news'],
+            'menu'          => ['articleCenter', 'examManage', 'exams'],
             'operateList'   => $operateList,
             'operateUrl'    => $operateUrl,
-            'redirectUrl'   => route('news'),
+            'redirectUrl'   => route('exams'),
         ];
-        return $this->createView('admin.article.news.index', $result);
+        return $this->createView('admin.article.exam.index', $result);
     }
 
     protected function allowOperate()
@@ -64,7 +64,7 @@ class IndexAction extends BaseAction
         ];
         $list[$key]->allow_operate_change = 0;
         $authService = $this->getAuthService();
-        if ($authService->isMaster || $authService->validateAction('articleNewsInfo')) {
+        if ($authService->isMaster || $authService->validateAction('articleExamInfo')) {
             $operateList['allow_operate_edit'] = 1;
         }
         $authService = $this->getAuthService();
@@ -78,7 +78,7 @@ class IndexAction extends BaseAction
     protected function processList($list)
     {
         foreach ($list as $key => $item) {
-            $list[$key]->edit_url = route('articleNewsInfo', ['work_no'=>1, 'id'=>$item->id]);
+            $list[$key]->edit_url = route('articleExamInfo', ['work_no'=>1, 'id'=>$item->id]);
             $list = $this->listAllowOperate($list, $key);
         }
         return $list;

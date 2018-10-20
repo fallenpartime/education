@@ -15,6 +15,21 @@
                                 <a href="{{ array_get($menu_urls, 'articleCenter.newsManage') }}" @if(in_array('newsManage', $menu)) class="current"@endif>教育资讯</a>
                             </li>
                         @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('examManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'articleCenter.examManage') }}" @if(in_array('examManage', $menu)) class="current"@endif>中高考政策</a>
+                            </li>
+                        @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('practiceManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'articleCenter.practiceManage') }}" @if(in_array('practiceManage', $menu)) class="current"@endif>社会实践记录</a>
+                            </li>
+                        @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('techingManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'articleCenter.techingManage') }}" @if(in_array('techingManage', $menu)) class="current"@endif>教研活动</a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
                 @endif

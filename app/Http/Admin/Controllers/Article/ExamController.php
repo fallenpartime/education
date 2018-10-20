@@ -6,8 +6,8 @@
  */
 namespace App\Http\Admin\Controllers\Article;
 
-use App\Http\Admin\Actions\Article\Examination\IndexAction;
-use App\Http\Admin\Actions\Article\Examination\InfoAction;
+use App\Http\Admin\Actions\Article\Exam\IndexAction;
+use App\Http\Admin\Actions\Article\Exam\InfoAction;
 use App\Http\Admin\Controllers\Controller;
 use Illuminate\Http\Request;
 

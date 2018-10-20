@@ -1,16 +1,16 @@
 @extends('admin.layouts.main')
-@section('title', '教育资讯列表-教育新闻-文章管理中心')
+@section('title', '中高考政策列表-中高考政策-文章管理中心')
 @section('body_content')
     <link href="/assets/stylesheets/common.css" media="all" rel="stylesheet" type="text/css" />
     <link href="/assets/stylesheets/font-awesome.css" media="all" rel="stylesheet" type="text/css" />
-    @include('admin.menus.article.news_menu', ['menu' => $menu, 'admin_info' => $admin_info, 'ts_list' => $ts_list])
+    @include('admin.menus.article.exam_menu', ['menu' => $menu, 'admin_info' => $admin_info, 'ts_list' => $ts_list])
 
     <div class="container-fluid main-content">
         <div class="row">
             <div class="col-lg-12">
                 <div class="widget-container fluid-height clearfix">
                     <div class="widget-content padded clearfix">
-                        <p>教育资讯列表</p>
+                        <p>中高考政策列表</p>
                         <table class="table table-bordered table-striped" id="dataTable1">
                             <thead>
                                 <th width="10%">ID</th>

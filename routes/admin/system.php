@@ -46,3 +46,11 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
         'uses' => '\App\Http\Admin\Controllers\System\MasterController@ownerAuthority'
     ])->name('ownerAuthority');
 });
+Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(function () {
+    Route::get('/admin/log/operates', [
+        'uses' => '\App\Http\Admin\Controllers\System\LogController@operateLogs'
+    ])->name('operateLogs');
+    Route::get('/admin/log/admin/operates', [
+        'uses' => '\App\Http\Admin\Controllers\System\LogController@adminLogs'
+    ])->name('adminLogs');
+});

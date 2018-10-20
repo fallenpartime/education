@@ -14,6 +14,9 @@ class AdminMenuConfig
         return [
             'articleCenter'  =>  [
                 'newsManage'  =>  '',
+                'examManage'  =>  '',
+                'practiceManage'    =>  '',
+                'techingManage'     =>  '',
             ],
             'schoolCenter'  =>  [
                 'schoolDistrictManage'  =>  '',
@@ -35,7 +38,19 @@ class AdminMenuConfig
                 'newsManage'    =>  [
                     'news'              =>  route('news'),
                     'articleNewsInfo'   =>  route('articleNewsInfo', ['work_no'=>1]),
-                ]
+                ],
+                'examManage'    =>  [
+                    'exams'             =>  route('exams'),
+                    'articleExamInfo'   =>  route('articleExamInfo', ['work_no'=>1]),
+                ],
+                'practiceManage'    =>  [
+                    'practices'             =>  route('practices'),
+                    'articlePracticesInfo'  =>  route('articlePracticesInfo', ['work_no'=>1]),
+                ],
+                'techingManage'     =>  [
+                    'techings'              =>  route('techings'),
+                    'articleTechingInfo'    =>  route('articleTechingInfo', ['work_no'=>1]),
+                ],
             ],
             'schoolCenter'  =>  [
                 'schoolDistrictManage'  =>  [

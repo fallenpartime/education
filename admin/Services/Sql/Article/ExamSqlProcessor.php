@@ -1,6 +1,6 @@
 <?php
 /**
- * 教育新闻文章列表
+ * 中高考政策文章列表
  * Date: 2018/10/8
  * Time: 2:19
  */
@@ -10,12 +10,12 @@ use Admin\Base\Processor\BaseSqlProcessor;
 use Admin\Config\ArticleConfig;
 use Admin\Services\Sql\BaseSqlDelegation;
 
-class NewsSqlProcessor extends BaseSqlProcessor implements BaseSqlDelegation
+class ExamSqlProcessor extends BaseSqlProcessor implements BaseSqlDelegation
 {
     public function getListSql($model, $params, $url, $options = [])
     {
         $urlParams = ['search'=>'search'];
-        $model = $model->where('type', ArticleConfig::NEWS_TYPE);
+        $model = $model->where('type', ArticleConfig::EXAM_TYPE);
         // 显示状态
         $isShow = intval(trim(array_get($params, 'is_show')));
         if ($isShow > 0) {

@@ -1,10 +1,10 @@
 <?php
 /**
- * 教育新闻详情
+ * 中高考政策
  * Date: 2018/10/8
  * Time: 22:43
  */
-namespace App\Http\Admin\Actions\Article\News;
+namespace App\Http\Admin\Actions\Article\Exam;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Article;
@@ -18,7 +18,7 @@ class InfoAction extends BaseAction
     use ApiActionTrait;
 
     protected $_article = null;
-    protected $_type = 1;
+    protected $_type = 2;
     protected $pictureProcessor = null;
 
     protected function getPictureProcessor()
@@ -52,10 +52,10 @@ class InfoAction extends BaseAction
         $result = [
             'record'            =>  $this->_article,
             'articleType'       =>  1,
-            'menu'              =>  ['articleCenter', 'newsManage', 'articleNewsInfo'],
-            'actionUrl'         => route('articleNewsInfo', ['work_no'=>2]),
+            'menu'              =>  ['articleCenter', 'examManage', 'articleExamInfo'],
+            'actionUrl'         => route('articleExamInfo', ['work_no'=>2]),
         ];
-        return $this->createView('admin.article.news.info', $result);
+        return $this->createView('admin.article.exam.info', $result);
     }
 
     protected function process()
@@ -151,7 +151,7 @@ class InfoAction extends BaseAction
     protected function update($data)
     {
         if ($this->_article->type != $this->_type) {
-            $this->errorJson(500, '文章类别非新闻类型');
+            $this->errorJson(500, '文章类别非中高考政策类型');
         }
         $processor = new ArticleProcessor();
         list($status, $id) = $processor->update($this->_article->id, $data);
