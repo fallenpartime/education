@@ -18,6 +18,10 @@ class AdminMenuConfig
                 'practiceManage'    =>  '',
                 'techingManage'     =>  '',
             ],
+            'activityCenter'  =>  [
+                'pollManage'  =>  '',
+                'questionManage'  =>  '',
+            ],
             'schoolCenter'  =>  [
                 'schoolDistrictManage'  =>  '',
                 'schoolManage'          =>  '',
@@ -50,6 +54,16 @@ class AdminMenuConfig
                 'techingManage'     =>  [
                     'techings'              =>  route('techings'),
                     'articleTechingInfo'    =>  route('articleTechingInfo', ['work_no'=>1]),
+                ],
+            ],
+            'activityCenter'  =>  [
+                'pollManage'  =>  [
+                    'polls'             =>  route('polls'),
+                    'activityPollInfo'  =>  route('activityPollInfo', ['work_no'=>1]),
+                ],
+                'questionManage'  =>  [
+                    'questions'             =>  route('questions'),
+                    'activityQuestionInfo'  =>  route('activityQuestionInfo', ['work_no'=>1]),
                 ],
             ],
             'schoolCenter'  =>  [

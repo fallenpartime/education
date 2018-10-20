@@ -33,6 +33,25 @@
                     </ul>
                 </li>
                 @endif
+                @if(!empty($admin_info['is_manager'] || in_array('activityCenter', $ts_list)))
+                <li class="dropdown">
+                    <a data-toggle="dropdown" href="#" @if(in_array('activityCenter', $menu)) class="current"@endif >
+                        <span aria-hidden="true" class="se7en-tables"></span>活动管理中心<b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @if(!empty($admin_info['is_manager'] || in_array('pollManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'activityCenter.pollManage') }}" @if(in_array('pollManage', $menu)) class="current"@endif>网络投票管理</a>
+                            </li>
+                        @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('questionManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'activityCenter.questionManage') }}" @if(in_array('questionManage', $menu)) class="current"@endif>投票问题管理</a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+                @endif
                 @if(!empty($admin_info['is_manager'] || in_array('schoolCenter', $ts_list)))
                 <li class="dropdown">
                     <a data-toggle="dropdown" href="#" @if(in_array('schoolCenter', $menu)) class="current"@endif >
