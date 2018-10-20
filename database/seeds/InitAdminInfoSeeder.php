@@ -53,10 +53,12 @@ class InitAdminInfoSeeder extends Seeder
                 ]],
             ]],
             ['name'=>'文章管理中心', 'type'=>1, 'action'=>'articleCenter', 'list'=>[
+                ['name'=>'文章操作', 'type'=>2, 'action'=>'operateArticle', 'list'=>[
+                    ['name'=>'文章显示状态修改', 'type'=>3, 'action'=>'articleShow']
+                ]],
                 ['name'=>'教育新闻管理', 'type'=>2, 'action'=>'newsManage', 'list'=>[
-                    ['name'=>'教育新闻列表', 'type'=>3, 'action'=>'news'],
-                    ['name'=>'教育新闻配置', 'type'=>3, 'action'=>'articleNewsInfo'],
-                    ['name'=>'教育新闻显示状态修改', 'type'=>3, 'action'=>'articleShow']
+                    ['name'=>'教育资讯列表', 'type'=>3, 'action'=>'news'],
+                    ['name'=>'教育资讯配置', 'type'=>3, 'action'=>'articleNewsInfo'],
                 ]],
             ]],
         ];
