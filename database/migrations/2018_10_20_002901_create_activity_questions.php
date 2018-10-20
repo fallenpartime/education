@@ -16,8 +16,8 @@ class CreateActivityQuestions extends Migration
         Schema::create('activity_questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('activity_id')->default(0)->comment('活动ID');
-            $table->tinyInteger('type', 100)->default(0)->comment('类型 0-文字 1-图片');
-            $table->string('title')->default('')->comment('问题描述');
+            $table->tinyInteger('type')->default(0)->comment('类型 0-文字 1-图片');
+            $table->string('title', 100)->default('')->comment('问题描述');
             $table->string('source')->default('')->comment('资源地址');
             $table->tinyInteger('is_checkbox')->default(0)->comment('是否多选 0-否 1-是');
             $table->timestamps();
