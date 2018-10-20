@@ -45,7 +45,7 @@ class AdminMenuConfig
                 ],
                 'practiceManage'    =>  [
                     'practices'             =>  route('practices'),
-                    'articlePracticesInfo'  =>  route('articlePracticesInfo', ['work_no'=>1]),
+                    'articlePracticeInfo'   =>  route('articlePracticeInfo', ['work_no'=>1]),
                 ],
                 'techingManage'     =>  [
                     'techings'              =>  route('techings'),

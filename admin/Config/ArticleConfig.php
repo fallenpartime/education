@@ -11,7 +11,7 @@ class ArticleConfig
     const NEWS_TYPE = 1;
     const EXAM_TYPE = 2;
     const PRACTICE_TYPE = 3;
-    const TECH_TYPE = 2;
+    const TECH_TYPE = 4;
 
     public static function getTypeList()
     {

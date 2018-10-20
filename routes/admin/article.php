@@ -21,7 +21,7 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
     ])->name('practices');
     Route::match(['get', 'post'], '/admin/article/practice/info', [
         'uses' => '\App\Http\Admin\Controllers\Article\PracticeController@info'
-    ])->name('articlePracticesInfo');
+    ])->name('articlePracticeInfo');
     // 教研活动
     Route::get('/admin/article/techings', [
         'uses' => '\App\Http\Admin\Controllers\Article\TechingController@index'
