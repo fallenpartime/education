@@ -43,7 +43,7 @@
                             <a href="{{ route('activityPollVoteData') }}">
                                 <dl class="btn btn-lg btn-primary-outline">
                                     <dt><img src="/assets/images/manage.png"></dt>
-                                    <dd @if(in_array('activityPollVoteData', $menu)) style="color:#007aff;"@endif>活动投票统计</dd>
+                                    <dd @if(in_array('activityPollVoteData', $menu)) style="color:#007aff;"@endif>活动投票数据</dd>
                                 </dl>
                             </a>
                         @endif
