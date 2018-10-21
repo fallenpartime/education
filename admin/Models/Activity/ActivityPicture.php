@@ -2,20 +2,16 @@
 
 namespace Admin\Models\Activity;
 
+use Admin\Models\Activity\Activity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Activity extends Model
+class ActivityPicture extends Model
 {
     use SoftDeletes;
 
-    protected $table = "activities";
-    protected $appends = ['open_status', 'edit_url', 'operate_list'];
-
-    public function getOpenStatusAttribute()
-    {
-        return array_get($this->attributes, 'open_status', '');
-    }
+    protected $table = "activity_pictures";
+    protected $appends = ['edit_url', 'operate_list'];
 
     public function getEditUrlAttribute()
     {
@@ -27,8 +23,8 @@ class Activity extends Model
         return array_get($this->attributes, 'operate_list', []);
     }
 
-    public function picture()
+    public function activity()
     {
-        return $this->hasOne(ActivityPicture::class)->where('type', '=', 1);
+        return $this->belongsTo(Activity::class, 'activity_id', 'id');
     }
 }

@@ -4,7 +4,7 @@
  * Date: 2018/10/16
  * Time: 14:59
  */
-namespace Admin\Services\Activity;
+namespace Admin\Services\Activity\Processor;
 
 use Admin\Base\Processor\BaseProcessor;
 use Admin\Models\Activity\Activity;

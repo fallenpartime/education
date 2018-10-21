@@ -100,6 +100,9 @@
                                                 @if($value->is_show) 隐藏 @else 显示 @endif
                                             </a>
                                         @endif
+                                        @if($value->operate_list['allow_operate_remove'])
+                                            <a href="javascript:;" style="display: block;" onclick="remove({{ $value->id }})">作废</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -116,6 +119,26 @@
                 if (confirm('确定提交？')) {
                     $.post(
                         '{{ $operateUrl['change_url'] }}',
+                        {id: id},
+                        function (result) {
+                            result = JSON.parse(result)
+                            if (result.code == 200) {
+                                location.href = '{{ $redirectUrl }}';
+                            } else {
+                                alert(result.msg)
+                            }
+                        }
+                    )
+                }
+            }
+        </script>
+    @endif
+    @if($operateList['change_remove'])
+        <script>
+            function remove(id) {
+                if (confirm('确定提交？')) {
+                    $.post(
+                        '{{ $operateUrl['remove_url'] }}',
                         {id: id},
                         function (result) {
                             result = JSON.parse(result)

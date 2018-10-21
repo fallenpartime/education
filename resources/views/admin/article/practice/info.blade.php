@@ -40,7 +40,7 @@
                                         <input name="pubdate" type="text" class="Wdate" value="{{ !empty($record)? $record->deleted_at: '' }}" style="width: 160px;" onfocus="WdatePicker({isShowWeek:true,readOnly:'true',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2010-10-01 00:00:00',maxDate:'2099-12-31 23:59:59'})" />
                                     </p><br/>
                                     <p style="margin-bottom: 0;float: left">
-                                        <span>头图:<font style="color: grey;">(文章要设置为热文需上传头图，头图尺寸为：86*60)</font></span>
+                                        <span>列表图片:<font style="color: grey;">(图尺寸为：86*60)</font></span>
                                     </p>
                                     <div id="list-container" style="overflow: hidden;width: 80%;float: left">
                                         <div id="list-up">

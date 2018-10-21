@@ -23,7 +23,7 @@ class IndexAction extends BaseAction
         $list = [];
         $total = $model->count();
         if ($total > 0) {
-            $list = $this->pageModel($model, $page, $pageSize)->with('picture')->select(['id', 'type', 'title', 'is_show', 'is_open', 'read_count', 'join_count', 'list_pic', 'created_at', 'published_at', 'opened_at'])->get();
+            $list = $this->pageModel($model, $page, $pageSize)->with('picture')->select(['id', 'type', 'title', 'is_show', 'is_open', 'read_count', 'join_count', 'list_pic', 'created_at', 'published_at', 'opened_at', 'overed_at'])->get();
             $list = $this->processList($list);
         }
         list($url, $pageList) = CommonService::pagination($total, $pageSize, $page, $url);
@@ -43,16 +43,28 @@ class IndexAction extends BaseAction
     protected function allowOperate()
     {
         $operateList = [
-            'change_show' => 0
+            'change_show' => 0,
+            'change_open' => 0,
+            'change_remove' => 0
         ];
         $operateUrl = [
-            'change_url' => ''
+            'change_url'    => '',
+            'open_url'      => '',
+            'remove_url'      => ''
         ];
-//        $authService = $this->getAuthService();
-//        if ($authService->isMaster || $authService->validateAction('articleShow')) {
-//            $operateList['change_show'] = 1;
-//            $operateUrl['change_url'] = route('articleShow');
-//        }
+        $authService = $this->getAuthService();
+        if ($authService->isMaster || $authService->validateAction('activityShow')) {
+            $operateList['change_show'] = 1;
+            $operateUrl['change_url'] = route('activityShow');
+        }
+        if ($authService->isMaster || $authService->validateAction('activityOpen')) {
+            $operateList['change_open'] = 1;
+            $operateUrl['open_url'] = route('activityOpen');
+        }
+        if ($authService->isMaster || $authService->validateAction('activityRemove')) {
+            $operateList['change_remove'] = 1;
+            $operateUrl['remove_url'] = route('activityRemove');
+        }
         return [$operateList, $operateUrl];
     }
 
@@ -60,15 +72,34 @@ class IndexAction extends BaseAction
     {
         $operateList = [
             'allow_operate_edit' => 0,
-            'allow_operate_change' => 0
+            'allow_operate_show' => 0,
+            'allow_operate_open' => 0,
+            'allow_operate_close' => 0,
+            'allow_operate_remove' => 0
         ];
+        $isOpen = $list[$key]->is_open;
+        $openAt = $list[$key]->opened_at;
+        $overedAt = $list[$key]->overed_at;
         $authService = $this->getAuthService();
-        if ($authService->isMaster || $authService->validateAction('articleNewsInfo')) {
+        if ($authService->isMaster || $authService->validateAction('activityPollInfo')) {
             $operateList['allow_operate_edit'] = 1;
         }
-        $authService = $this->getAuthService();
-        if ($authService->isMaster || $authService->validateAction('articleShow')) {
-            $operateList['allow_operate_change'] = 1;
+        if ($authService->isMaster || $authService->validateAction('activityShow')) {
+            $operateList['allow_operate_show'] = 1;
+        }
+        if ($authService->isMaster || $authService->validateAction('activityOpen')) {
+            if (empty($isOpen)) {
+                if (empty($openAt)) {
+                    $operateList['allow_operate_open'] = 1;
+                }
+            } else {
+                if (empty($overedAt)) {
+                    $operateList['allow_operate_close'] = 1;
+                }
+            }
+        }
+        if ($authService->isMaster || $authService->validateAction('activityRemove')) {
+            $operateList['allow_operate_remove'] = 1;
         }
         $list[$key]->operate_list = $operateList;
         return $list;
@@ -77,8 +108,25 @@ class IndexAction extends BaseAction
     protected function processList($list)
     {
         foreach ($list as $key => $item) {
-            $list[$key]->edit_url = route('articleNewsInfo', ['work_no'=>1, 'id'=>$item->id]);
+            $list[$key]->edit_url = route('activityPollInfo', ['work_no'=>1, 'id'=>$item->id]);
+            $list = $this->getActivityOpenStatus($list, $key);
             $list = $this->listAllowOperate($list, $key);
+        }
+        return $list;
+    }
+
+    protected function getActivityOpenStatus($list, $key)
+    {
+        $isOpen = $list[$key]->is_open;
+        $overedAt = $list[$key]->overed_at;
+        if ($isOpen == 0) {
+            $list[$key]->open_status = '未开启';
+        } else {
+            if(!empty($overedAt)) {
+                $list[$key]->open_status = '已结束';
+            } else {
+                $list[$key]->open_status = '进行中';
+            }
         }
         return $list;
     }
