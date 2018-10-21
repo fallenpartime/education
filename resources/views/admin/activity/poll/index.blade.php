@@ -137,7 +137,7 @@
                                             <a href="javascript:;" style="display: block;" onclick="changeOpen({{ $value->id }})">开启活动</a>
                                         @endif
                                         @if($value->operate_list['allow_operate_close'])
-                                            <a href="javascript:;" style="display: block;" onclick="changeOpen({{ $value->id }})">关闭活动</a>
+                                            <a href="javascript:;" style="display: block;" onclick="changeOpen({{ $value->id }})">结束活动</a>
                                         @endif
                                         @if($value->operate_list['allow_operate_remove'])
                                             <a href="javascript:;" style="display: block;" onclick="removeActivity({{ $value->id }})">作废</a>

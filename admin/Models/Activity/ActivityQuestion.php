@@ -21,4 +21,9 @@ class ActivityQuestion extends Model
     {
         return array_get($this->attributes, 'operate_list', []);
     }
+
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
 }

@@ -11,6 +11,15 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
         'uses' => '\App\Http\Admin\Controllers\Activity\OperateController@open'
     ])->name('activityOpen');
 });
+// 问题操作
+Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(function () {
+    Route::match(['post'], '/admin/activity/question/show', [
+        'uses' => '\App\Http\Admin\Controllers\Activity\OperateController@questionShow'
+    ])->name('activityQuestionShow');
+    Route::match(['post'], '/admin/activity/question/remove', [
+        'uses' => '\App\Http\Admin\Controllers\Activity\OperateController@questionRemove'
+    ])->name('activityQuestionRemove');
+});
 // 网络投票活动
 Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(function () {
     Route::get('/admin/activity/polls', [

@@ -8,7 +8,9 @@ namespace App\Http\Admin\Controllers\Activity;
 
 use App\Http\Admin\Actions\Activity\Operate\OpenAction;
 use App\Http\Admin\Actions\Activity\Operate\RemoveAction;
+use App\Http\Admin\Actions\Activity\Operate\Question\RemoveAction as QuestionRemoveAction;
 use App\Http\Admin\Actions\Activity\Operate\ShowAction;
+use App\Http\Admin\Actions\Activity\Operate\Question\ShowAction as QuestionShowAction;
 use App\Http\Admin\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -40,5 +42,23 @@ class OperateController extends Controller
     public function show(Request $request)
     {
         return (new ShowAction($request))->run();
+    }
+
+    /**
+     * 问题作废
+     * @param Request $request
+     */
+    public function questionRemove(Request $request)
+    {
+        return (new QuestionRemoveAction($request))->run();
+    }
+
+    /**
+     * 问题显示状态修改
+     * @param Request $request
+     */
+    public function questionShow(Request $request)
+    {
+        return (new QuestionShowAction($request))->run();
     }
 }
