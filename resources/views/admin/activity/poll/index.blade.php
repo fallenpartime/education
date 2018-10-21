@@ -50,6 +50,15 @@
                             <option value="2" @if(array_get($urlParams, 'is_show') == 2)selected="selected"@endif>否</option>
                         </select>
                     </p>
+                    <p class="select" style="width: 300px;">
+                        <span class="special">活动开启状态：</span>
+                        <select name="open_status">
+                            <option value="">全部</option>
+                            <option value="1" @if(array_get($urlParams, 'open_status') == 1)selected="selected"@endif>未开启</option>
+                            <option value="2" @if(array_get($urlParams, 'open_status') == 2)selected="selected"@endif>进行中</option>
+                            <option value="3" @if(array_get($urlParams, 'open_status') == 3)selected="selected"@endif>已结束</option>
+                        </select>
+                    </p>
                     <button class="sub">搜索</button>
                 </form>
             </div>

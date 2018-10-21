@@ -24,11 +24,29 @@ class IndexSqlProcessor extends BaseSqlProcessor implements BaseSqlDelegation
             $urlParams['is_show'] = $isShow;
         }
         // 开启状态
-        $isOpen = intval(trim(array_get($params, 'is_open')));
-        if ($isOpen > 0) {
-            $openValue = $isOpen == 1? 1: 0;
-            $model = $model->where('is_open', $openValue);
-            $urlParams['is_open'] = $isOpen;
+        $openStatus = intval(trim(array_get($params, 'open_status')));
+        if ($openStatus > 0) {
+            switch ($openStatus) {
+                case 1:
+                    $model = $model->where('is_open', 0);
+                    break;
+                case 2:
+                    {
+                        $model = $model->where('is_open', 1);
+                        $model = $model->whereNotNull('opened_at');
+                        $model = $model->whereNull('overed_at');
+                    }
+                    break;
+                case 3:
+                    {
+                        $model = $model->where('is_open', 1);
+                        $model = $model->whereNotNull('overed_at');
+                    }
+                    break;
+                default:
+                    ;
+            }
+            $urlParams['open_status'] = $openStatus;
         }
         // 开始时间
         $fromTime = trim(array_get($params, 'from_time'));
