@@ -21,6 +21,9 @@ class AdminMenuConfig
             'activityCenter'  =>  [
                 'pollManage'  =>  '',
             ],
+            'interactCenter'  =>  [
+                'admonitionManage'  =>  '',
+            ],
             'schoolCenter'  =>  [
                 'schoolDistrictManage'  =>  '',
                 'schoolManage'          =>  '',
@@ -61,6 +64,11 @@ class AdminMenuConfig
                     'activityPollInfo'      =>  route('activityPollInfo', ['work_no'=>1]),
                     'activityPollQuestions'     =>  route('activityPollQuestions'),
                     'activityPollQuestionInfo'  =>  route('activityPollQuestionInfo', ['work_no'=>1]),
+                ],
+            ],
+            'interactCenter'  =>  [
+                'admonitionManage'      =>  [
+                    'admonitions'       =>  route('admonitions'),
                 ],
             ],
             'schoolCenter'  =>  [

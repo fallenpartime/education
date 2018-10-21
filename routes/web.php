@@ -21,4 +21,5 @@ require __DIR__.'/admin/system.php';
 require __DIR__.'/admin/school.php';
 require __DIR__.'/admin/article.php';
 require __DIR__.'/admin/activity.php';
+require __DIR__.'/admin/interact.php';
 require __DIR__.'/admin/upload.php';

@@ -47,6 +47,20 @@
                     </ul>
                 </li>
                 @endif
+                @if(!empty($admin_info['is_manager'] || in_array('interactCenter', $ts_list)))
+                <li class="dropdown">
+                    <a data-toggle="dropdown" href="#" @if(in_array('interactCenter', $menu)) class="current"@endif >
+                        <span aria-hidden="true" class="se7en-tables"></span>互动管理中心<b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @if(!empty($admin_info['is_manager'] || in_array('admonitionManage', $ts_list)))
+                            <li>
+                                <a href="{{ array_get($menu_urls, 'interactCenter.admonitionManage') }}" @if(in_array('admonitionManage', $menu)) class="current"@endif>用户意见管理</a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+                @endif
                 @if(!empty($admin_info['is_manager'] || in_array('schoolCenter', $ts_list)))
                 <li class="dropdown">
                     <a data-toggle="dropdown" href="#" @if(in_array('schoolCenter', $menu)) class="current"@endif >
