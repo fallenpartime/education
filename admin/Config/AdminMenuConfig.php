@@ -33,6 +33,7 @@ class AdminMenuConfig
                 'groupManage'       =>  '',
                 'roleManage'        =>  '',
                 'authorityManage'   =>  '',
+                'logManage'         =>  '',
             ],
         ];
     }
@@ -97,6 +98,10 @@ class AdminMenuConfig
                 'authorityManage'   =>  [
                     'authorities'       =>  route('authorities'),
                     'authorityInfo'     =>  route('authorityInfo', ['work_no'=>1])
+                ],
+                'logManage'     =>  [
+                    'operateLogs'       =>  route('operateLogs'),
+                    'adminLogs'         =>  route('adminLogs')
                 ],
             ],
         ];

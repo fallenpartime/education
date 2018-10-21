@@ -6,6 +6,8 @@
  */
 namespace App\Http\Admin\Controllers\System;
 
+use App\Http\Admin\Actions\System\Log\IndexAdminAction;
+use App\Http\Admin\Actions\System\Log\IndexOperateAction;
 use App\Http\Admin\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,7 @@ class LogController extends Controller
      */
     public function operateLogs(Request $request)
     {
-
+        return (new IndexOperateAction($request))->run();
     }
 
     /**
@@ -27,6 +29,6 @@ class LogController extends Controller
      */
     public function adminLogs(Request $request)
     {
-
+        return (new IndexAdminAction($request))->run();
     }
 }

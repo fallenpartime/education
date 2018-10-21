@@ -106,6 +106,11 @@
                             <a href="{{ array_get($menu_urls, 'manageCenter.authorityManage') }}" @if(in_array('authorityManage', $menu)) class="current"@endif>权限管理</a>
                         </li>
                         @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('logManage', $ts_list)))
+                        <li>
+                            <a href="{{ array_get($menu_urls, 'manageCenter.logManage') }}" @if(in_array('logManage', $menu)) class="current"@endif>日志管理</a>
+                        </li>
+                        @endif
                     </ul>
                 </li>
                 @endif
