@@ -39,6 +39,22 @@
                                 </dl>
                             </a>
                         @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('activityPollVoteData', $ts_list)))
+                            <a href="{{ route('activityPollVoteData') }}">
+                                <dl class="btn btn-lg btn-primary-outline">
+                                    <dt><img src="/assets/images/manage.png"></dt>
+                                    <dd @if(in_array('activityPollVoteData', $menu)) style="color:#007aff;"@endif>活动投票统计</dd>
+                                </dl>
+                            </a>
+                        @endif
+                        @if(!empty($admin_info['is_manager'] || in_array('activityPollVotes', $ts_list)))
+                            <a href="{{ route('activityPollVotes') }}">
+                                <dl class="btn btn-lg btn-primary-outline">
+                                    <dt><img src="/assets/images/manage.png"></dt>
+                                    <dd @if(in_array('activityPollVotes', $menu)) style="color:#007aff;"@endif>活动投票明细</dd>
+                                </dl>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

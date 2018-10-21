@@ -34,4 +34,10 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
     Route::match(['get', 'post'], '/admin/activity/poll/question/info', [
         'uses' => '\App\Http\Admin\Controllers\Activity\PollController@questionInfo'
     ])->name('activityPollQuestionInfo');
+    Route::get('/admin/activity/poll/vote/data', [
+        'uses' => '\App\Http\Admin\Controllers\Activity\PollController@activityVotes'
+    ])->name('activityPollVoteData');
+    Route::get('/admin/activity/poll/votes', [
+        'uses' => '\App\Http\Admin\Controllers\Activity\PollController@votes'
+    ])->name('activityPollVotes');
 });
