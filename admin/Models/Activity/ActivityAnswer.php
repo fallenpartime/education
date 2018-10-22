@@ -21,4 +21,9 @@ class ActivityAnswer extends Model
     {
         return array_get($this->attributes, 'operate_list', []);
     }
+
+    public function votes()
+    {
+        return $this->hasMany(ActivityVote::class, 'answer_id');
+    }
 }

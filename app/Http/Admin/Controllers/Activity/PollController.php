@@ -10,7 +10,7 @@ use App\Http\Admin\Actions\Activity\Poll\IndexAction;
 use App\Http\Admin\Actions\Activity\Poll\InfoAction;
 use App\Http\Admin\Actions\Activity\Poll\Question\IndexAction as QuestionIndexAction;
 use App\Http\Admin\Actions\Activity\Poll\Question\InfoAction as QuestionInfoAction;
-use App\Http\Admin\Actions\Activity\Poll\Vote\IndexActivityAction;
+use App\Http\Admin\Actions\Activity\Poll\Vote\IndexDataAction;
 use App\Http\Admin\Actions\Activity\Poll\Vote\IndexAction as VoteIndexAction;
 use App\Http\Admin\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -60,7 +60,7 @@ class PollController extends Controller
      */
     public function activityVotes(Request $request)
     {
-        return (new IndexActivityAction($request))->run();
+        return (new IndexDataAction($request))->run();
     }
 
     /**

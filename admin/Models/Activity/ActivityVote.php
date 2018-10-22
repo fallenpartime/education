@@ -2,6 +2,7 @@
 
 namespace Admin\Models\Activity;
 
+use Admin\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,5 +21,25 @@ class ActivityVote extends Model
     public function getOperateListAttribute()
     {
         return array_get($this->attributes, 'operate_list', []);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(ActivityQuestion::class, 'question_id');
+    }
+
+    public function answer()
+    {
+        return $this->belongsTo(ActivityAnswer::class, 'answer_id');
     }
 }

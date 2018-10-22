@@ -26,4 +26,14 @@ class ActivityQuestion extends Model
     {
         return $this->belongsTo(Activity::class);
     }
+
+    public function answers()
+    {
+        return $this->hasMany(ActivityAnswer::class, 'question_id');
+    }
+
+    public function count()
+    {
+        return $this->where('answer_id', array_get($this->attributes, 'id'))->count();
+    }
 }
