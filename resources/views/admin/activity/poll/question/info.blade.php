@@ -31,8 +31,8 @@
                                     </p><br/>
                                     <p style="width: 100%; margin-right: 10px;">
                                         <span>资源类型:</span>
-                                        <input type="radio" name="type" value="0" @if($record->type == 0) checked @endif />文字&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" name="type" value="1" @if($record->type == 1) checked @endif />图片
+                                        <input type="radio" name="type" value="0" @if(!empty($record) && $record->type == 0) checked @endif />文字&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" name="type" value="1" @if(!empty($record) && $record->type == 1) checked @endif />图片
                                     </p><br/>
                                     <p style="width: 50%; display: inline; margin-right: 10px;">
                                         <span>问题标题:</span>
@@ -49,8 +49,8 @@
                                     <br/>
                                     <p style="width: 100%; margin-right: 10px;">
                                         <span>是否多选:</span>
-                                        <input type="radio" name="is_checkbox" value="0" @if($record->type == 0) checked @endif/>否&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" name="is_checkbox" value="1" @if($record->type == 1) checked @endif/>是
+                                        <input type="radio" name="is_checkbox" value="0" @if(!empty($record) && $record->is_checkbox == 0) checked @endif/>否&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" name="is_checkbox" value="1" @if(!empty($record) && $record->is_checkbox == 1) checked @endif/>是
                                     </p><br/>
                                     <p style="width: 100%;"></p><br/>
                                 </div>

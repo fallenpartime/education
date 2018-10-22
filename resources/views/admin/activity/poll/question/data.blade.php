@@ -29,7 +29,7 @@
                         <input type="text" name="question_id" value="{{ array_get($urlParams, 'question_id') }}">
                     </p>
                     <p class="select" style="width: 300px;">
-                        <span class="special">问题选项类型：</span>
+                        <span class="special">资源类型：</span>
                         <select name="type">
                             <option value="">全部</option>
                             <option value="1" @if(array_get($urlParams, 'type') == 1)selected="selected"@endif>文本</option>
@@ -70,14 +70,14 @@
                                     </td>
                                     <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
                                         @if($value->type)
-                                            题目类型:图片<br>
+                                            资源类型: 图片<br>
                                             题目图片:
                                             @if(!empty($value->source))
                                                 <a href="{{ $value->source }}" target="_blank"><img src="{{ $value->source }}" style="width: 100px; height: 100px;"/></a>
                                             @endif
                                         @else
-                                            题目类型:文字<br>
-                                            题目标题:{{ $value->title }}
+                                            资源类型: 文字<br>
+                                            题目标题: {{ $value->title }}
                                         @endif
                                     </td>
                                     <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
