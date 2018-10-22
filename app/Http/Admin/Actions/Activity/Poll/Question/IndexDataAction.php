@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Activity\Poll\Question;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\ActivityQuestion;
+use Admin\Services\Activity\Integration\QuestionDataIntegration;
 use Admin\Services\Common\CommonService;
 use Admin\Services\Sql\Activity\Poll\QuestionDataSqlProcessor;
 
@@ -38,8 +39,11 @@ class IndexDataAction extends BaseAction
 
     protected function processList($list)
     {
-        if (!$list->isEmpty()) {
+        if (!empty($list)) {
+            $dataIntegration = new QuestionDataIntegration();
             foreach ($list as $key => $item) {
+                list($status, $message, $answerData, $otherData) = $dataIntegration->_init($item->id)->process();
+                $list[$key]->other_option = ['answer' => $answerData, 'other' => $otherData];
             }
         }
         return $list;

@@ -44,7 +44,6 @@ class IndexAction extends BaseAction
     {
         if (!empty($list)) {
             foreach ($list as $key => $item) {
-                $list[$key]->
                 $list = $this->listAllowOperate($list, $key);
             }
         }

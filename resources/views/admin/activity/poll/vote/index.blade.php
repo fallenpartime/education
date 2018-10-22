@@ -34,7 +34,7 @@
                     </p>
                     <p class="select" style="width: 300px;">
                         <span class="special">问题选项类型：</span>
-                        <select name="is_show">
+                        <select name="type">
                             <option value="">全部</option>
                             <option value="1" @if(array_get($urlParams, 'type') == 1)selected="selected"@endif>文本</option>
                             <option value="2" @if(array_get($urlParams, 'type') == 2)selected="selected"@endif>图片</option>

@@ -23,16 +23,19 @@ class QuestionDataIntegration extends BaseWorkProcessor
             $this->question = ActivityQuestion::find($questionId);
         }
         $this->status = 0;
+        return $this;
     }
 
     public function process()
     {
         if (empty($this->question)) {
-            return $this->parseResult('问题不存在', '');
+            return $this->parseResult('问题不存在', '', '');
         }
         $answerData = $this->parseAnswerInfo();
+        $answerData = implode('<br>', $answerData);
         $otherData = $this->parseOtherInfo();
-
+        $this->status = 1;
+        return $this->parseResult('', $answerData, $otherData);
     }
 
     protected function parseAnswerInfo()
@@ -49,10 +52,11 @@ class QuestionDataIntegration extends BaseWorkProcessor
 
     protected function parseOtherInfo()
     {
-        $list = [];
         $count = ActivityVote::where('question_id', $this->question->id)->where('type', 0)->count();
+        if (empty($count)) {
+            return "";
+        }
         $description = "自填信息,{$count}次";
-        $list[] = $description;
-        return $list;
+        return $description;
     }
 }

@@ -14,6 +14,13 @@ class QuestionSqlProcessor extends BaseSqlProcessor implements BaseSqlDelegation
     public function getListSql($model, $params, $url, $options = [])
     {
         $urlParams = ['search'=>'search'];
+        // 类别
+        $type = intval(trim(array_get($params, 'type')));
+        if ($type > 0) {
+            $typeValue = $type - 1;
+            $model = $model->where('type', $typeValue);
+            $urlParams['type'] = $type;
+        }
         // 活动ID
         $activityId = intval(trim(array_get($params, 'activity_id')));
         if ($activityId > 0) {

@@ -40,6 +40,14 @@
                             <option value="2" @if(array_get($urlParams, 'is_checkbox') == 2)selected="selected"@endif>否</option>
                         </select>
                     </p>
+                    <p class="select" style="width: 300px;">
+                        <span class="special">问题选项类型：</span>
+                        <select name="type">
+                            <option value="">全部</option>
+                            <option value="1" @if(array_get($urlParams, 'type') == 1)selected="selected"@endif>文本</option>
+                            <option value="2" @if(array_get($urlParams, 'type') == 2)selected="selected"@endif>图片</option>
+                        </select>
+                    </p>
                     <button class="sub">搜索</button>
                 </form>
             </div>
@@ -69,8 +77,10 @@
                                         {{ $value->id }}
                                     </td>
                                     <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
-                                        ID:{{ $value->activity->id }}<br>
-                                        标题:{{ $value->activity->title }}<br>
+                                        @if(!empty($value->activity))
+                                            ID:{{ $value->activity->id }}<br>
+                                            标题:{{ $value->activity->title }}<br>
+                                        @endif
                                     </td>
                                     <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
                                         {{ $value->title }}
