@@ -27,4 +27,18 @@ class AdminConfig
         }
         return $indexUrls[$indexTag][$columnName];
     }
+
+    public static function getAdminOperateList()
+    {
+        return [
+            '1'  => '添加管理员',
+        ];
+    }
+
+    public static function getOperateList()
+    {
+        return [
+            '1'  => '添加文章',
+        ];
+    }
 }
