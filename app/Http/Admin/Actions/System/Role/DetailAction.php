@@ -16,6 +16,7 @@ use Admin\Services\Authority\Integration\RelateAuthoritiesCheckedIntegration;
 use Admin\Services\Authority\Processor\AdminUserGroupProcessor;
 use Admin\Services\Authority\Processor\AdminUserRoleAccessProcessor;
 use Admin\Services\Authority\Processor\AdminUserRoleProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -221,12 +222,14 @@ class DetailAction extends BaseAction
             return [$res, 0];
         }
         list($res, $model) = $processor->insert($data);
+        LogService::adminLog($this->request, 30, $model->id, '添加角色', $this->getAuthService()->getAdminInfo());
         $insertId = $res? $model->id: 0;
         return [$res, $insertId];
     }
 
     protected function update($data)
     {
+        LogService::adminLog($this->request, 31, $this->_role->id, '编辑角色', $this->getAuthService()->getAdminInfo());
         $processor = new AdminUserRoleProcessor();
         list($res, $errorId) = $this->validateRepeat($processor, $data, 1);
         if ($res == false) {

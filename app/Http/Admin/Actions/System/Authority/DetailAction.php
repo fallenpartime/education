@@ -10,6 +10,7 @@ use Admin\Actions\BaseAction;
 use Admin\Models\System\AdminAction;
 use Admin\Services\Authority\AuthorityService;
 use Admin\Services\Authority\Processor\AdminActionProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -138,6 +139,7 @@ class DetailAction extends BaseAction
             $this->errorJson(500, '权限名已存在');
         }
         list($res, $model) = $processor->insert($data);
+        LogService::adminLog($this->request, 10, $model->id, '添加权限', $this->getAuthService()->getAdminInfo());
         $insertId = $res? $model->id: 0;
         return [$res, $insertId];
     }
@@ -153,6 +155,7 @@ class DetailAction extends BaseAction
         if (!empty($nameRecord) && $actionRecord->id != $this->authority->id) {
             $this->errorJson(500, '权限名已存在');
         }
+        LogService::adminLog($this->request, 11, $this->authority->id, '编辑权限', $this->getAuthService()->getAdminInfo());
         return $processor->update($this->authority->id, $data);
     }
 }

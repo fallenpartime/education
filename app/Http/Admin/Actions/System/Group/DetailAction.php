@@ -11,6 +11,7 @@ use Admin\Models\System\AdminUserGroup;
 use Admin\Services\Authority\AuthorityService;
 use Admin\Services\Authority\Integration\RelateAuthoritiesCheckedIntegration;
 use Admin\Services\Authority\Processor\AdminUserGroupProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -147,12 +148,14 @@ class DetailAction extends BaseAction
             return [$res, 0];
         }
         list($res, $model) = $processor->insert($data);
+        LogService::adminLog($this->request, 20, $model->id, '添加分组', $this->getAuthService()->getAdminInfo());
         $insertId = $res? $model->id: 0;
         return [$res, $insertId];
     }
 
     protected function update($data)
     {
+        LogService::adminLog($this->request, 21, $this->_group->id, '编辑分组', $this->getAuthService()->getAdminInfo());
         $processor = new AdminUserGroupProcessor();
         list($res, $errorId) = $this->validateRepeat($processor, $data, 1);
         if ($res == false) {

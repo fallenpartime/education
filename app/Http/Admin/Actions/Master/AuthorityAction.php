@@ -12,6 +12,7 @@ use Admin\Services\Authority\AuthorityService;
 use Admin\Services\Authority\Integration\OwnerAuthoritiesIntegration;
 use Admin\Services\Authority\Integration\RelateAuthoritiesCheckedIntegration;
 use Admin\Services\Authority\Processor\AdminUserActionProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -131,6 +132,7 @@ class AuthorityAction extends BaseAction
     protected function store($data)
     {
         list($res, $model) = (new AdminUserActionProcessor())->insert($data);
+        LogService::adminLog($this->request, 3, $model->id, '编辑管理员', $this->getAuthService()->getAdminInfo());
         $insertId = $res? $model->id: 0;
         return [$res, $insertId];
     }

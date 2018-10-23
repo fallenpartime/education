@@ -11,6 +11,7 @@ use Admin\Models\System\AdminUserInfo;
 use Admin\Models\System\AdminUserRole;
 use Admin\Services\Authority\Processor\AdminUserInfoProcessor;
 use Admin\Services\Authority\Processor\AdminUserProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -63,6 +64,7 @@ class DetailAction extends BaseAction
         if(empty($this->_owner)){
             $this->errorJson(500, '后台用户信息不存在');
         }
+        LogService::adminLog($this->request, 2, $this->_user->id, '编辑管理员', $this->getAuthService()->getAdminInfo());
         $adminUserProcessor = new AdminUserProcessor();
         list($res, $errorId, $message) = $this->validateRepeat($adminUserProcessor, $userData, 1);
         if ($res == false) {
@@ -90,6 +92,7 @@ class DetailAction extends BaseAction
         if ($status) {
             $this->successJson();
         }
+        LogService::adminLog($this->request, 1, $user->id, '添加管理员', $this->getAuthService()->getAdminInfo());
         $this->errorJson(500, '后台用户信息创建失败');
     }
 
