@@ -9,6 +9,7 @@ namespace App\Http\Admin\Actions\Activity\Operate;
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
 use Admin\Services\Activity\Processor\ActivityProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -45,6 +46,7 @@ class OpenAction extends BaseAction
 
     protected function open()
     {
+        LogService::operateLog($this->request, 22, $this->_activity->id, "活动开放状态修改：0=>1", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityProcessor())->update($this->_activity->id, ['is_open'=>1, 'opened_at'=>date('Y-m-d H:i:s')]);
         if ($res) {
             $this->successJson();
@@ -54,6 +56,7 @@ class OpenAction extends BaseAction
 
     protected function close()
     {
+        LogService::operateLog($this->request, 22, $this->_activity->id, "活动开放状态修改：1=>0", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityProcessor())->update($this->_activity->id, [ 'overed_at'=>date('Y-m-d H:i:s')]);
         if ($res) {
             $this->successJson();

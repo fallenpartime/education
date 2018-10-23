@@ -9,6 +9,7 @@ namespace App\Http\Admin\Actions\Article\Operate;
 use Admin\Actions\BaseAction;
 use Admin\Models\Article;
 use Admin\Services\Article\Processor\ArticleProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -33,6 +34,7 @@ class RemoveAction extends BaseAction
 
     protected function process()
     {
+        LogService::operateLog($this->request, 3, $this->_article->id, '作废文章', $this->getAuthService()->getAdminInfo());
         $res = (new ArticleProcessor())->destroy($this->_article->id);
         if ($res) {
             $this->successJson();

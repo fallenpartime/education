@@ -10,6 +10,7 @@ use Admin\Actions\BaseAction;
 use Admin\Models\Article;
 use Admin\Services\Article\Processor\ArticlePictureProcessor;
 use Admin\Services\Article\Processor\ArticleProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -144,6 +145,7 @@ class InfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '文章创建失败');
         }
+        LogService::operateLog($this->request, 2, $article->id, '添加文章', $this->getAuthService()->getAdminInfo());
         $this->processImage($data['list_pic'], $article->id, 1);
         $this->successJson();
     }
@@ -153,6 +155,7 @@ class InfoAction extends BaseAction
         if ($this->_article->type != $this->_type) {
             $this->errorJson(500, '文章类别非新闻类型');
         }
+        LogService::operateLog($this->request, 2, $this->_article->id, '编辑文章', $this->getAuthService()->getAdminInfo());
         $processor = new ArticleProcessor();
         list($status, $id) = $processor->update($this->_article->id, $data);
         if (empty($status)) {

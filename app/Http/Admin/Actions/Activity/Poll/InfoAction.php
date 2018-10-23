@@ -10,6 +10,7 @@ use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
 use Admin\Services\Activity\Processor\ActivityPictureProcessor;
 use Admin\Services\Activity\Processor\ActivityProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -142,11 +143,12 @@ class InfoAction extends BaseAction
     protected function save($data)
     {
         $processor = new ActivityProcessor();
-        list($status, $article) = $processor->insert($data);
+        list($status, $activity) = $processor->insert($data);
         if (empty($status)) {
             $this->errorJson(500, '活动创建失败');
         }
-        $this->processImage($data['list_pic'], $article->id, 1);
+        LogService::operateLog($this->request, 20, $activity->id, "添加活动", $this->getAuthService()->getAdminInfo());
+        $this->processImage($data['list_pic'], $activity->id, 1);
         $this->successJson();
     }
 
@@ -155,6 +157,7 @@ class InfoAction extends BaseAction
         if ($this->_activity->type != $this->_type) {
             $this->errorJson(500, '活动类别非网络投票');
         }
+        LogService::operateLog($this->request, 21, $this->_activity->id, "编辑活动", $this->getAuthService()->getAdminInfo());
         $processor = new ActivityProcessor();
         list($status, $id) = $processor->update($this->_activity->id, $data);
         if (empty($status)) {

@@ -9,6 +9,7 @@ namespace App\Http\Admin\Actions\Activity\Operate;
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
 use Admin\Services\Activity\Processor\ActivityProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -33,6 +34,7 @@ class RemoveAction extends BaseAction
 
     protected function process()
     {
+        LogService::operateLog($this->request, 23, $this->_activity->id, "活动作废", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityProcessor())->destroy($this->_activity->id);
         if ($res) {
             $this->successJson();
