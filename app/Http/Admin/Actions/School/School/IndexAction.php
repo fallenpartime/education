@@ -7,7 +7,9 @@
 namespace App\Http\Admin\Actions\School\School;
 
 use Admin\Actions\BaseAction;
+use Admin\Config\SchoolConfig;
 use Admin\Models\School\School;
+use Admin\Models\School\SchoolDistrict;
 use Admin\Services\Common\CommonService;
 use Admin\Services\Sql\School\SchoolSqlProcessor;
 
@@ -23,7 +25,7 @@ class IndexAction extends BaseAction
         $list = [];
         $total = $model->count();
         if ($total > 0) {
-            $list = $this->pageModel($model, $page, $pageSize)->with('district')->select(['id', 'type', 'no', 'district_no', 'name', 'address', 'is_show', 'created_at'])->get();
+            $list = $this->pageModel($model, $page, $pageSize)->with('district')->select(['id', 'type', 'no', 'district_no', 'name', 'address', 'is_show', 'telent', 'property', 'created_at'])->get();
             $list = $this->processList($list);
         }
         list($url, $pageList) = CommonService::pagination($total, $pageSize, $page, $url);
@@ -33,6 +35,8 @@ class IndexAction extends BaseAction
             'pageList'      => $pageList,
             'urlParams'     => $urlParams,
             'menu'          => ['schoolCenter', 'schoolManage', 'schools'],
+            'properties'    => SchoolConfig::getPropertyList(),
+            'districts'     => SchoolDistrict::all(['id', 'no', 'name']),
             'operateList'   => $operateList,
             'operateUrl'    => $operateUrl,
             'redirectUrl'   => route('schools'),

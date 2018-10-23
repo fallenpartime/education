@@ -20,11 +20,18 @@
                                     <span class="blank">学校名称：</span><input type="text" name="name" id="name"  style="width: 50%;" value="{{ !empty($record)? $record->name: '' }}"/><span class="icon">*</span><br/>
                                     <span class="blank">编号：</span><input type="text" name="no" id="no" style="width:50%;" value="{{ !empty($record)? $record->no: '' }}"/><span class="icon">*</span><br/>
                                     <span class="blank">地址：</span><input type="text" name="address" id="address" style="width:50%;" value="{{ !empty($record)? $record->address: '' }}"/><span class="icon">*</span><br/>
+                                    <span class="blank">办公电话：</span><input type="text" name="telent" id="telent" style="width:50%;" value="{{ !empty($record)? $record->telent: '' }}"/><br/>
                                     <span class="blank">学区：</span>
                                     <select name="district_no" style="width: 50%;">
                                         <option value="">请选择</option>
                                         @foreach($districts as $district)
                                         <option value="{{ $district->no }}" @if(!empty($record) && $record->district_no==$district->no)selected="selected"@endif>{{ $district->name }}</option>
+                                        @endforeach
+                                    </select><br/>
+                                    <span class="blank">学校性质：</span>
+                                    <select name="property" style="width: 50%;">
+                                        @foreach($properties as $property)
+                                            <option value="{{ $property['type'] }}" @if(!empty($record) && $record->property==$property['type'])selected="selected"@endif>{{ $property['title'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>

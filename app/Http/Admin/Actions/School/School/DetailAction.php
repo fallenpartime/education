@@ -7,6 +7,7 @@
 namespace App\Http\Admin\Actions\School\School;
 
 use Admin\Actions\BaseAction;
+use Admin\Config\SchoolConfig;
 use Admin\Models\School\School;
 use Admin\Models\School\SchoolDistrict;
 use Admin\Services\School\Processor\SchoolProcessor;
@@ -43,6 +44,7 @@ class DetailAction extends BaseAction
             'record'            =>  $this->_school,
             'districts'         =>  SchoolDistrict::all(['id', 'no', 'name']),
             'menu'  =>  ['schoolCenter', 'schoolManage', 'schoolInfo'],
+            'properties'        => SchoolConfig::getPropertyList(),
             'actionUrl'         => route('schoolInfo', ['work_no'=>2]),
             'redirectUrl'       => route('schools'),
         ];
@@ -71,9 +73,14 @@ class DetailAction extends BaseAction
         $no = $httpTool->getBothSafeParam('no');
         $address = $httpTool->getBothSafeParam('address');
         $districtNo = $httpTool->getBothSafeParam('district_no');
+        $property = $httpTool->getBothSafeParam('property', HttpConfig::PARAM_NUMBER_TYPE);
+        $telent = $httpTool->getBothSafeParam('telent');
         $name = trim($name);
         $no = trim($no);
         $address = trim($address);
+        $districtNo = trim($districtNo);
+        $telent = trim($telent);
+        $property = intval($property);
         if(empty($name)){
             $this->errorJson(500, '学校名为空');
         }
@@ -90,8 +97,12 @@ class DetailAction extends BaseAction
             'name'  =>  $name,
             'no'    =>  $no,
             'address'       =>  $address,
-            'district_no'   =>  $districtNo,
+            'property'      =>  $property,
+            'telent'        =>  $telent,
         ];
+        if (!empty($districtNo)) {
+            $data['district_no'] = $districtNo;
+        }
         $res = empty($this->_school)? $this->save($data): $this->update($data);
         if ($res) {
             $this->successJson();
