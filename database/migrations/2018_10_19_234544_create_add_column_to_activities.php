@@ -32,6 +32,8 @@ class CreateAddColumnToActivities extends Migration
     public function down()
     {
         Schema::table('activities', function (Blueprint $table) {
+            $table->dropIndex('activities_is_open_index');
+            $table->dropIndex('activities_opened_at_index');
             $table->dropColumn('is_open');
             $table->dropColumn('read_count');
             $table->dropColumn('like_count');

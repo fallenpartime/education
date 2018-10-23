@@ -27,7 +27,7 @@ class AddOveredAtToActivitiesTables extends Migration
     public function down()
     {
         Schema::table('activities', function (Blueprint $table) {
-            $table->dropIndex('overed_at');
+            $table->dropIndex('activities_overed_at_index');
             $table->dropColumn('overed_at');
         });
     }

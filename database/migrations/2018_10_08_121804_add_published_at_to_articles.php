@@ -27,7 +27,8 @@ class AddPublishedAtToArticles extends Migration
     public function down()
     {
         Schema::table('articles', function (Blueprint $table) {
-            //
+            $table->dropIndex('articles_published_at_index');
+            $table->dropColumn('published_at');
         });
     }
 }

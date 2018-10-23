@@ -27,7 +27,8 @@ class AddDelStatusToArticlePictures extends Migration
     public function down()
     {
         Schema::table('article_pictures', function (Blueprint $table) {
-            //
+            $table->dropIndex('article_pictures_del_status_index');
+            $table->dropColumn('del_status');
         });
     }
 }
