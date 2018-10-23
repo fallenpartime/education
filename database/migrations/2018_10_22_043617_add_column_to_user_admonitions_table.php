@@ -14,7 +14,7 @@ class AddColumnToUserAdmonitionsTable extends Migration
     public function up()
     {
         Schema::table('user_admonitions', function (Blueprint $table) {
-            $table->string('reply_owner')->default('')->comment('答复执行人');
+            $table->string('reply_owner', 50)->default('')->comment('答复执行人');
             $table->integer('reply_userid')->default(0)->comment('答复执行人ID');
             $table->index('reply_owner');
             $table->index('reply_userid');
