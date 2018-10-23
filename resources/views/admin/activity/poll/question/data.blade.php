@@ -81,7 +81,7 @@
                                         @endif
                                     </td>
                                     <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
-                                        {{ $value->other_option['answer'] }}
+                                        {!! $value->other_option['answer'] !!}
                                     </td>
                                     <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
                                         {{ $value->other_option['other'] }}

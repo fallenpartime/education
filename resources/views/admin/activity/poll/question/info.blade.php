@@ -51,7 +51,11 @@
                                         <span>是否多选:</span>
                                         <input type="radio" name="is_checkbox" value="0" @if(!empty($record) && $record->is_checkbox == 0) checked @endif/>否&nbsp;&nbsp;&nbsp;&nbsp;
                                         <input type="radio" name="is_checkbox" value="1" @if(!empty($record) && $record->is_checkbox == 1) checked @endif/>是
-                                    </p><br/>
+                                    </p><br/><br/>
+                                    <p id="answer" class="answer-list" style="width: 80%; margin-top: -10px; height: auto;">
+                                        <span>问题答案：</span><br><br>
+                                        <a id="add-item" class="add-item" href="javascript:;" style="cursor: pointer;">添加答案</a>
+                                    </p>
                                     <p style="width: 100%;"></p><br/>
                                 </div>
                             </div>
@@ -97,5 +101,33 @@
                 )
             }
         }
+    </script>
+    <script>
+        function removeItem(object) {
+            $(object).parent().remove();
+        }
+        var answerIndex = 1;
+        function createAnswer(index, withDelete, value, answerId) {
+            var delOption = '';
+            if (withDelete == 1 && index > 1) {
+                delOption = '<a class="del-item" href="javascript:;" style="padding-left: 20px; cursor: pointer;" onclick="removeItem(this)">删除</a>\n';
+            }
+            $("#add-item").before('<div class="answer-item" style="display: block; padding-bottom: 10px;">\n' +
+                '                                            <span>答案:</span>\n' +
+                '                                            <input type="hidden" name="answer_id[' + index + ']" value="' + answerId + '" style="width: 50%;" />\n' +
+                '                                            <input type="text" name="answer_title[' + index + ']" value="' + value + '" style="width: 50%;" />\n' + delOption +
+                '                                        </div>')
+            answerIndex ++;
+        }
+        $("#add-item").click(function () {
+            createAnswer(answerIndex, 1, '', 0)
+        })
+        @if(!is_null($answers) && !$answers->isEmpty())
+            @foreach($answers as $answer)
+                createAnswer(answerIndex, 1, '{{ $answer->title }}', {{ $answer->id }})
+            @endforeach
+        @else
+        createAnswer(1, 0, '', 0)
+        @endif
     </script>
 @endsection

@@ -8,7 +8,9 @@ namespace App\Http\Admin\Actions\Activity\Poll\Question;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
+use Admin\Models\Activity\ActivityAnswer;
 use Admin\Models\Activity\ActivityQuestion;
+use Admin\Services\Activity\Processor\ActivityAnswerProcessor;
 use Admin\Services\Activity\Processor\ActivityQuestionProcessor;
 use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
@@ -42,8 +44,13 @@ class InfoAction extends BaseAction
     {
         $httpTool = $this->getHttpTool();
         $activityId = $httpTool->getBothSafeParam('activity_id', HttpConfig::PARAM_NUMBER_TYPE);
+        $answers = null;
+        if (!empty($this->_question)) {
+            $answers = $this->_question->answers;
+        }
         $result = [
             'record'            =>  $this->_question,
+            'answers'           =>  $answers,
             'activityId'        =>  !empty($this->_question)? $this->_question->activity_id: $activityId,
             'articleType'       =>  1,
             'menu'              => ['activityCenter', 'pollManage', 'activityPollQuestionInfo'],
@@ -97,6 +104,7 @@ class InfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '问题创建失败');
         }
+        $this->processAnswer($data['activity_id'], $question->id);
         LogService::operateLog($this->request, 40, $question->id, '添加问题', $this->getAuthService()->getAdminInfo());
         $this->successJson();
     }
@@ -109,6 +117,37 @@ class InfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '问题修改失败');
         }
+        $this->processAnswer($data['activity_id'], $id);
         $this->successJson();
+    }
+
+    protected function processAnswer($activityId, $questionId)
+    {
+        if (empty($activityId)) {
+            return false;
+        }
+        $processor = new ActivityAnswerProcessor();
+        $answerIds = $this->request->get('answer_id');
+        ActivityAnswer::where('question_id', $questionId)->delete();
+        $answerTitles = $this->request->get('answer_title');
+        foreach ($answerIds as $key => $answerId) {
+            $answerTitle = trim($answerTitles[$key]);
+            if (empty($answerTitle)) {
+                continue;
+            }
+            if (!empty($answerId)) {
+                $record = ActivityAnswer::withTrashed()->find($answerId);
+                $record->restore();
+                $record->title = $answerTitle;
+                $record->save();
+            } else {
+                $data = [
+                    'activity_id'  =>  $activityId,
+                    'question_id'  =>  $questionId,
+                    'title'        =>  $answerTitle,
+                ];
+                $processor->insert($data);
+            }
+        }
     }
 }

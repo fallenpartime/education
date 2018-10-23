@@ -7,6 +7,7 @@
 namespace App\Http\Admin\Controllers\Article;
 
 use App\Http\Admin\Actions\Article\Operate\DetailAction;
+use App\Http\Admin\Actions\Article\Operate\FreshAction;
 use App\Http\Admin\Actions\Article\Operate\InfoAction;
 use App\Http\Admin\Actions\Article\Operate\RemoveAction;
 use App\Http\Admin\Actions\Article\Operate\ShowAction;
@@ -32,5 +33,14 @@ class OperateController extends Controller
     public function remove(Request $request)
     {
         return (new RemoveAction($request))->run();
+    }
+
+    /**
+     * 活动缓存刷新
+     * @param Request $request
+     */
+    public function fresh(Request $request)
+    {
+        return (new FreshAction($request))->run();
     }
 }

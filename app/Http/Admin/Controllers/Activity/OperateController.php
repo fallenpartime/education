@@ -6,6 +6,7 @@
  */
 namespace App\Http\Admin\Controllers\Activity;
 
+use App\Http\Admin\Actions\Activity\Operate\FreshAction;
 use App\Http\Admin\Actions\Activity\Operate\OpenAction;
 use App\Http\Admin\Actions\Activity\Operate\RemoveAction;
 use App\Http\Admin\Actions\Activity\Operate\Question\RemoveAction as QuestionRemoveAction;
@@ -60,5 +61,14 @@ class OperateController extends Controller
     public function questionShow(Request $request)
     {
         return (new QuestionShowAction($request))->run();
+    }
+
+    /**
+     * 活动缓存刷新
+     * @param Request $request
+     */
+    public function fresh(Request $request)
+    {
+        return (new FreshAction($request))->run();
     }
 }
