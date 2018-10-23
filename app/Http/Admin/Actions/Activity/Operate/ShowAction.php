@@ -36,7 +36,7 @@ class ShowAction extends BaseAction
     {
         $showValue = $this->_activity->is_show;
         $showValue = ($showValue + 1) % 2;
-        LogService::operateLog($this->request, 24, $this->_activity->id, "活动显示状态修改：{$this->_activity->is_show}=>$showValue", $this->getAuthService()->getAdminInfo());
+        LogService::operateLog($this->request, 24, $this->_activity->id, "活动显示状态修改：{$this->_activity->is_show}=>{$showValue}", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityProcessor())->update($this->_activity->id, ['is_show'=>$showValue]);
         if ($res) {
             $this->successJson();

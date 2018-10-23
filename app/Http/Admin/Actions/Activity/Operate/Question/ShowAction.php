@@ -9,6 +9,7 @@ namespace App\Http\Admin\Actions\Activity\Operate\Question;
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\ActivityQuestion;
 use Admin\Services\Activity\Processor\ActivityQuestionProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -35,6 +36,7 @@ class ShowAction extends BaseAction
     {
         $showValue = $this->_question->is_show;
         $showValue = ($showValue + 1) % 2;
+        LogService::operateLog($this->request, 42, $this->_question->id, "问题显示状态修改：{$this->_question->is_show}=>$showValue", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityQuestionProcessor())->update($this->_question->id, ['is_show'=>$showValue]);
         if ($res) {
             $this->successJson();

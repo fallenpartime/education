@@ -10,6 +10,7 @@ use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
 use Admin\Models\Activity\ActivityQuestion;
 use Admin\Services\Activity\Processor\ActivityQuestionProcessor;
+use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
 
@@ -96,11 +97,13 @@ class InfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '问题创建失败');
         }
+        LogService::operateLog($this->request, 40, $question->id, '添加问题', $this->getAuthService()->getAdminInfo());
         $this->successJson();
     }
 
     protected function update($data)
     {
+        LogService::operateLog($this->request, 41, $this->_question->id, '编辑问题', $this->getAuthService()->getAdminInfo());
         $processor = new ActivityQuestionProcessor();
         list($status, $id) = $processor->update($this->_question->id, $data);
         if (empty($status)) {

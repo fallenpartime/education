@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Interact\Admonition;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\User\UserAdmonition;
+use Admin\Services\Log\LogService;
 use Admin\Services\User\Processor\UserAdmonitionProcessor;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
@@ -40,6 +41,7 @@ class ReplyAction extends BaseAction
         }
         $authService = $this->getAuthService();
         $adminInfo = $authService->getAdminInfo();
+        LogService::operateLog($this->request, 51, $this->_admonition->id, "用户意见答复", $adminInfo);
         $res = (new UserAdmonitionProcessor())->update($this->_admonition->id, [
             'reply_content'     =>  $content,
             'reply_at'          =>  date('Y-m-d H:i:s'),

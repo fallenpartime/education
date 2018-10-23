@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Interact\Admonition;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\User\UserAdmonition;
+use Admin\Services\Log\LogService;
 use Admin\Services\User\Processor\UserAdmonitionProcessor;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
@@ -35,6 +36,7 @@ class ShowAction extends BaseAction
     {
         $showValue = $this->_admonition->is_show;
         $showValue = ($showValue + 1) % 2;
+        LogService::operateLog($this->request, 52, $this->_admonition->id, "用户意见显示状态修改：{$this->_admonition->is_show}=>{$showValue}", $this->getAuthService()->getAdminInfo());
         $res = (new UserAdmonitionProcessor())->update($this->_admonition->id, ['is_show'=>$showValue]);
         if ($res) {
             $this->successJson();
