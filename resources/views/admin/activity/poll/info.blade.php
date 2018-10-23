@@ -35,6 +35,10 @@
                                         <span>活动简介:</span>
                                         <textarea name="description" required="required" placeholder="请输入活动简介">{{ !empty($record)? $record->description: '' }}</textarea>
                                     </p><br/>
+                                    <p style="width: 50%; margin-right: 10px;">
+                                        <span>感谢语:</span>
+                                        <textarea name="thank_content" required="required" placeholder="请输入活动感谢语">{{ !empty($record)? $record->thank_content: '' }}</textarea>
+                                    </p><br/>
                                     <p style="width: 100%;">
                                         <span>发布时间:</span>
                                         <input name="pubdate" type="text" class="Wdate" value="{{ !empty($record)? $record->deleted_at: '' }}" style="width: 160px;" onfocus="WdatePicker({isShowWeek:true,readOnly:'true',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2010-10-01 00:00:00',maxDate:'2099-12-31 23:59:59'})" />

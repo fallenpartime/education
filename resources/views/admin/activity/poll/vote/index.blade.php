@@ -33,7 +33,7 @@
                         <input type="text" name="question_id" value="{{ array_get($urlParams, 'question_id') }}">
                     </p>
                     <p class="select" style="width: 300px;">
-                        <span class="special">问题选项类型：</span>
+                        <span class="special">问题资源类型：</span>
                         <select name="type">
                             <option value="">全部</option>
                             <option value="1" @if(array_get($urlParams, 'type') == 1)selected="selected"@endif>文本</option>

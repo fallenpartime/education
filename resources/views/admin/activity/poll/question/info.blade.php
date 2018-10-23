@@ -27,7 +27,7 @@
                                 <div class="medical-div">
                                     <p style="width: 50%; display: inline; margin-right: 10px;">
                                         <span>活动ID:</span>
-                                        <input type="text" name="activity_id" value="{{ !empty($record)? $record->activity_id: '' }}" required="required" placeholder="请输入活动ID" style="width: 40%;"/>
+                                        <input type="text" name="activity_id" value="{{ !empty($activityId)? $activityId: '' }}" required="required" placeholder="请输入活动ID" style="width: 40%;"/>
                                     </p><br/>
                                     <p style="width: 100%; margin-right: 10px;">
                                         <span>资源类型:</span>

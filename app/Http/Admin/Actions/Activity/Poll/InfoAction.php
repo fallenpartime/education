@@ -65,6 +65,7 @@ class InfoAction extends BaseAction
         $title = $httpTool->getBothSafeParam('title');
         $description = $httpTool->getBothSafeParam('description');
         $content = $httpTool->getBothSafeParam('content');
+        $thankContent = $httpTool->getBothSafeParam('thank_content');
         $publishedAt = $httpTool->getBothSafeParam('pubdate');
         $picPreview = $this->request->get('list_pic_preview');
         $title = trim($title);
@@ -87,6 +88,7 @@ class InfoAction extends BaseAction
             'title'     =>  $title,
             'description'   =>  $description,
             'content'   =>  $content,
+            'thank_content' =>  !empty($thankContent)? $thankContent: '',
             'published_at'  =>  !empty($publishedAt)? $publishedAt: null,
             'list_pic'      =>  !empty($picPreview)?  $picPreview[0]: null,
         ];

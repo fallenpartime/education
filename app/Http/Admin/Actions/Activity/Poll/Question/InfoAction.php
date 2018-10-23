@@ -39,8 +39,11 @@ class InfoAction extends BaseAction
 
     protected function showInfo()
     {
+        $httpTool = $this->getHttpTool();
+        $activityId = $httpTool->getBothSafeParam('activity_id', HttpConfig::PARAM_NUMBER_TYPE);
         $result = [
             'record'            =>  $this->_question,
+            'activityId'        =>  !empty($this->_question)? $this->_question->activity_id: $activityId,
             'articleType'       =>  1,
             'menu'              => ['activityCenter', 'pollManage', 'activityPollQuestionInfo'],
             'actionUrl'         => route('activityPollQuestionInfo', ['work_no'=>2]),

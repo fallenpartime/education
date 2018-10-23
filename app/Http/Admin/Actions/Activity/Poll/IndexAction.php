@@ -45,12 +45,14 @@ class IndexAction extends BaseAction
         $operateList = [
             'change_show' => 0,
             'change_open' => 0,
-            'change_remove' => 0
+            'change_remove' => 0,
+            'create_question' => 0,
         ];
         $operateUrl = [
             'change_url'    => '',
             'open_url'      => '',
-            'remove_url'      => ''
+            'remove_url'      => '',
+            'question_url'    => '',
         ];
         $authService = $this->getAuthService();
         if ($authService->isMaster || $authService->validateAction('activityShow')) {
@@ -65,6 +67,10 @@ class IndexAction extends BaseAction
             $operateList['change_remove'] = 1;
             $operateUrl['remove_url'] = route('activityRemove');
         }
+        if ($authService->isMaster || $authService->validateAction('activityPollQuestionInfo')) {
+            $operateList['create_question'] = 1;
+            $operateUrl['question_url'] = route('activityPollQuestionInfo', ['work_no'=>1]);
+        }
         return [$operateList, $operateUrl];
     }
 
@@ -75,7 +81,8 @@ class IndexAction extends BaseAction
             'allow_operate_show' => 0,
             'allow_operate_open' => 0,
             'allow_operate_close' => 0,
-            'allow_operate_remove' => 0
+            'allow_operate_remove' => 0,
+            'allow_operate_question' => 0
         ];
         $isOpen = $list[$key]->is_open;
         $openAt = $list[$key]->opened_at;
@@ -100,6 +107,9 @@ class IndexAction extends BaseAction
         }
         if ($authService->isMaster || $authService->validateAction('activityRemove')) {
             $operateList['allow_operate_remove'] = 1;
+        }
+        if ($authService->isMaster || $authService->validateAction('activityPollQuestionInfo')) {
+            $operateList['allow_operate_question'] = 1;
         }
         $list[$key]->operate_list = $operateList;
         return $list;

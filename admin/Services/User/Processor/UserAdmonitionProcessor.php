@@ -4,7 +4,7 @@
  * Date: 2018/10/22
  * Time: 4:09
  */
-namespace Admin\Services\User;
+namespace Admin\Services\User\Processor;
 
 use Admin\Base\Processor\BaseProcessor;
 use Admin\Models\User\UserAdmonition;
