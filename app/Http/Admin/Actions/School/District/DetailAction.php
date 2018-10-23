@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\School\District;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\School\SchoolDistrict;
+use Admin\Services\Log\LogService;
 use Admin\Services\School\Processor\SchoolDistrictProcessor;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
@@ -93,15 +94,17 @@ class DetailAction extends BaseAction
     {
         $processor = new SchoolDistrictProcessor();
         $this->validateRepeat($processor, $data);
-        list($status, $user) = $processor->insert($data);
+        list($status, $district) = $processor->insert($data);
         if (empty($status)) {
             $this->errorJson(500, '学区创建失败');
         }
+        LogService::operateLog($this->request, 60, $district->id, '添加学区', $this->getAuthService()->getAdminInfo());
         $this->successJson();
     }
 
     protected function update($data)
     {
+        LogService::operateLog($this->request, 60, $this->_district->id, '编辑学区', $this->getAuthService()->getAdminInfo());
         $processor = new SchoolDistrictProcessor();
         $this->validateRepeat($processor, $data, 1);
         $processor->update($this->_district->id, $data);

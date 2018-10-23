@@ -10,6 +10,7 @@ use Admin\Actions\BaseAction;
 use Admin\Config\SchoolConfig;
 use Admin\Models\School\School;
 use Admin\Models\School\SchoolDistrict;
+use Admin\Services\Log\LogService;
 use Admin\Services\School\Processor\SchoolProcessor;
 use Admin\Traits\ApiActionTrait;
 use Frameworks\Tool\Http\HttpConfig;
@@ -118,11 +119,13 @@ class DetailAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '学校创建失败');
         }
+        LogService::operateLog($this->request, 60, $school->id, '添加学校', $this->getAuthService()->getAdminInfo());
         $this->successJson();
     }
 
     protected function update($data)
     {
+        LogService::operateLog($this->request, 61, $this->_school->id, '编辑学校', $this->getAuthService()->getAdminInfo());
         $processor = new SchoolProcessor();
         $this->validateRepeat($processor, $data, 1);
         $processor->update($this->_school->id, $data);
