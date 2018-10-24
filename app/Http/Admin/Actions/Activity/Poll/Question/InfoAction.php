@@ -21,6 +21,7 @@ class InfoAction extends BaseAction
     use ApiActionTrait;
 
     protected $_question = null;
+    protected $_activity = null;
 
     public function run()
     {
@@ -47,12 +48,21 @@ class InfoAction extends BaseAction
         $answers = null;
         if (!empty($this->_question)) {
             $answers = $this->_question->answers;
+            $this->_activity = Activity::find($this->_question->activity_id);
+        } else {
+            $this->_activity = Activity::find($activityId);
         }
+        $allowEditAnswer = 1;
+        if (!empty($this->_activity) && $this->_activity->is_open) {
+            $allowEditAnswer = 0;
+        }
+
         $result = [
             'record'            =>  $this->_question,
             'answers'           =>  $answers,
             'activityId'        =>  !empty($this->_question)? $this->_question->activity_id: $activityId,
             'articleType'       =>  1,
+            'allowEditAnswer'   =>  $allowEditAnswer,
             'menu'              => ['activityCenter', 'pollManage', 'activityPollQuestionInfo'],
             'actionUrl'         => route('activityPollQuestionInfo', ['work_no'=>2]),
         ];
@@ -73,8 +83,11 @@ class InfoAction extends BaseAction
         if (empty($activityId)) {
             $this->errorJson(500, '活动ID不能为空');
         }
-        $activity = Activity::find($activityId);
-        if (empty($activity)) {
+        if (!empty($this->_question) && $this->_question->activity_id != $activityId) {
+            $this->errorJson(500, '活动ID不一致');
+        }
+        $this->_activity = Activity::find($activityId);
+        if (empty($this->_activity)) {
             $this->errorJson(500, '活动不存在');
         }
         if (empty($title) && empty($source)) {
@@ -104,7 +117,7 @@ class InfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '问题创建失败');
         }
-        $this->processAnswer($data['activity_id'], $question->id);
+        $this->processAnswer($question->id);
         LogService::operateLog($this->request, 40, $question->id, '添加问题', $this->getAuthService()->getAdminInfo());
         $this->successJson();
     }
@@ -117,13 +130,18 @@ class InfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '问题修改失败');
         }
-        $this->processAnswer($data['activity_id'], $id);
+        $this->processAnswer($id);
         $this->successJson();
     }
 
-    protected function processAnswer($activityId, $questionId)
+    protected function processAnswer($questionId)
     {
+        $activityId = $this->_activity->id;
         if (empty($activityId)) {
+            return false;
+        }
+        // 活动进行中、已结束不能更改
+        if ($this->_activity->is_open) {
             return false;
         }
         $processor = new ActivityAnswerProcessor();

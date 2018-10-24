@@ -54,7 +54,7 @@
                                     </p><br/><br/>
                                     <p id="answer" class="answer-list" style="width: 80%; margin-top: -10px; height: auto;">
                                         <span>问题答案：</span><br><br>
-                                        <a id="add-item" class="add-item" href="javascript:;" style="cursor: pointer;">添加答案</a>
+                                        <a id="add-item" class="add-item" href="javascript:;" style="cursor: pointer;@if($allowEditAnswer == 0) display: none;@endif">添加答案</a>
                                     </p>
                                     <p style="width: 100%;"></p><br/>
                                 </div>
@@ -107,27 +107,33 @@
             $(object).parent().remove();
         }
         var answerIndex = 1;
-        function createAnswer(index, withDelete, value, answerId) {
+        function createAnswer(index, withDelete, value, answerId, allowEdit) {
             var delOption = '';
-            if (withDelete == 1 && index > 1) {
+            var onlyReadOption = '';
+            if (withDelete == 1 && allowEdit == 1 && index > 1) {
                 delOption = '<a class="del-item" href="javascript:;" style="padding-left: 20px; cursor: pointer;" onclick="removeItem(this)">删除</a>\n';
+            }
+            if (allowEdit == 0) {
+                onlyReadOption = 'readOnly';
             }
             $("#add-item").before('<div class="answer-item" style="display: block; padding-bottom: 10px;">\n' +
                 '                                            <span>答案:</span>\n' +
                 '                                            <input type="hidden" name="answer_id[' + index + ']" value="' + answerId + '" style="width: 50%;" />\n' +
-                '                                            <input type="text" name="answer_title[' + index + ']" value="' + value + '" style="width: 50%;" />\n' + delOption +
+                '                                            <input type="text" name="answer_title[' + index + ']" value="' + value + '" style="width: 50%;" ' + onlyReadOption + ' />\n' + delOption +
                 '                                        </div>')
             answerIndex ++;
         }
+        @if($allowEditAnswer == 0)
         $("#add-item").click(function () {
-            createAnswer(answerIndex, 1, '', 0)
+            createAnswer(answerIndex, 1, '', 0, 1)
         })
+        @endif
         @if(!is_null($answers) && !$answers->isEmpty())
             @foreach($answers as $answer)
-                createAnswer(answerIndex, 1, '{{ $answer->title }}', {{ $answer->id }})
+                createAnswer(answerIndex, 1, '{{ $answer->title }}', {{ $answer->id }}, {{ $allowEditAnswer }})
             @endforeach
         @else
-        createAnswer(1, 0, '', 0)
+        createAnswer(1, 0, '', 0, {{ $allowEditAnswer }})
         @endif
     </script>
 @endsection
