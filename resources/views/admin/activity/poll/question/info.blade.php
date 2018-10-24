@@ -123,7 +123,7 @@
                 '                                        </div>')
             answerIndex ++;
         }
-        @if($allowEditAnswer == 0)
+        @if($allowEditAnswer == 1)
         $("#add-item").click(function () {
             createAnswer(answerIndex, 1, '', 0, 1)
         })
