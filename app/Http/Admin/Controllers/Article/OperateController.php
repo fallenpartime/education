@@ -6,9 +6,7 @@
  */
 namespace App\Http\Admin\Controllers\Article;
 
-use App\Http\Admin\Actions\Article\Operate\DetailAction;
 use App\Http\Admin\Actions\Article\Operate\FreshAction;
-use App\Http\Admin\Actions\Article\Operate\InfoAction;
 use App\Http\Admin\Actions\Article\Operate\RemoveAction;
 use App\Http\Admin\Actions\Article\Operate\ShowAction;
 use App\Http\Admin\Controllers\Controller;
@@ -36,7 +34,7 @@ class OperateController extends Controller
     }
 
     /**
-     * 活动缓存刷新
+     * 文章缓存刷新
      * @param Request $request
      */
     public function fresh(Request $request)

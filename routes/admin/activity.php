@@ -10,6 +10,9 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
     Route::match(['post'], '/admin/activity/open', [
         'uses' => '\App\Http\Admin\Controllers\Activity\OperateController@open'
     ])->name('activityOpen');
+    Route::match(['post'], '/admin/activity/fresh', [
+        'uses' => '\App\Http\Admin\Controllers\Activity\OperateController@fresh'
+    ])->name('activityFresh');
 });
 // 问题操作
 Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(function () {

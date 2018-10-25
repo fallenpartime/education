@@ -36,4 +36,7 @@ Route::middleware(['web', 'admin.login.auth', 'admin.action.auth'])->group(funct
     Route::match(['post'], '/admin/article/remove', [
         'uses' => '\App\Http\Admin\Controllers\Article\OperateController@remove'
     ])->name('articleRemove');
+    Route::match(['post'], '/admin/article/fresh', [
+        'uses' => '\App\Http\Admin\Controllers\Article\OperateController@fresh'
+    ])->name('articleFresh');
 });
