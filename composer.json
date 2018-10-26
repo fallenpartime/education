@@ -33,7 +33,8 @@
             "App\\": "app/",
             "Frameworks\\": "frameworks/",
             "Admin\\": "admin/",
-            "Front\\": "front/"
+            "Front\\": "front/",
+            "Wechat\\": "wechat/"
         }
     },
     "autoload-dev": {

@@ -23,3 +23,4 @@ require __DIR__.'/admin/article.php';
 require __DIR__.'/admin/activity.php';
 require __DIR__.'/admin/interact.php';
 require __DIR__.'/admin/upload.php';
+require __DIR__.'/wechat/oauth.php';
