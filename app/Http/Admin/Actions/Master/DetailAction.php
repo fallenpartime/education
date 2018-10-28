@@ -114,14 +114,14 @@ class DetailAction extends BaseAction
         $changePwd = $httpTool->getBothSafeParam('change_pwd', HttpConfig::PARAM_NUMBER_TYPE);
         $pwd = $httpTool->getBothSafeParam('pwd');
         $roleId = $httpTool->getBothSafeParam('role_id', HttpConfig::PARAM_NUMBER_TYPE);
-        $isOwner = $httpTool->getBothSafeParam('is_owner', HttpConfig::PARAM_NUMBER_TYPE);
+//        $isOwner = $httpTool->getBothSafeParam('is_owner', HttpConfig::PARAM_NUMBER_TYPE);
         $isAdmin = $httpTool->getBothSafeParam('is_admin', HttpConfig::PARAM_NUMBER_TYPE);
         $username = trim($username);
         $phone = trim($phone);
         $phone = trim($phone);
         $ownerData = [
             'role_id'   =>  !empty($roleId)? $roleId: 0,
-            'is_owner'  =>  !empty($isOwner)? $isOwner: 0,
+            'is_owner'  =>  1,
             'is_admin'  =>  !empty($isAdmin)? $isAdmin: 0,
         ];
         $userData = [

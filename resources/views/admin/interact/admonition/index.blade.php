@@ -120,6 +120,9 @@
                                         @if($value->operate_list['allow_operate_reply'])
                                             <a href="javascript:;" style="display: block;" onclick="changeReply({{ $value->id }})">答复</a>
                                         @endif
+                                        @if($value->operate_list['allow_operate_modify_reply'])
+                                            <a href="javascript:;" style="display: block;" onclick="changeReply({{ $value->id }})">修改答复</a>
+                                        @endif
                                         @if($value->operate_list['allow_operate_remove'])
                                             <a href="javascript:;" style="display: block;" onclick="removeAdmonition({{ $value->id }})">作废</a>
                                         @endif
@@ -197,6 +200,18 @@
                 $("#reply_content").val('');
                 $(".float-window").show();
                 $(".window-box").show();
+                $.post(
+                    '{{ $operateUrl['reply_url'] }}',
+                    {id: id},
+                    function (result) {
+                        result = JSON.parse(result)
+                        if (result.code == 200) {
+                            $("#reply_content").val(result.data.content);
+                        } else {
+                            alert(result.msg)
+                        }
+                    }
+                )
             }
             $("#reply_submit").click(function () {
                 if (confirm('确定提交答复？')) {
@@ -212,7 +227,7 @@
                     }
                     $.post(
                         '{{ $operateUrl['reply_url'] }}',
-                        {id: admonId, content: replyContent},
+                        {id: admonId, content: replyContent, submit: 1},
                         function (result) {
                             result = JSON.parse(result)
                             if (result.code == 200) {

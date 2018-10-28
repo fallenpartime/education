@@ -41,7 +41,7 @@
                         </select>
                     </p>
                     <p class="select" style="width: 300px;">
-                        <span class="special">资源类型：</span>
+                        <span class="special">问题类型：</span>
                         <select name="type">
                             <option value="">全部</option>
                             <option value="1" @if(array_get($urlParams, 'type') == 1)selected="selected"@endif>文本</option>
@@ -63,7 +63,7 @@
                             <thead>
                                 <th width="10%">问题ID</th>
                                 <th width="20%">活动</th>
-                                <th width="10%">资源类型</th>
+                                <th width="10%">问题类型</th>
                                 <th width="15%">问题标题</th>
                                 <th width="15%">问题图片</th>
                                 <th width="7%">显示状态</th>

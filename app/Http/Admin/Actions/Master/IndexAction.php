@@ -95,8 +95,8 @@ class IndexAction extends BaseAction
     protected function getStatusDescription($item)
     {
         $description = [];
-        $description[] = '是否允许登录：'.(!empty($item->is_admin)? '是': '否');
-        $description[] = '是否显示为执行人：'.(!empty($item->is_owner)? '是': '否');
+        $description[] = '是否激活：'.(!empty($item->is_admin)? '是': '否');
+//        $description[] = '是否显示为执行人：'.(!empty($item->is_owner)? '是': '否');
         $description[] = '是否超级管理员：'.(!empty($item->is_super)? '是': '否');
         return implode('<br>', $description);
     }

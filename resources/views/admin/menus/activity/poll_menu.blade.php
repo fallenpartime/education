@@ -11,7 +11,7 @@
                             <a href="{{ route('polls') }}">
                                 <dl class="btn btn-lg btn-primary-outline">
                                     <dt><img src="/assets/images/manage.png"></dt>
-                                    <dd @if(in_array('polls', $menu)) style="color:#007aff;"@endif>活动列表</dd>
+                                    <dd @if(in_array('polls', $menu)) style="color:#007aff;"@endif>投票列表</dd>
                                 </dl>
                             </a>
                         @endif
@@ -19,7 +19,7 @@
                             <a href="{{ route('activityPollInfo', ['work_no'=>1]) }}">
                                 <dl class="btn btn-lg btn-primary-outline">
                                     <dt><img src="/assets/images/manage.png"></dt>
-                                    <dd @if(in_array('activityPollInfo', $menu)) style="color:#007aff;"@endif>活动配置</dd>
+                                    <dd @if(in_array('activityPollInfo', $menu)) style="color:#007aff;"@endif>投票配置</dd>
                                 </dl>
                             </a>
                         @endif

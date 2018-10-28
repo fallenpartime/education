@@ -65,6 +65,7 @@ class InfoAction extends BaseAction
             'allowEditAnswer'   =>  $allowEditAnswer,
             'menu'              => ['activityCenter', 'pollManage', 'activityPollQuestionInfo'],
             'actionUrl'         => route('activityPollQuestionInfo', ['work_no'=>2]),
+            'redirectUrl'       => route('activityPollQuestions'),
         ];
         return $this->createView('admin.activity.poll.question.info', $result);
     }

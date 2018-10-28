@@ -16,8 +16,8 @@
                             <p>角色详情</p>
                             <table class="table table-bordered table-striped table-hover" id="">
                                 <thead>
-                                <th width="30%">标题</th>
-                                <th width="65%">内容</th>
+                                    <th width="30%">标题</th>
+                                    <th width="65%">内容</th>
                                 </thead>
                                 <tbody style="text-align: center;">
                                 <tr>
@@ -41,13 +41,29 @@
                                         </select>
                                     </td>
                                 </tr>
-                                @if(!empty($groups))
+                                <tr>
+                                    <td>分组选择</td>
+                                    <td style="text-align: left;">
+                                        @if(!empty($groups))
+                                            @foreach($groups as $group)
+                                                <?php
+                                                $groupModel = $group['model'];
+                                                $access = $group['access'];
+                                                ?>
+                                                    <input type="checkbox" class="group-list" name="{{ $groupModel->tip }}" value="{{ $groupModel->group_no }}" @if(!empty($access))checked="checked"@endif/>&nbsp;{{ $groupModel->name }}分组&nbsp;&nbsp;&nbsp;
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                </tr>
+                                @if(false && !empty($groups))
                                     @foreach($groups as $group)
                                     <?php
                                         $groupModel = $group['model'];
                                         $access = $group['access'];
                                     ?>
-                                    <tr>
+                                        <td>
+
+                                        </td>
                                         <td>
                                             <input type="checkbox" class="group-list" name="{{ $groupModel->tip }}" value="{{ $groupModel->group_no }}" @if(!empty($access))checked="checked"@endif/>&nbsp;{{ $groupModel->name }}分组</td>
                                         </td>

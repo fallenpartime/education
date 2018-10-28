@@ -170,18 +170,18 @@ class DetailAction extends BaseAction
             $processor = new AdminUserRoleAccessProcessor();
             foreach ($groups as $group) {
                 $groupNo = $this->request->get("{$group->tip}");
-                $isLeader = $this->request->get("{$group->tip}_leader");
-                $isLeader = !empty($isLeader)? 1: 0;
-                $leaderNo = $this->request->get("{$group->tip}_leader_no");
+//                $isLeader = $this->request->get("{$group->tip}_leader");
+//                $isLeader = !empty($isLeader)? 1: 0;
+//                $leaderNo = $this->request->get("{$group->tip}_leader_no");
                 if ($groupNo > 0) {
-                    if ($isLeader > 0) {
-                        $leaderNo = 0;
-                    }
+//                    if ($isLeader > 0) {
+//                        $leaderNo = 0;
+//                    }
                     $data = [
                         'group_no'  =>  $groupNo,
                         'role_no'   =>  $roleNo,
-                        'leader_no' =>  $leaderNo,
-                        'is_leader' =>  $isLeader,
+                        'leader_no' =>  0,
+                        'is_leader' =>  0,
                     ];
                     $processor->insert($data);
                 }

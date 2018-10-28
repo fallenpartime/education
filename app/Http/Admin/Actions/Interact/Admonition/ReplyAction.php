@@ -23,13 +23,23 @@ class ReplyAction extends BaseAction
     {
         $httpTool = $this->getHttpTool();
         $id = $httpTool->getBothSafeParam('id', HttpConfig::PARAM_NUMBER_TYPE);
+        $submit = $httpTool->getBothSafeParam('submit');
         if (!empty($id)) {
             $this->_admonition = UserAdmonition::find($id);
         }
         if (empty($this->_admonition)) {
             $this->errorJson(500, '用户意见不存在');
         }
-        $this->process();
+        if (!empty($submit)) {
+            $this->process();
+        }
+        $this->showReplyContent();
+    }
+
+    protected function showReplyContent()
+    {
+        $content = $this->_admonition->reply_content;
+        $this->successJson('', ['content'=>$content]);
     }
 
     protected function process()

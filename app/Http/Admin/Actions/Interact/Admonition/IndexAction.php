@@ -73,7 +73,8 @@ class IndexAction extends BaseAction
         $operateList = [
             'allow_operate_show' => 0,
             'allow_operate_remove' => 0,
-            'allow_operate_reply'  => 0
+            'allow_operate_reply'  => 0,
+            'allow_operate_modify_reply'  => 0
         ];
         $replyContent = $list[$key]->reply_content;
         $authService = $this->getAuthService();
@@ -86,6 +87,8 @@ class IndexAction extends BaseAction
         if ($authService->isMaster || $authService->validateAction('admonitionReply')) {
             if (empty($replyContent)) {
                 $operateList['allow_operate_reply'] = 1;
+            } else {
+                $operateList['allow_operate_modify_reply'] = 1;
             }
         }
         $list[$key]->operate_list = $operateList;

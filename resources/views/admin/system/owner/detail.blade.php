@@ -29,12 +29,14 @@
                                             @endforeach
                                         @endif
                                     </select><br/>
+                                    @if(false)
                                     <span class="blank">显示为执行人：</span>
                                     <select name="is_owner" style="width: 50%;">
                                         <option value="0">否</option>
                                         <option value="1" @if(!empty($record) && $record->is_owner == 1)selected="selected"@endif>是</option>
                                     </select><br/>
-                                    <span class="blank">允许登录：</span>
+                                    @endif
+                                    <span class="blank">是否激活：</span>
                                     <select name="is_admin" style="width: 50%;">
                                         <option value="0">否</option>
                                         <option value="1" @if(!empty($record) && $record->is_admin == 1)selected="selected"@endif>是</option>

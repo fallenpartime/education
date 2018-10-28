@@ -30,7 +30,7 @@
                                         <input type="text" name="activity_id" value="{{ !empty($activityId)? $activityId: '' }}" required="required" placeholder="请输入活动ID" style="width: 40%;"/>
                                     </p><br/>
                                     <p style="width: 100%; margin-right: 10px;">
-                                        <span>资源类型:</span>
+                                        <span>问题类型:</span>
                                         <input type="radio" name="type" value="0" @if(!empty($record) && $record->type == 0) checked @endif />文字&nbsp;&nbsp;&nbsp;&nbsp;
                                         <input type="radio" name="type" value="1" @if(!empty($record) && $record->type == 1) checked @endif />图片
                                     </p><br/>
@@ -93,7 +93,7 @@
                     function (result) {
                         result = JSON.parse(result)
                         if (result.code == 200) {
-                            location.href=document.referrer;
+                            location.href='{{ $redirectUrl }}';
                         } else {
                             alert(result.msg)
                         }

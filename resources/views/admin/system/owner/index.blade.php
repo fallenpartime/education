@@ -16,6 +16,7 @@
                         <span class="special">电话：</span>
                         <input type="text" name="phone" value="{{ array_get($urlParams, 'phone') }}">
                     </p>
+                    @if(false)
                     <p class="select" style="width: 300px;">
                         <span class="special">显示为执行人：</span>
                         <select name="is_owner">
@@ -24,6 +25,7 @@
                             <option value="1" @if(array_get($urlParams, 'is_owner') == 1)selected="selected"@endif>否</option>
                         </select>
                     </p>
+                    @endif
                     <button class="sub">搜索</button>
                 </form>
             </div>

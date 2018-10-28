@@ -18,7 +18,7 @@
                         <input type="text" name="name" value="{{ array_get($urlParams, 'name') }}">
                     </p>
                     <p class="select" style="width: 300px;">
-                        <span class="special">学区：</span>
+                        <span class="special">所属学区：</span>
                         <select name="district_no">
                             <option value="">全部</option>
                             @if(!$districts->isEmpty())
@@ -70,7 +70,7 @@
                         <table class="table table-bordered table-striped" id="dataTable1">
                             <thead>
                                 <th width="5%">学校编号</th>
-                                <th width="10%">学区</th>
+                                <th width="10%">所属学区</th>
                                 <th width="10%">学校名称</th>
                                 <th width="20%">地址</th>
                                 <th width="10%">办公电话</th>
