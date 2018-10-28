@@ -72,4 +72,30 @@
             }
         }
     </script>
+    <script>
+        $(".first_all_check").click(function () {
+            var checkedValue = $(this).prop('checked')
+            if (checkedValue) {
+                $(".first_level").prop('checked', true)
+            } else {
+                $(".first_level").attr('checked', false)
+            }
+        })
+        $(".second_all_check").click(function () {
+            var checkedValue = $(this).prop('checked')
+            if (checkedValue) {
+                $(".second_level").prop('checked', true)
+            } else {
+                $(".second_level").attr('checked', false)
+            }
+        })
+        $(".third_all_check").click(function () {
+            var checkedValue = $(this).prop('checked')
+            if (checkedValue) {
+                $(".third_level").prop('checked', true)
+            } else {
+                $(".third_level").attr('checked', false)
+            }
+        })
+    </script>
 @endsection

@@ -17,11 +17,11 @@
                                     <p style="width:1.5em;">权限设置</p>
                                 </div>
                                 <div class="bank-form">
-                                    <span class="blank">一级菜单：</span>
+                                    <span class="blank">所属一级权限：</span>
                                     <select name="first_menu" id="first_menu" style="width: 50%;">
                                         <option value=""></option>
                                     </select><br/>
-                                    <span class="blank">二级菜单：</span>
+                                    <span class="blank">所属二级权限：</span>
                                     <select name="second_menu" id="second_menu" style="width: 50%;">
                                         <option value=""></option>
                                     </select><br/>

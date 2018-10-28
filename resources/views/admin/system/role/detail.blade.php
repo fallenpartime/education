@@ -142,28 +142,62 @@
         }
     </script>
     <script>
-        $(".group-list").each(function (i, elem) {
-            $(elem).click(function () {
+        function changeGroupAuth() {
+            var groupCheckedList = "";
+            $(".group-list").each(function () {
                 var checked = $(this).prop("checked")
                 var groupVal = $(this).val()
+                if (checked && groupVal > 0) {
+                    groupCheckedList += groupVal
+                    groupCheckedList += ","
+                }
+            })
+            if (groupCheckedList.length > 0) {
+                $(".group-auth").attr('checked', false)
                 $.post(
                     '{{ $groupAuthorityUrl }}',
-                    {group_id: groupVal},
+                    {group_list: groupCheckedList},
                     function (result) {
                         result = JSON.parse(result)
                         var authList = result.data.list;
                         for (var i in authList) {
-                            console.log(authList[i]);
-                            if (checked == true) {
-                                $("[class='group-auth'][value="+authList[i]+"]").prop("checked", true);
-                            } else {
-                                $("[class='group-auth'][value="+authList[i]+"]").attr("checked", false);
-                            }
+                            $("[class='group-auth'][value="+authList[i]+"]").prop("checked", true);
                         }
                     }
                 )
-
+            }
+        }
+        changeGroupAuth()
+        $(".group-list").each(function () {
+            $(this).click(function () {
+                changeGroupAuth()
             })
+        })
+    </script>
+    <script>
+        $(".first_all_check").click(function () {
+            var checkedValue = $(this).prop('checked')
+            if (checkedValue) {
+                $(".first_level").prop('checked', true)
+            } else {
+                $(".first_level").attr('checked', false)
+            }
+        })
+        $(".second_all_check").click(function () {
+            var checkedValue = $(this).prop('checked')
+            if (checkedValue) {
+                $(".second_level").prop('checked', true)
+            } else {
+                $(".second_level").attr('checked', false)
+            }
+        })
+        $(".third_all_check").click(function () {
+            var checkedValue = $(this).prop('checked')
+            if (checkedValue) {
+                $(".third_level").prop('checked', true)
+            } else {
+                $(".third_level").attr('checked', false)
+            }
         })
     </script>
 @endsection

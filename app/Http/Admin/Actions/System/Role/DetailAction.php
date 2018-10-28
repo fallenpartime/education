@@ -13,7 +13,6 @@ use Admin\Models\System\AdminUserRole;
 use Admin\Models\System\AdminUserRoleAccess;
 use Admin\Services\Authority\AuthorityService;
 use Admin\Services\Authority\Integration\RelateAuthoritiesCheckedIntegration;
-use Admin\Services\Authority\Processor\AdminUserGroupProcessor;
 use Admin\Services\Authority\Processor\AdminUserRoleAccessProcessor;
 use Admin\Services\Authority\Processor\AdminUserRoleProcessor;
 use Admin\Services\Log\LogService;
@@ -57,7 +56,7 @@ class DetailAction extends BaseAction
             'roles'             =>  AdminUserRole::all(),
             'groups'            =>  $this->getAccess(),
             'authorities'       =>  $this->parseRoleMenu($roleMenus),
-            'groupAuthorities'  =>  $this->parseGroupMenu($groupMenus),
+            'groupAuthorities'  =>  $groupMenus,
             'indexUrls'         => $indexUrls,
             'menu'  =>  ['manageCenter', 'roleManage', 'roleInfo'],
             'actionUrl'         => route('roleInfo', ['work_no'=>2]),
@@ -94,29 +93,6 @@ class DetailAction extends BaseAction
         if (!empty($this->_role)) {
             $roleActions = !empty($this->_role->actions)? json_decode($this->_role->actions, true): [];
             list($status, $count, $menus) = (new RelateAuthoritiesCheckedIntegration($menus, $roleActions))->process();
-        }
-        return $menus;
-    }
-
-    protected function parseGroupMenu($menus)
-    {
-        $groupActions = [];
-        if (!empty($this->_role)) {
-            $accesses = $this->_role->accesses;
-            if (!empty($accesses)) {
-                foreach ($accesses as $access) {
-                    $groupActionList = [];
-                    $group = $access->group;
-                    if (!empty($group) && !empty($group->actions)) {
-                        $groupActionList = json_decode($group->actions, true);
-                    }
-                    $groupActions = array_merge($groupActions, $groupActionList);
-                }
-            }
-            if (!empty($groupActions)) {
-                $groupActions = array_unique($groupActions);
-                list($status, $count, $menus) = (new RelateAuthoritiesCheckedIntegration($menus, $groupActions))->process();
-            }
         }
         return $menus;
     }
@@ -240,15 +216,26 @@ class DetailAction extends BaseAction
 
     protected function showGroupAuthority()
     {
-        $httpTool = $this->getHttpTool();
         $data = ['list'=>[]];
-        $groupId = $httpTool->getBothSafeParam('group_id', HttpConfig::PARAM_NUMBER_TYPE);
-        if ($groupId > 0) {
-            $group = (new AdminUserGroupProcessor())->getSingleByNo($groupId);
-            if (!empty($group) && !empty($group->actions)) {
-                $data['list'] = json_decode($group->actions);
-            }
+        $groupList = request('group_list', '');
+        $groupList = trim($groupList);
+        $groupList = trim($groupList, ",");
+        if (empty($groupList)) {
+            $this->successJson('', $data);
         }
+        $groupList = explode(',', $groupList);
+        $groupList = array_filter($groupList);
+        $groups = AdminUserGroup::whereIn('group_no', $groupList)->select(['group_no', 'actions'])->get();
+        $groupActions = [];
+        foreach ($groups as $group) {
+            $groupActionList = [];
+            if (!empty($group->actions)) {
+                $groupActionList = json_decode($group->actions, true);
+            }
+            $groupActions = array_merge($groupActions, $groupActionList);
+        }
+        $groupActions = array_unique($groupActions);
+        $data['list'] = $groupActions;
         $this->successJson('', $data);
     }
 }
