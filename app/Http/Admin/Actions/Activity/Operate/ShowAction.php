@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Activity\Operate;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
+use Admin\Services\Activity\ActivityService;
 use Admin\Services\Activity\Processor\ActivityProcessor;
 use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
@@ -39,6 +40,9 @@ class ShowAction extends BaseAction
         LogService::operateLog($this->request, 24, $this->_activity->id, "活动显示状态修改：{$this->_activity->is_show}=>{$showValue}", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityProcessor())->update($this->_activity->id, ['is_show'=>$showValue]);
         if ($res) {
+            // 活动缓存显示状态修改
+            $articleService = new ActivityService($this->_activity->id);
+            $articleService->setCacheRecord(['is_show'=>$showValue]);
             $this->successJson();
         }
         $this->errorJson(500, '提交失败');

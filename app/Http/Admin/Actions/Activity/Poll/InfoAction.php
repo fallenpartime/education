@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Activity\Poll;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
+use Admin\Services\Activity\ActivityService;
 use Admin\Services\Activity\Processor\ActivityPictureProcessor;
 use Admin\Services\Activity\Processor\ActivityProcessor;
 use Admin\Services\Log\LogService;
@@ -143,6 +144,12 @@ class InfoAction extends BaseAction
         return false;
     }
 
+    protected function processCache($id, $data)
+    {
+        $service = new ActivityService($id);
+        $service->setCacheRecord($data);
+    }
+
     protected function save($data)
     {
         $processor = new ActivityProcessor();
@@ -151,6 +158,7 @@ class InfoAction extends BaseAction
             $this->errorJson(500, '活动创建失败');
         }
         LogService::operateLog($this->request, 20, $activity->id, "添加活动", $this->getAuthService()->getAdminInfo());
+        $this->processCache($activity->id, $data);
         $this->processImage($data['list_pic'], $activity->id, 1);
         $this->successJson();
     }
@@ -166,6 +174,7 @@ class InfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '活动修改失败');
         }
+        $this->processCache($this->_activity->id, $data);
         $this->processImage($data['list_pic'], $id);
         $this->successJson();
     }

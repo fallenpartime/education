@@ -7,6 +7,7 @@
 namespace App\Http\Admin\Actions\Article;
 
 use Admin\Actions\BaseAction;
+use Admin\Services\Article\ArticleService;
 use Admin\Services\Article\Processor\ArticlePictureProcessor;
 use Admin\Services\Article\Processor\ArticleProcessor;
 use Admin\Services\Log\LogService;
@@ -112,6 +113,12 @@ class BaseInfoAction extends BaseAction
         return false;
     }
 
+    protected function processCache($id, $data)
+    {
+        $service = new ArticleService($id);
+        $service->setCacheRecord($data);
+    }
+
     protected function save($data)
     {
         $processor = new ArticleProcessor();
@@ -120,6 +127,7 @@ class BaseInfoAction extends BaseAction
             $this->errorJson(500, '文章创建失败');
         }
         LogService::operateLog($this->request, 1, $article->id, '添加文章', $this->getAuthService()->getAdminInfo());
+        $this->processCache($article->id, $data);
         $this->processImage($data['list_pic'], $article->id, 1);
         $this->successJson();
     }
@@ -135,6 +143,7 @@ class BaseInfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '文章修改失败');
         }
+        $this->processCache($this->_article->id, $data);
         $this->processImage($data['list_pic'], $id);
         $this->successJson();
     }

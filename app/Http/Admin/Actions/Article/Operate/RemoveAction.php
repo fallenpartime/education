@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Article\Operate;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Article;
+use Admin\Services\Article\ArticleService;
 use Admin\Services\Article\Processor\ArticleProcessor;
 use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
@@ -37,6 +38,9 @@ class RemoveAction extends BaseAction
         LogService::operateLog($this->request, 3, $this->_article->id, '作废文章', $this->getAuthService()->getAdminInfo());
         $res = (new ArticleProcessor())->destroy($this->_article->id);
         if ($res) {
+            // 作废文章缓存
+            $articleService = new ArticleService($this->_article->id);
+            $articleService->removeCacheRecord();
             $this->successJson();
         }
         $this->errorJson(500, '提交失败');

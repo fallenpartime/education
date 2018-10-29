@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Article\Operate;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Article;
+use Admin\Services\Article\ArticleService;
 use Admin\Services\Article\Processor\ArticleProcessor;
 use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
@@ -39,6 +40,9 @@ class ShowAction extends BaseAction
         LogService::operateLog($this->request, 4, $this->_article->id, "文章显示状态修改：{$this->_article->is_show}=>{$showValue}", $this->getAuthService()->getAdminInfo());
         $res = (new ArticleProcessor())->update($this->_article->id, ['is_show'=>$showValue]);
         if ($res) {
+            // 文章缓存显示状态修改
+            $articleService = new ArticleService($this->_article->id);
+            $articleService->setCacheRecord(['is_show'=>$showValue]);
             $this->successJson();
         }
         $this->errorJson(500, '提交失败');

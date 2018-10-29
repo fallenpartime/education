@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Activity\Operate;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
+use Admin\Services\Activity\ActivityService;
 use Admin\Services\Activity\Processor\ActivityProcessor;
 use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;
@@ -37,6 +38,9 @@ class RemoveAction extends BaseAction
         LogService::operateLog($this->request, 23, $this->_activity->id, "活动作废", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityProcessor())->destroy($this->_activity->id);
         if ($res) {
+            // 作废活动缓存
+            $articleService = new ActivityService($this->_activity->id);
+            $articleService->removeCacheRecord();
             $this->successJson();
         }
         $this->errorJson(500, '提交失败');
