@@ -37,11 +37,14 @@ class ArticleService
 
     /**
      * 获取文章缓存记录
+     * @param int $id
      * @return array
      */
-    public function getCacheRecord()
+    public function getCacheRecord($id = 0)
     {
-        $id = intval($this->id);
+        if (empty($id)) {
+            $id = intval($this->id);
+        }
         if ($id <= 0) {
             return [];
         }
@@ -106,5 +109,20 @@ class ArticleService
         }
         $cacheKeyword = $this->cacheKeyword($id);
         return Redis::hincrby($cacheKeyword, 'like_count', 1);
+    }
+
+    public function getRecord($id = 0)
+    {
+        if (empty($id)) {
+            $id = intval($this->id);
+        }
+        if ($id <= 0) {
+            return [];
+        }
+        $record = $this->getCacheRecord($id);
+        if (empty($record)) {
+            $record = Article::find($id);
+        }
+        return $record;
     }
 }

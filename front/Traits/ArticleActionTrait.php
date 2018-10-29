@@ -6,8 +6,8 @@
  */
 namespace Front\Traits;
 
-use Admin\Models\Article\Article;
 use Admin\Services\Article\ArticleService;
+use Vinkla\Hashids\Facades\Hashids;
 
 trait ArticleActionTrait
 {
@@ -25,15 +25,15 @@ trait ArticleActionTrait
         return $this->articleService;
     }
 
-    protected function readCounter()
+    protected function initArticleByCode()
     {
-        if (empty($this->article)) {
-            return 0;
+        $code = request('code');
+        $params = Hashids::decode($code);
+        if (empty($params)) {
+            return false;
+        } else if(count($params) != 1) {
+            return false;
         }
-        $id = array_get($this->article, 'id');
-        $result = Article::find($id)->increment('read_count');
-        if ($result) {
-            $this->getService()->readCounter();
-        }
+        $this->article = (new ArticleService())->getRecord($params[0]);
     }
 }
