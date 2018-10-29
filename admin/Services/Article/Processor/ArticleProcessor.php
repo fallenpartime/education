@@ -7,7 +7,7 @@
 namespace Admin\Services\Article\Processor;
 
 use Admin\Base\Processor\BaseProcessor;
-use Admin\Models\Article;
+use Admin\Models\Article\Article;
 
 class ArticleProcessor extends BaseProcessor
 {

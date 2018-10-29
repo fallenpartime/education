@@ -6,9 +6,17 @@
  */
 namespace App\Http\Front\Controllers\Interact;
 
+use App\Http\Front\Actions\Interact\Admonition\IndexAction;
 use App\Http\Front\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class AdmonitionController extends Controller
 {
-
+    /**
+     * @param Request $request
+     */
+    public function index(Request $request)
+    {
+        return (new IndexAction($request))->run();
+    }
 }

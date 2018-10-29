@@ -6,7 +6,7 @@
  */
 namespace App\Http\Admin\Actions\Article\Exam;
 
-use Admin\Models\Article;
+use Admin\Models\Article\Article;
 use App\Http\Admin\Actions\Article\BaseInfoAction;
 use Frameworks\Tool\Http\HttpConfig;
 

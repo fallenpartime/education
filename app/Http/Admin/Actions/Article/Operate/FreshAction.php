@@ -7,7 +7,7 @@
 namespace App\Http\Admin\Actions\Article\Operate;
 
 use Admin\Actions\BaseAction;
-use Admin\Models\Article;
+use Admin\Models\Article\Article;
 use Admin\Services\Article\ArticleService;
 use Admin\Services\Log\LogService;
 use Admin\Traits\ApiActionTrait;

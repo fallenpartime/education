@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Admin\Middleware\AdminActionAuthMiddleware;
 use App\Http\Admin\Middleware\AdminLoginAuthMiddleware;
+use App\Http\Front\Middleware\WechatOauthMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,5 +65,6 @@ class Kernel extends HttpKernel
 //        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin.login.auth' => AdminLoginAuthMiddleware::class,
         'admin.action.auth' => AdminActionAuthMiddleware::class,
+        'wechat.oauth' => WechatOauthMiddleware::class,
     ];
 }

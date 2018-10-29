@@ -7,6 +7,7 @@
 namespace Admin\Services\Article;
 
 use Admin\Config\ArticleConfig;
+use Admin\Models\Article\Article;
 use Illuminate\Support\Facades\Redis;
 
 class ArticleService
@@ -75,5 +76,35 @@ class ArticleService
         }
         $cacheKeyword = $this->cacheKeyword($id);
         return Redis::del($cacheKeyword);
+    }
+
+    /**
+     * 阅读计数器
+     */
+    public function readCounter()
+    {
+        $id = intval($this->id);
+        if ($id <= 0) {
+            return false;
+        }
+        $result = Article::find($id)->increment('read_count');
+        if ($result) {
+            $cacheKeyword = $this->cacheKeyword($id);
+            Redis::hincrby($cacheKeyword, 'read_count', 1);
+        }
+        return true;
+    }
+
+    /**
+     * 点赞计数器
+     */
+    public function likeCounter()
+    {
+        $id = intval($this->id);
+        if ($id <= 0) {
+            return false;
+        }
+        $cacheKeyword = $this->cacheKeyword($id);
+        return Redis::hincrby($cacheKeyword, 'like_count', 1);
     }
 }
