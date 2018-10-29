@@ -142,6 +142,9 @@
                                         @if($value->operate_list['allow_operate_close'])
                                             <a href="javascript:;" style="display: block;" onclick="changeOpen({{ $value->id }})">结束活动</a>
                                         @endif
+                                        @if($value->operate_list['allow_operate_fresh'])
+                                            <a href="javascript:;" style="display: block;" onclick="changeFresh({{ $value->id }})">刷新页面缓存</a>
+                                        @endif
                                         @if($value->operate_list['allow_operate_remove'])
                                             <a href="javascript:;" style="display: block;" onclick="removeActivity({{ $value->id }})">作废</a>
                                         @endif
@@ -220,6 +223,26 @@
             function createQuestion(id) {
                 if (confirm('确定添加问题？')) {
                     location.href="{{ $operateUrl['question_url'] }}&activity_id="+id;
+                }
+            }
+        </script>
+    @endif
+    @if($operateList['change_fresh'])
+        <script>
+            function changeFresh(id) {
+                if (confirm('确定刷新提交？')) {
+                    $.post(
+                        '{{ $operateUrl['fresh_url'] }}',
+                        {id: id},
+                        function (result) {
+                            result = JSON.parse(result)
+                            if (result.code == 200) {
+                                location.href = '{{ $redirectUrl }}';
+                            } else {
+                                alert(result.msg)
+                            }
+                        }
+                    )
                 }
             }
         </script>
