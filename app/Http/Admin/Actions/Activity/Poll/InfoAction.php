@@ -64,12 +64,14 @@ class InfoAction extends BaseAction
         $httpTool = $this->getHttpTool();
         $id = $httpTool->getBothSafeParam('id', HttpConfig::PARAM_NUMBER_TYPE);
         $title = $httpTool->getBothSafeParam('title');
+        $author = $httpTool->getBothSafeParam('author');
         $description = $httpTool->getBothSafeParam('description');
         $content = $httpTool->getBothSafeParam('content');
         $thankContent = $httpTool->getBothSafeParam('thank_content');
         $publishedAt = $httpTool->getBothSafeParam('pubdate');
         $picPreview = $this->request->get('list_pic_preview');
         $title = trim($title);
+        $author = trim($author);
         $description = trim($description);
         $publishedAt = trim($publishedAt);
         if(empty($title)){
@@ -87,6 +89,7 @@ class InfoAction extends BaseAction
         $data = [
             'type'      =>  $this->_type,
             'title'     =>  $title,
+            'author'    =>  $author,
             'description'   =>  $description,
             'content'   =>  $content,
             'thank_content' =>  !empty($thankContent)? $thankContent: '',

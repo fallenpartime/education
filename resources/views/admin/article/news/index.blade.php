@@ -53,7 +53,7 @@
                         <table class="table table-bordered table-striped" id="dataTable1">
                             <thead>
                                 <th width="10%">ID</th>
-                                <th width="15%">标题</th>
+                                <th width="15%">标题<br>作者</th>
                                 <th width="10%">显示状态</th>
                                 <th width="5%">阅读数</th>
                                 <th width="5%">点赞数</th>
@@ -69,7 +69,8 @@
                                         {{ $value->id }}
                                     </td>
                                     <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
-                                        {{ $value->title }}
+                                        {{ $value->title }}<br>
+                                        @if(!empty($value->author))作者：{{ $value->author }}@endif
                                     </td>
                                     <td style="color:@if($value->is_show) green @else red @endif;">
                                         @if($value->is_show) 显示 @else 隐藏 @endif

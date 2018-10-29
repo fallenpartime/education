@@ -23,7 +23,7 @@ class IndexAction extends BaseAction
         $list = [];
         $total = $model->count();
         if ($total > 0) {
-            $list = $this->pageModel($model, $page, $pageSize)->with('picture')->select(['id', 'type', 'title', 'is_show', 'is_open', 'read_count', 'join_count', 'list_pic', 'created_at', 'published_at', 'opened_at', 'overed_at'])->get();
+            $list = $this->pageModel($model, $page, $pageSize)->with('picture')->select(['id', 'type', 'title', 'author', 'is_show', 'is_open', 'read_count', 'join_count', 'list_pic', 'created_at', 'published_at', 'opened_at', 'overed_at'])->get();
             $list = $this->processList($list);
         }
         list($url, $pageList) = CommonService::pagination($total, $pageSize, $page, $url);

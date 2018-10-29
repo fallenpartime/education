@@ -30,6 +30,10 @@
                                     <p style="width: 50%; display: inline; margin-right: 10px;">
                                         <span>文章标题:</span>
                                         <input type="text" name="title" value="{{ !empty($record)? $record->title: '' }}" required="required" placeholder="请输入文章标题" style="width: 40%;"/>
+                                    </p><br/><br/>
+                                    <p style="width: 50%; display: inline; margin-right: 10px;">
+                                        <span>文章作者:</span>
+                                        <input type="text" name="author" value="{{ !empty($record)? $record->author: '' }}" required="required" placeholder="请输入文章作者" style="width: 40%;"/>
                                     </p><br/>
                                     <p style="width: 50%; margin-top: 20px; margin-right: 10px;">
                                         <span>文章简介:</span>
