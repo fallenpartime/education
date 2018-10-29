@@ -7,14 +7,18 @@
 namespace App\Http\Admin\Actions\Test;
 
 use Admin\Actions\BaseAction;
+use Illuminate\Support\Facades\Redis;
 
 class IndexAction extends BaseAction
 {
     public function run()
     {
-        $result = [
-            'menu'  =>  ['manageCenter', 'authorityCenter', 'authorities']
-        ];
-        return $this->createView('admin.test.index', $result);
+        $keyname = 'edu:test:name';
+//        Redis::set($keyname, time());
+        dd(Redis::keys("*"));
+//        $result = [
+//            'menu'  =>  ['manageCenter', 'authorityCenter', 'authorities']
+//        ];
+//        return $this->createView('admin.test.index', $result);
     }
 }

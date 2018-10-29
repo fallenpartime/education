@@ -12,7 +12,12 @@ class ArticleConfig
     const EXAM_TYPE = 2;
     const PRACTICE_TYPE = 3;
     const TECH_TYPE = 4;
+    const CACHE_PREFIX = 'edu:article:';
 
+    /**
+     * 文章类别
+     * @return array
+     */
     public static function getTypeList()
     {
         return [
@@ -21,5 +26,15 @@ class ArticleConfig
             static::PRACTICE_TYPE   =>  ['type' =>  static::PRACTICE_TYPE, 'title'  =>  '社会实践记录'],
             static::TECH_TYPE       =>  ['type' =>  static::TECH_TYPE, 'title'  =>  '教研活动'],
         ];
+    }
+
+    /**
+     * 文章缓存关键字
+     * @param $id
+     * @return string
+     */
+    public static function getCacheKeyword($id)
+    {
+        return self::CACHE_PREFIX.$id;
     }
 }
