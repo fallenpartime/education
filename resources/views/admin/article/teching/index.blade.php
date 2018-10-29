@@ -101,6 +101,9 @@
                                                 @if($value->is_show) 隐藏 @else 显示 @endif
                                             </a>
                                         @endif
+                                        @if($value->operate_list['allow_operate_fresh'])
+                                            <a href="javascript:;" style="display: block;" onclick="fresh({{ $value->id }})">刷新页面缓存</a>
+                                        @endif
                                         @if($value->operate_list['allow_operate_remove'])
                                             <a href="javascript:;" style="display: block;" onclick="remove({{ $value->id }})">作废</a>
                                         @endif
@@ -140,6 +143,26 @@
                 if (confirm('确定提交？')) {
                     $.post(
                         '{{ $operateUrl['remove_url'] }}',
+                        {id: id},
+                        function (result) {
+                            result = JSON.parse(result)
+                            if (result.code == 200) {
+                                location.href = '{{ $redirectUrl }}';
+                            } else {
+                                alert(result.msg)
+                            }
+                        }
+                    )
+                }
+            }
+        </script>
+    @endif
+    @if($operateList['change_fresh'])
+        <script>
+            function fresh(id) {
+                if (confirm('确定活动刷新缓存？')) {
+                    $.post(
+                        '{{ $operateUrl['fresh_url'] }}',
                         {id: id},
                         function (result) {
                             result = JSON.parse(result)

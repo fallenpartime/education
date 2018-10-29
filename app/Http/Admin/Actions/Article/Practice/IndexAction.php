@@ -44,11 +44,13 @@ class IndexAction extends BaseAction
     {
         $operateList = [
             'change_show'   => 0,
-            'change_remove' => 0
+            'change_remove' => 0,
+            'change_fresh'  => 0
         ];
         $operateUrl = [
             'change_url' => '',
-            'remove_url' => ''
+            'remove_url' => '',
+            'fresh_url'  => ''
         ];
         $authService = $this->getAuthService();
         if ($authService->isMaster || $authService->validateAction('articleShow')) {
@@ -59,6 +61,10 @@ class IndexAction extends BaseAction
             $operateList['change_remove'] = 1;
             $operateUrl['remove_url'] = route('articleRemove');
         }
+        if ($authService->isMaster || $authService->validateAction('articleFresh')) {
+            $operateList['change_fresh'] = 1;
+            $operateUrl['fresh_url'] = route('articleFresh');
+        }
         return [$operateList, $operateUrl];
     }
 
@@ -67,7 +73,8 @@ class IndexAction extends BaseAction
         $operateList = [
             'allow_operate_edit' => 0,
             'allow_operate_change' => 0,
-            'allow_operate_remove' => 0
+            'allow_operate_remove' => 0,
+            'allow_operate_fresh'  => 0
         ];
         $authService = $this->getAuthService();
         if ($authService->isMaster || $authService->validateAction('articleExamInfo')) {
@@ -78,6 +85,9 @@ class IndexAction extends BaseAction
         }
         if ($authService->isMaster || $authService->validateAction('articleRemove')) {
             $operateList['allow_operate_remove'] = 1;
+        }
+        if ($authService->isMaster || $authService->validateAction('articleFresh')) {
+            $operateList['allow_operate_fresh'] = 1;
         }
         $list[$key]->operate_list = $operateList;
         return $list;
