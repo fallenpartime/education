@@ -8,11 +8,13 @@ namespace Admin\Services\Activity;
 
 use Admin\Config\ActivityConfig;
 use Admin\Models\Activity\Activity;
+use Frameworks\Tool\Random\HashTool;
 use Illuminate\Support\Facades\Redis;
 
 class ActivityService
 {
     protected $id = 0;
+    protected $hashTool = null;
 
     public function __construct($id = 0)
     {
@@ -23,6 +25,14 @@ class ActivityService
     {
         $this->id = $id;
         return $this;
+    }
+
+    public function getHashTool()
+    {
+        if (empty($this->hashTool)) {
+            $this->hashTool = new HashTool();
+        }
+        return $this->hashTool;
     }
 
     /**
@@ -124,5 +134,27 @@ class ActivityService
             $record = Activity::find($id);
         }
         return $record;
+    }
+
+    /**
+     * 生成对外显示地址
+     * @param $type
+     * @return string
+     */
+    public function getShowUrl($type)
+    {
+        $code = $this->getHashTool()->encode($this->id, $type);
+        $routeName = '';
+        switch ($type) {
+            case 1:
+                $routeName = 'front.poll.info';
+                break;
+            default:
+                ;
+        }
+        if (!empty($routeName)) {
+            return route($routeName, ['code'=>$code]);
+        }
+        return '';
     }
 }

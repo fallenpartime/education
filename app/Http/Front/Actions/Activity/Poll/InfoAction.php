@@ -4,7 +4,7 @@
  * Date: 2018/10/30
  * Time: 1:49
  */
-namespace Front\Actions\Activity\Poll;
+namespace App\Http\Front\Actions\Activity\Poll;
 
 use Front\Actions\BaseAction;
 
