@@ -4,9 +4,9 @@ Route::middleware(['web'])->group(function () {
     // 扫码验证
     Route::match(['get', 'post'], '/wechat/oauth/scan', [
         'uses' => '\App\Http\Wechat\Controllers\Oauth\OauthController@scan'
-    ])->name('oauthScan');
+    ])->name('wechat.oauth.scan');
     // 授权登录
     Route::match(['get', 'post'], '/wechat/oauth/redirect', [
         'uses' => '\App\Http\Wechat\Controllers\Oauth\OauthController@redirectTo'
-    ])->name('oauthRedirect');
+    ])->name('wechat.oauth.redirect');
 });
