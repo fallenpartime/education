@@ -37,6 +37,9 @@ class ShowAction extends BaseAction
     {
         $showValue = $this->_activity->is_show;
         $showValue = ($showValue + 1) % 2;
+        if ($showValue == 1 && empty($this->_activity->published_at)) {
+            $this->errorJson(500, '发布时间未设置，不可设置显示');
+        }
         LogService::operateLog($this->request, 24, $this->_activity->id, "活动显示状态修改：{$this->_activity->is_show}=>{$showValue}", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityProcessor())->update($this->_activity->id, ['is_show'=>$showValue]);
         if ($res) {
