@@ -12,6 +12,7 @@ trait ArticleActionTrait
 {
     protected $record = null;
     protected $articleService = null;
+    protected $likeUrl = '';
 
     protected function getService()
     {
@@ -37,11 +38,12 @@ trait ArticleActionTrait
         } else if(count($params) < 2) {
             return false;
         }
-        if ($this->type == intval($params[1])) {
+        if ($this->type != intval($params[1])) {
             return false;
         }
         $this->record = $service->getRecord($params[0]);
         if (!empty($this->record)) {
+            $this->likeUrl = route('front.article.like', ['code'=>$service->getCode(array_get($this->record, 'id'))]);
             return true;
         }
         return false;

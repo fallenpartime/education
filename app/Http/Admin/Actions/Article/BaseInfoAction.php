@@ -127,6 +127,10 @@ class BaseInfoAction extends BaseAction
             $this->errorJson(500, '文章创建失败');
         }
         LogService::operateLog($this->request, 1, $article->id, '添加文章', $this->getAuthService()->getAdminInfo());
+        $data['is_show'] = 0;
+        $data['read_count'] = 0;
+        $data['like_count'] = 0;
+        $data['id'] = $article->id;
         $this->processCache($article->id, $data);
         $this->processImage($data['list_pic'], $article->id, 1);
         $this->successJson();
@@ -143,6 +147,10 @@ class BaseInfoAction extends BaseAction
         if (empty($status)) {
             $this->errorJson(500, '文章修改失败');
         }
+        $data['is_show'] = $this->_article->is_show;
+        $data['read_count'] = $this->_article->read_count;
+        $data['like_count'] = $this->_article->like_count;
+        $data['id'] = $this->_article->id;
         $this->processCache($this->_article->id, $data);
         $this->processImage($data['list_pic'], $id);
         $this->successJson();

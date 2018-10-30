@@ -20,12 +20,10 @@ class InfoAction extends BaseAction
         if (!$this->initRecordByCode()) {
             dd(404);
         }
-        $service = $this->getService();
-        $service->readCounter();
-        $likeUrl = route('front.article.like', ['code'=>$service->getCode(array_get($this->record, 'id'))]);
+        $this->getService()->readCounter();
         $result = [
             'record'        =>  $this->record,
-            'like_url'      =>  $likeUrl,
+            'like_url'      =>  $this->likeUrl,
         ];
         return view('front.article.exam.info', $result);
     }

@@ -35,6 +35,7 @@ class FreshAction extends BaseAction
     protected function process()
     {
         $data = [
+            'id'        =>  $this->_article->id,
             'type'      =>  $this->_article->type,
             'title'     =>  $this->_article->title,
             'author'    =>  $this->_article->author,
