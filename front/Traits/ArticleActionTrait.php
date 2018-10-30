@@ -11,7 +11,6 @@ use Admin\Services\Article\ArticleService;
 trait ArticleActionTrait
 {
     protected $record = null;
-    protected $type = 0;
     protected $articleService = null;
 
     protected function getService()

@@ -1,7 +1,13 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Fallen
- * Date: 2018/10/30
- * Time: 1:00
- */
+@extends('front.article.main')
+@section('title', '教育快讯')
+@section('body_content')
+    <script>
+        var pageCode = '';
+        $.post(
+            '/front/article/news',
+            {code: pageCode},
+            function (result) {
+            }
+        )
+    </script>
+@endsection

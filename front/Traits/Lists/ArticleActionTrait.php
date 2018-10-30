@@ -13,7 +13,6 @@ use Front\Config\PaginationConfig;
 
 trait ArticleActionTrait
 {
-    protected $type = 0;
     protected $limit = 0;
     protected $page = 1;
 
@@ -52,7 +51,7 @@ trait ArticleActionTrait
         $list = [];
         $records = $this->getList();
         $service = new ArticleService();
-        if (!$records.isEmpty()) {
+        if (!$records->isEmpty()) {
             foreach ($records as $item) {
                 $unit = [
                     'title' =>  $item->title,

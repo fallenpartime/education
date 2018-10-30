@@ -13,7 +13,6 @@ use Front\Config\PaginationConfig;
 
 trait ActivityActionTrait
 {
-    protected $type = 0;
     protected $limit = 0;
     protected $page = 1;
 
