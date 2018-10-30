@@ -11,7 +11,6 @@ class AdminConfig
     public static function indexUrlList()
     {
         return [
-            'index'       => ['title'=>'首页', 'url'=>''],
             'owners'      => ['title'=>'管理员列表', 'url'=>route('owners')],
             'districts'   => ['title'=>'学区列表', 'url'=>route('districts')],
         ];
