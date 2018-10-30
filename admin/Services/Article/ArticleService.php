@@ -144,6 +144,26 @@ class ArticleService
     public function getShowUrl($type)
     {
         $code = $this->getHashTool()->encode($this->id, $type);
-        return route('front.news.info', ['code'=>$code]);
+        $routeName = '';
+        switch ($type) {
+            case 1:
+                $routeName = 'front.news.info';
+                break;
+            case 2:
+                $routeName = 'front.exam.info';
+                break;
+            case 3:
+                $routeName = 'front.practice.info';
+                break;
+            case 4:
+                $routeName = 'front.teching.info';
+                break;
+            default:
+                ;
+        }
+        if (!empty($routeName)) {
+            return route($routeName, ['code'=>$code]);
+        }
+        return '';
     }
 }
