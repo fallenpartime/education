@@ -40,12 +40,12 @@ return [
     'connections' => [
 
         'main' => [
-            'salt' => env('APP_KEY'),
+            'salt' => env('HASHIDS_SALT'),
             'length' => '8',
         ],
 
         'alternative' => [
-            'salt' => env('APP_KEY'),
+            'salt' => env('HASHIDS_SALT'),
             'length' => '6',
         ],
 
