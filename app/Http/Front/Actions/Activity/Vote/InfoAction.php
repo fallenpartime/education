@@ -4,11 +4,10 @@
  * Date: 2018/10/30
  * Time: 1:51
  */
-namespace App\Http\Front\Actions\Activity\Poll\Vote;
+namespace App\Http\Front\Actions\Activity\Vote;
 
 use Front\Actions\BaseAction;
 
 class InfoAction extends BaseAction
 {
-
 }

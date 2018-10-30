@@ -132,6 +132,8 @@ class ArticleService
         $record = $this->getCacheRecord($id);
         if (empty($record)) {
             $record = Article::find($id);
+        } else if(array_get($record, 'is_show') == 0) {
+            return [];
         }
         return $record;
     }
@@ -165,5 +167,10 @@ class ArticleService
             return route($routeName, ['code'=>$code]);
         }
         return '';
+    }
+
+    public function getCode($id)
+    {
+        return $this->getHashTool()->encode($id);
     }
 }
