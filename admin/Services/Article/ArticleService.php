@@ -8,11 +8,13 @@ namespace Admin\Services\Article;
 
 use Admin\Config\ArticleConfig;
 use Admin\Models\Article\Article;
+use Frameworks\Tool\Random\HashTool;
 use Illuminate\Support\Facades\Redis;
 
 class ArticleService
 {
     protected $id = 0;
+    protected $hashTool = null;
 
     public function __construct($id = 0)
     {
@@ -23,6 +25,14 @@ class ArticleService
     {
         $this->id = $id;
         return $this;
+    }
+
+    public function getHashTool()
+    {
+        if (empty($this->hashTool)) {
+            $this->hashTool = new HashTool();
+        }
+        return $this->hashTool;
     }
 
     /**
@@ -124,5 +134,16 @@ class ArticleService
             $record = Article::find($id);
         }
         return $record;
+    }
+
+    /**
+     * 生成对外显示地址
+     * @param $type
+     * @return string
+     */
+    public function getShowUrl($type)
+    {
+        $code = $this->getHashTool()->encode($this->id, $type);
+        return route('front.news.info', ['code'=>$code]);
     }
 }

@@ -7,7 +7,7 @@
 namespace Front\Traits;
 
 use Admin\Services\Activity\ActivityService;
-use Vinkla\Hashids\Facades\Hashids;
+use Frameworks\Tool\Random\HashTool;
 
 trait ActivityActionTrait
 {
@@ -28,7 +28,11 @@ trait ActivityActionTrait
     protected function initActivityByCode()
     {
         $code = request('code');
-        $params = Hashids::decode($code);
+        if (empty($code)) {
+            return false;
+        }
+        $hashTool = new HashTool();
+        $params = $hashTool->decode($code);
         if (empty($params)) {
             return false;
         } else if(count($params) != 1) {

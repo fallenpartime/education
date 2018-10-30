@@ -47,6 +47,14 @@ class BaseAction
         exit("<script>alert('{$message}');location.href=document.referrer;</script>");
     }
 
+    protected function isPost()
+    {
+        if ($this->request->isMethod('post')) {
+            return true;
+        }
+        return false;
+    }
+
     public function run()
     {}
 }

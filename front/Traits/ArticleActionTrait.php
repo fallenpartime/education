@@ -7,7 +7,7 @@
 namespace Front\Traits;
 
 use Admin\Services\Article\ArticleService;
-use Vinkla\Hashids\Facades\Hashids;
+use Frameworks\Tool\Random\HashTool;
 
 trait ArticleActionTrait
 {
@@ -28,7 +28,11 @@ trait ArticleActionTrait
     protected function initArticleByCode()
     {
         $code = request('code');
-        $params = Hashids::decode($code);
+        if (empty($code)) {
+            return false;
+        }
+        $hashTool = new HashTool();
+        $params = $hashTool->decode($code);
         if (empty($params)) {
             return false;
         } else if(count($params) != 1) {

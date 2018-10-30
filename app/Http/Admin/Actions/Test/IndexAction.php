@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Test;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Article\Article;
+use Frameworks\Tool\Random\HashTool;
 use Illuminate\Support\Facades\Redis;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -15,9 +16,10 @@ class IndexAction extends BaseAction
 {
     public function run()
     {
-        $hash = Hashids::encode(1,1);
+        $hashTool = new HashTool();
+        $hash = $hashTool->encode(1,2);
         var_dump($hash);
-        $hashCode = Hashids::decode($hash);
+        $hashCode = $hashTool->decode($hash);
         dd($hashCode);
 //        dd(Article::find(1)->increment('read_count'));
 //        $keyname = 'edu:test:name';
