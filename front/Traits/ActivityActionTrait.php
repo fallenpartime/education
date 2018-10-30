@@ -41,7 +41,7 @@ trait ActivityActionTrait
         if ($this->type == intval($params[1])) {
             return false;
         }
-        $this->record = $this->getService()->getRecord($params[0]);
+        $this->record = $service->getRecord($params[0]);
         if (!empty($this->record)) {
             return true;
         }
