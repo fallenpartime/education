@@ -23,12 +23,11 @@ class InfoAction extends BaseAction
         $service = $this->getService();
         $service->readCounter();
         $code = $service->getCode(array_get($this->record, 'id'));
-        $likeUrl = route('front.activity.like', ['code'=>$code]);
         // 是否允许投票
         list($allowVote, $voteUrl) = $this->allowVote($code);
         $result = [
             'record'        =>  $this->record,
-            'like_url'      =>  $likeUrl,
+            'like_url'      =>  $this->likeUrl,
             'allow_vote'    =>  $allowVote,
             'vote_url'      =>  $voteUrl,
         ];

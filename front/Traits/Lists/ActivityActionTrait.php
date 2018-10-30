@@ -51,7 +51,7 @@ trait ActivityActionTrait
         $list = [];
         $records = $this->getList();
         $service = new ActivityService();
-        if (!$records.isEmpty()) {
+        if (!$records->isEmpty()) {
             foreach ($records as $item) {
                 $unit = [
                     'title' =>  $item->title,
