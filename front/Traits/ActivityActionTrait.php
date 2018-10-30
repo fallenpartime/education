@@ -7,38 +7,44 @@
 namespace Front\Traits;
 
 use Admin\Services\Activity\ActivityService;
-use Frameworks\Tool\Random\HashTool;
 
 trait ActivityActionTrait
 {
-    protected $activity = null;
+    protected $record = null;
     protected $type = 0;
-    protected $activityService = null;
+    protected $articleService = null;
 
     protected function getService()
     {
-        if (empty($this->article)) {
-            $this->activityService = new ActivityService();
-        } else {
-            $this->activityService = new ActivityService(array_get($this->article, 'id'));
+        if (empty($this->articleService)) {
+            $this->articleService = new ActivityService();
         }
-        return $this->activityService;
+        if (!empty($this->record)) {
+            $this->articleService = $this->articleService->_init(array_get($this->record, 'id'));
+        }
+        return $this->articleService;
     }
 
-    protected function initActivityByCode()
+    protected function initRecordByCode()
     {
         $code = request('code');
         if (empty($code)) {
             return false;
         }
-        $hashTool = new HashTool();
-        $params = $hashTool->decode($code);
+        $service = $this->getService();
+        $params = $service->getHashTool()->decode($code);
         if (empty($params)) {
             return false;
-        } else if(count($params) != 1) {
+        } else if(count($params) < 2) {
             return false;
         }
-        $this->activity = (new ActivityService())->getRecord($params[0]);
-        $this->type = $params[1];
+        if ($this->type == intval($params[1])) {
+            return false;
+        }
+        $this->record = $this->getService()->getRecord($params[0]);
+        if (!empty($this->record)) {
+            return true;
+        }
+        return false;
     }
 }

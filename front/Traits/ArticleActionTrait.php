@@ -7,38 +7,44 @@
 namespace Front\Traits;
 
 use Admin\Services\Article\ArticleService;
-use Frameworks\Tool\Random\HashTool;
 
 trait ArticleActionTrait
 {
-    protected $article = null;
+    protected $record = null;
     protected $type = 0;
     protected $articleService = null;
 
     protected function getService()
     {
-        if (empty($this->article)) {
+        if (empty($this->articleService)) {
             $this->articleService = new ArticleService();
-        } else {
-            $this->articleService = new ArticleService(array_get($this->article, 'id'));
+        }
+        if (!empty($this->record)) {
+            $this->articleService = $this->articleService->_init(array_get($this->record, 'id'));
         }
         return $this->articleService;
     }
 
-    protected function initArticleByCode()
+    protected function initRecordByCode()
     {
         $code = request('code');
         if (empty($code)) {
             return false;
         }
-        $hashTool = new HashTool();
-        $params = $hashTool->decode($code);
+        $service = $this->getService();
+        $params = $service->getHashTool()->decode($code);
         if (empty($params)) {
             return false;
-        } else if(count($params) != 1) {
+        } else if(count($params) < 2) {
             return false;
         }
-        $this->article = (new ArticleService())->getRecord($params[0]);
-        $this->type = $params[1];
+        if ($this->type == intval($params[1])) {
+            return false;
+        }
+        $this->record = $this->getService()->getRecord($params[0]);
+        if (!empty($this->record)) {
+            return true;
+        }
+        return false;
     }
 }

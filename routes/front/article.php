@@ -1,4 +1,10 @@
 <?php
+// 文章操作
+Route::middleware(['web'])->group(function () {
+    Route::post('/front/article/like', [
+        'uses' => '\App\Http\Front\Controllers\Article\OperateController@like'
+    ])->name('front.article.like');
+});
 // 教育快讯
 Route::middleware(['web'])->group(function () {
     Route::match(['get', 'post'], '/front/article/news', [
