@@ -158,6 +158,13 @@ class InfoAction extends BaseAction
             $this->errorJson(500, '活动创建失败');
         }
         LogService::operateLog($this->request, 20, $activity->id, "添加活动", $this->getAuthService()->getAdminInfo());
+        $data['id'] = $activity->id;
+        $data['is_show'] = 0;
+        $data['is_open'] = 0;
+        $data['read_count'] = 0;
+        $data['like_count'] = 0;
+        $data['join_count'] = 0;
+        $data['overed_at'] = '';
         $this->processCache($activity->id, $data);
         $this->processImage($data['list_pic'], $activity->id, 1);
         $this->successJson();
