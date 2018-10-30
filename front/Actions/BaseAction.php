@@ -8,6 +8,7 @@ namespace Front\Actions;
 
 use Frameworks\Tool\Http\HttpConfig;
 use Frameworks\Tool\Http\HttpTool;
+use Front\Config\PaginationConfig;
 use Illuminate\Http\Request;
 
 class BaseAction
@@ -32,7 +33,7 @@ class BaseAction
     {
         $page = $this->getHttpTool()->getBothSafeParam('page', HttpConfig::PARAM_NUMBER_TYPE);
         $page = $page > 0? $page: 1;
-        return [$page, 20];
+        return [$page, PaginationConfig::PAGE_SIZE];
     }
 
     protected function pageModel($model, $page, $pageSize)
