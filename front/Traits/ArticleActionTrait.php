@@ -35,5 +35,6 @@ trait ArticleActionTrait
             return false;
         }
         $this->article = (new ArticleService())->getRecord($params[0]);
+        $this->type = $params[1];
     }
 }

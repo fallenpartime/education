@@ -35,5 +35,6 @@ trait ActivityActionTrait
             return false;
         }
         $this->activity = (new ActivityService())->getRecord($params[0]);
+        $this->type = $params[1];
     }
 }
