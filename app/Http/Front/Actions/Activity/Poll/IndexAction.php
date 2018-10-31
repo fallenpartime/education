@@ -26,6 +26,6 @@ class IndexAction extends BaseAction
 
     protected function show()
     {
-        return view('front.activity.poll.index');
+        return view('front.activity.poll.index', ['pull_url'=>route('front.polls')]);
     }
 }

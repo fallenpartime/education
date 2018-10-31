@@ -1,7 +1,13 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Fallen
- * Date: 2018/10/30
- * Time: 0:59
- */
+@extends('front.article.main')
+@section('title', '终稿考政策')
+@section('body_content')
+    <script>
+        var pageCode = '';
+        $.post(
+            '{{ $pull_url }}',
+            {code: pageCode},
+            function (result) {
+            }
+        )
+    </script>
+@endsection

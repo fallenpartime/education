@@ -1,7 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Fallen
- * Date: 2018/10/27
- * Time: 9:44
- */
+// 学校
+Route::middleware(['web'])->group(function () {
+    Route::match(['get', 'post'], '/front/school/search', [
+        'uses' => '\App\Http\Front\Controllers\School\SchoolController@search'
+    ])->name('front.school.search');
+});

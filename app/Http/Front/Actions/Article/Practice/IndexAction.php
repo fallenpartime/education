@@ -26,6 +26,6 @@ class IndexAction extends BaseAction
 
     protected function show()
     {
-        return view('front.article.practice.index');
+        return view('front.article.practice.index', ['pull_url'=>route('front.practices')]);
     }
 }

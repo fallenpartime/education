@@ -4,7 +4,7 @@
     <script>
         var pageCode = '';
         $.post(
-            '/front/article/news',
+            '{{ $pull_url }}',
             {code: pageCode},
             function (result) {
             }
