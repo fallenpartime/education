@@ -2,9 +2,9 @@
 @section('title', '教育机构查询')
 @section('body_content')
     <div class="main">
-        <form action="">
+        <form action="" onsubmit="return false;">
             <label for="" class="serchBtn">
-                <input type="text" placeholder="搜索学校" name='schoolName' id="schoolName">
+                <input type="text" placeholder="搜索学校" name='keyword' id="schoolName">
                 <i class="submitBtn"></i>
             </label>
         </form>
