@@ -44,3 +44,16 @@
     margin: 5px auto 8px;
     width: 100%;
 }
+.main .vote{
+    overflow: hidden;
+}
+.main .vote .vote-btn {
+    margin: 15px 0;
+    padding: 8px 18px;
+    float: right;
+    font-size: 14px;
+    color: #fff;
+    background-color: #ea6f5a;
+    border-radius: 4px;
+    display: inline-block;
+}

@@ -1,0 +1,84 @@
+input,textarea {
+    outline: none; 
+}
+.active-background {
+	height: 60px;
+	background-color: #ea6f5a;
+	border-radius: 0 0 4px 4px;
+	position: relative;
+}
+.active-background .vote-entrance {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+	width: 120px;
+    height: 10px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+.active-desc {
+	text-align: center;
+    margin: 10px 10% 0;
+    border-bottom: 1px solid;
+    border-color: #f0f0f0;
+}
+.active-desc .active-thumb {
+	margin: 0 auto;
+    border-radius: 50%;
+    border: 1px solid;
+    width: 66px;
+    height: 66px;
+    border-color: #f0f0f0;
+}
+.active-desc .active-thumb img {
+	display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 33px;
+}
+.active-desc h3 {
+	margin: 20px 0 0;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    height: 28px;
+    color: #333;
+}
+.active-desc p {
+	margin: 5px 0 20px;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #969696;
+    line-height: 20px;
+}
+.active-con {
+	margin-top: 10px;
+    padding: 0 10%;
+    /*text-align: center;*/
+}
+.vote-list .vote-item {
+	padding-left: 6%;
+}
+.vote-list .vote-item textarea {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ededed;
+}
+.active-con .sub-btn {
+	margin: 10px auto;
+	padding: 8px 18px;
+    display: block;
+    width: 50%;
+	border: 1px solid #ea6f5a;
+	background-color: #ea6f5a;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+}
+.vote-list p{
+    margin: 10px 0 5px;
+}

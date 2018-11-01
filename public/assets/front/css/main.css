@@ -24,10 +24,6 @@ a {
 	color:#576b95;
 	text-decoration:none
 }
-.container {
-	height: 100%;
-	overflow:hidden
-}
 .loading {
 	position:absolute;
 	top:50%;

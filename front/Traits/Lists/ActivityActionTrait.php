@@ -42,14 +42,29 @@ trait ActivityActionTrait
     protected function getList()
     {
         $this->initParams();
-        $model = $this->pageModel(Activity::where(['type'=>$this->type, 'is_show'=>1]), $this->page, $this->limit)->select(['id', 'type', 'title', 'description', 'list_pic'])->orderBy('published_at', 'DESC');
-        return $model->get();
+        $model = Activity::where(['type'=>$this->type, 'is_show'=>1]);
+        $pageCount = $this->getPageInfo($model);
+        $model = $this->pageModel($model, $this->page, $this->limit)->select(['id', 'type', 'title', 'description', 'list_pic'])->orderBy('published_at', 'DESC');
+        return [$model->get(), $pageCount];
+    }
+
+    protected function getPageInfo($model)
+    {
+        $count = $model->count();
+        if (empty($count)) {
+            return 0;
+        }
+        $pageCount = intval($count / $this->limit);
+        if ($count % $this->limit > 0) {
+            $pageCount ++;
+        }
+        return $pageCount;
     }
 
     protected function processList()
     {
         $list = [];
-        $records = $this->getList();
+        list($records, $pageCount) = $this->getList();
         $service = new ActivityService();
         if (!$records->isEmpty()) {
             foreach ($records as $item) {
@@ -69,6 +84,8 @@ trait ActivityActionTrait
         }
         $data = [
             'code'  =>  $code,
+            'pageNo'    =>  $this->page,
+            'pageCount' =>  $pageCount,
             'list'  =>  $list,
         ];
         $this->successJson('', $data);

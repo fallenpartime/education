@@ -20,6 +20,7 @@ trait ArticleActionTrait
     {
         $this->page = 1;
         $this->limit = PaginationConfig::PAGE_SIZE;
+        $this->limit = 1;
         $code = request('code');
         if (empty($code)) {
             return false;
@@ -42,14 +43,29 @@ trait ArticleActionTrait
     protected function getList()
     {
         $this->initParams();
-        $model = $this->pageModel(Article::where(['type'=>$this->type, 'is_show'=>1]), $this->page, $this->limit)->select(['id', 'type', 'title', 'description', 'list_pic'])->orderBy('published_at', 'DESC');
-        return $model->get();
+        $model = Article::where(['type'=>$this->type, 'is_show'=>1]);
+        $pageCount = $this->getPageInfo($model);
+        $model = $this->pageModel($model, $this->page, $this->limit)->select(['id', 'type', 'title', 'description', 'list_pic'])->orderBy('published_at', 'DESC');
+        return [$model->get(), $pageCount];
+    }
+
+    protected function getPageInfo($model)
+    {
+        $count = $model->count();
+        if (empty($count)) {
+            return 0;
+        }
+        $pageCount = intval($count / $this->limit);
+        if ($count % $this->limit > 0) {
+            $pageCount ++;
+        }
+        return $pageCount;
     }
 
     protected function processList()
     {
         $list = [];
-        $records = $this->getList();
+        list($records, $pageCount) = $this->getList();
         $service = new ArticleService();
         if (!$records->isEmpty()) {
             foreach ($records as $item) {
@@ -69,6 +85,8 @@ trait ArticleActionTrait
         }
         $data = [
             'code'  =>  $code,
+            'pageNo'    =>  $this->page,
+            'pageCount' =>  $pageCount,
             'list'  =>  $list,
         ];
         $this->successJson('', $data);
