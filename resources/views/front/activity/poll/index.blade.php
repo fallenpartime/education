@@ -1,4 +1,4 @@
-@extends('front.article.listmain')
+@extends('front.activity.listmain')
 @section('title', '网络投票活动')
 @section('body_content')
     <div class="container">
