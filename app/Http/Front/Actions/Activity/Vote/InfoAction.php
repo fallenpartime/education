@@ -74,6 +74,7 @@ class InfoAction extends BaseAction
                 $processor->insert($vote);
             }
         }
-        $this->getJsonTool()->customJson(['code'=>1]);
+        $thankUrl = '';
+        $this->successJson('', ['url'=>$thankUrl]);
     }
 }
