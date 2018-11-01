@@ -22,6 +22,21 @@ class IndexAction extends BaseAction
         $httpTool = $this->getHttpTool();
         $keyword = $httpTool->getBothSafeParam('keyword');
         $list = $this->getList($keyword);
+        if (!empty($list)) {
+            foreach ($list as $key => $item) {
+                switch ($list[$key]->property) {
+                    case 0:
+                        $list[$key]->property = '未知';
+                        break;
+                    case 1:
+                        $list[$key]->property = '公立';
+                        break;
+                    case 2:
+                        $list[$key]->property = '私立';
+                        break;
+                }
+            }
+        }
         $this->getJsonTool()->customJson(['code'=>1, 'result'=>$list]);
     }
 
