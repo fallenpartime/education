@@ -13,16 +13,27 @@
                 <div class="content">
                     {!! array_get($record, "content") !!}
                 </div>
-                <div class="vote">
-                    <a class="vote-btn" href="vote.html">我要投票</a>
-                </div>
                 <div class="article-footer">
                     <ul class="operation">
                         <li class="read-num"><i class="iconfont">&#xe639;</i>{{ array_get($record, "read_count") }}</li>
-                        <li class="like-num"><i class="iconfont">&#xe60e;</i>{{ array_get($record, "like_count") }}</li>
+                        <li class="like-num like-tag"><i class="iconfont like-btn" onclick="like()">&#xe60e;</i>{{ array_get($record, "like_count") }}</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function like() {
+            $.post(
+                '{{ $like_url }}',
+                {},
+                function (result) {
+                    result = JSON.parse(result);
+                    if (result.code == 200) {
+                        $(".like-tag").html('<i class="iconfont like-btn" onclick="like()">&#xe60e;</i>'+result.data.count)
+                    }
+                }
+            )
+        }
+    </script>
 @endsection

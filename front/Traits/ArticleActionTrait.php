@@ -38,12 +38,14 @@ trait ArticleActionTrait
         } else if(count($params) < 2) {
             return false;
         }
-        if ($this->type != intval($params[1])) {
-            return false;
+        if (isset($this->type) && $this->type > 0) {
+            if ($this->type != intval($params[1])) {
+                return false;
+            }
         }
         $this->record = $service->getRecord($params[0]);
         if (!empty($this->record)) {
-            $this->likeUrl = route('front.article.like', ['code'=>$service->getCode(array_get($this->record, 'id'))]);
+            $this->likeUrl = route('front.article.like', ['code'=>$service->getCode(array_get($this->record, 'id'), array_get($this->record, 'type'))]);
             return true;
         }
         return false;

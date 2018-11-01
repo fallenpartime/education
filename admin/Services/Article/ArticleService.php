@@ -169,8 +169,8 @@ class ArticleService
         return '';
     }
 
-    public function getCode($id)
+    public function getCode($id, $type)
     {
-        return $this->getHashTool()->encode($id);
+        return $this->getHashTool()->encode($id, $type);
     }
 }

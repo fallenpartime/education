@@ -6,9 +6,23 @@
  */
 namespace App\Http\Front\Actions\Activity\Operate;
 
+use Admin\Traits\ApiActionTrait;
 use Front\Actions\BaseAction;
+use Front\Traits\ActivityActionTrait;
 
 class LikeAction extends BaseAction
 {
+    use ActivityActionTrait, ApiActionTrait;
 
+    public function run()
+    {
+        if (!$this->initRecordByCode()) {
+            dd(404);
+        }
+        $count = $this->getService()->likeCounter();
+        $data = [
+            'count' =>  $count,
+        ];
+        $this->successJson('', $data);
+    }
 }
