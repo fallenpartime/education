@@ -22,7 +22,7 @@ class InfoAction extends BaseAction
         }
         $service = $this->getService();
         $service->readCounter();
-        $code = $service->getCode(array_get($this->record, 'id'));
+        $code = $service->getCode(array_get($this->record, 'id'), array_get($this->record, 'type'));
         // 是否允许投票
         list($allowVote, $voteUrl) = $this->allowVote($code);
         $result = [

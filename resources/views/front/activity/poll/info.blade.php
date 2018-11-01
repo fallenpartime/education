@@ -13,9 +13,11 @@
                 <div class="content">
                     {!! array_get($record, "content") !!}
                 </div>
+                @if($allow_vote)
                 <div class="vote">
-                    <a class="vote-btn" href="vote.html">我要投票</a>
+                    <a class="vote-btn" href="{{ $vote_url }}">我要投票</a>
                 </div>
+                @endif
                 <div class="article-footer">
                     <ul class="operation">
                         <li class="read-num"><i class="iconfont">&#xe639;</i>{{ array_get($record, "read_count") }}</li>

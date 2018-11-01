@@ -43,7 +43,7 @@ class QuestionDataIntegration extends BaseWorkProcessor
         $list = [];
         $answers = $this->question->answers;
         foreach ($answers as $key => $answer) {
-            $count = ActivityVote::where('answer_id', $answer->id)->where('type', 1)->count();
+            $count = ActivityVote::where('answer_id', $answer->id)->where('type', 0)->count();
             $description = "选项{$key},标题:{$answer->title},投票:{$count}次";
             $list[] = $description;
         }
@@ -52,7 +52,7 @@ class QuestionDataIntegration extends BaseWorkProcessor
 
     protected function parseOtherInfo()
     {
-        $count = ActivityVote::where('question_id', $this->question->id)->where('type', 0)->count();
+        $count = ActivityVote::where('question_id', $this->question->id)->where('type', 1)->count();
         $description = "自填信息,投票:{$count}次";
         return $description;
     }

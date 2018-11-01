@@ -1,7 +1,7 @@
 <?php
 // 投票操作
 Route::middleware(['web'])->group(function () {
-    Route::post('/front/activity/vote', [
+    Route::match(['get', 'post'], '/front/activity/vote', [
         'uses' => '\App\Http\Front\Controllers\Activity\VoteController@info'
     ])->name('front.activity.vote');
 });
