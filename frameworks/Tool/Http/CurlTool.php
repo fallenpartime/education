@@ -43,6 +43,7 @@ class CurlTool
         return $res;
     }
 
+
     /**
      * 异步请求
      */
