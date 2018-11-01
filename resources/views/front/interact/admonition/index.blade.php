@@ -1,7 +1,32 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Fallen
- * Date: 2018/10/30
- * Time: 1:02
- */
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <title>师生风采-详情</title>
+    <link rel="stylesheet" type="text/css" href="/assets/front/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/assets/front/css/interaction.css">
+    <link rel="stylesheet" type="text/css" href="/assets/front/css/iconfont.css">
+    <title>学生家长互动</title>
+</head>
+<body>
+<!-- https://www.jianshu.com/faqs -->
+<div class="container">
+    <div class="main">
+        <div class="question-title">
+            互动问题
+            <a class="question-add" href="{{ $consult_url }}" title="咨询问题"><i class="iconfont">&#xe627;</i></a>
+        </div>
+        <ul class="question-list">
+            @if(!$list->isEmpty())
+                @foreach($list as $item)
+                <li class="question-item">
+                    <p class="title">{{ $item->content }}</p>
+                    <p class="con">{{ $item->reply_content }}</p>
+                </li>
+                @endforeach
+            @endif
+        </ul>
+    </div>
+</div>
+</body>
+</html>

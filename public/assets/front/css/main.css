@@ -34,3 +34,8 @@ a {
 	transform:translate(-50%,-50%);
 	margin-top:-10px
 }
+input,textarea{
+    outline: none;
+    background: none;
+    border: none;
+}

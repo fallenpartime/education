@@ -6,6 +6,7 @@
  */
 namespace App\Http\Front\Controllers\Interact;
 
+use App\Http\Front\Actions\Interact\Admonition\ConsultAction;
 use App\Http\Front\Actions\Interact\Admonition\IndexAction;
 use App\Http\Front\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,5 +19,10 @@ class AdmonitionController extends Controller
     public function index(Request $request)
     {
         return (new IndexAction($request))->run();
+    }
+
+    public function consult(Request $request)
+    {
+        return (new ConsultAction($request))->run();
     }
 }

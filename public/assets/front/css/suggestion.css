@@ -1,0 +1,104 @@
+.container {
+    position: relative;
+    overflow: auto;
+}
+.main {
+	padding-left: 18px;
+	padding-right: 18px;
+}
+.main .sug-title {
+	margin: 15px 0 15px 0;
+    padding-left: 10px;
+    font-size: 20px;
+    line-height: 1;
+    border-left: 4px solid #ea6f5a;
+}
+.main .panel {
+	border-radius: 6px;
+    border: 1px solid #d5d5d5;
+}
+
+.main .panel .panel-title{
+	padding: 8px 15px;
+	font-size: 14px;
+	font-weight: 700;
+	background-color: #f5f5f5;
+	border-radius: 6px 6px 0 0;
+	border-bottom: solid 1px #ddd;
+}
+.main .panel .panel-body {
+	padding: 15px 15px 0 15px;
+}
+.panel-body .row {
+	margin-top: 15px;
+}
+.form-label {
+	display: block;
+	position: relative;
+	min-height: 1px;
+	margin: 3px 0 10px;
+	box-sizing: border-box;
+	text-align: left;
+	cursor: text;
+	font-size: 14px;
+	-webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+.row input,.row textarea{
+    padding: 10px;
+}
+.row .input-text {
+	font-size: 16px;
+	height: 36px;
+	box-sizing: border-box;
+    border: solid 1px #ddd;
+    width: 100%;
+    -webkit-transition: all 0.2s linear 0s;
+    -moz-transition: all 0.2s linear 0s;
+    -o-transition: all 0.2s linear 0s;
+    transition: all 0.2s linear 0s;
+}
+.row textarea {
+	height: 100px;
+    resize: none;
+    font-size: 14px;
+    padding: 4px;
+    box-sizing: border-box;
+    border: solid 1px #ddd;
+    width: 100%;
+    -webkit-transition: all 0.2s linear 0s;
+    -moz-transition: all 0.2s linear 0s;
+    -o-transition: all 0.2s linear 0s;
+    transition: all 0.2s linear 0s;
+}
+.panel-body .sub-btn {
+	margin: 15px auto;
+	padding: 8px 18px;
+	display: block;
+	border: 1px solid #ea6f5a;
+	background-color: #ea6f5a;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+}
+input textarea {
+	color: #333;
+}
+.alert {
+	padding: 20px;
+	top: 50%;
+    left: 50%;
+    position: fixed;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    border-radius: 5px;
+    background: rgba(0,0,0,.7);
+    color: #fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}

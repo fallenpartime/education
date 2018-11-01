@@ -48,9 +48,9 @@
     overflow: hidden;
 }
 .main .vote .vote-btn {
+    float: right;
     margin: 15px 0;
     padding: 8px 18px;
-    float: right;
     font-size: 14px;
     color: #fff;
     background-color: #ea6f5a;
