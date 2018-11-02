@@ -78,7 +78,7 @@
                                 "<h4>学校学区:</h4>" +item.district + "<br>";
                             var infoWindow = new BMap.InfoWindow(infoContent);
                             infoList[sid] = infoWindow;
-                            addMarker(point);
+                            addMarker(sid, point);
                             // infoList[sid] = "";
                             // 'name'      =>  $item->name,
                             //     'address'   =>  $item->address,
