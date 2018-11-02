@@ -20,7 +20,6 @@ trait ArticleActionTrait
     {
         $this->page = 1;
         $this->limit = PaginationConfig::PAGE_SIZE;
-        $this->limit = 1;
         $code = request('code');
         if (empty($code)) {
             return false;
