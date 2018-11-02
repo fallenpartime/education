@@ -59,14 +59,14 @@
                                 "<h6 style='margin:0 0 5px 0;padding:0.2em 0'>学校学区:" +item.district + "</h6>" +
                                 "<h6 style='margin:0 0 5px 0;padding:0.2em 0'>学校属性:" +item.property + "</h6>" +
                                 "</div>");
+                            console.log(infoList[itemid])
                             function addMarker(point){
                                 var marker = new BMap.Marker(point);
                                 map.addOverlay(marker);
                                 marker.enableDragging();
                                 marker.id = itemid
+                                console.log(itemid)
                                 marker.addEventListener("click", function() {
-                                    console.log(itemid)
-                                    console.log(infoList[itemid])
                                     this.openInfoWindow(infoList[this.id]);
                                 })
                             }
