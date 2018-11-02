@@ -32,11 +32,11 @@
         function openMapWindow(infoWindow, point) {
             map.openInfoWindow(infoWindow, point);
         }
-        
+
         function addResultItem(id, title) {
             $("#search_results").addChild('<li onmousemove="openMapWindow(infoList['+id+'], pointList['+id+'])"><a href="#">'+title+'</a></li>');
         }
-        function addMarker(point){
+        function addMarker(id, point){
             var marker = new BMap.Marker(point);
             map.addOverlay(marker);
             marker.enableDragging();
