@@ -9,7 +9,7 @@ $(function(){
     $('#search').keyup(function(event) {
         event.stopPropagation();
         $.ajax({
-            url: 'config/search_action.php',
+            url: '/front/school/district/search',
             type: 'post',
             data: $("form").serialize(),
             success: function(responseText,status,xhr){

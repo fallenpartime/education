@@ -4,7 +4,7 @@
  * Date: 2018/11/2
  * Time: 10:23
  */
-namespace Front\Config;
+namespace Frameworks\Tool\Map;
 
 class MapConfig
 {
