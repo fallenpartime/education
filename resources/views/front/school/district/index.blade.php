@@ -1,100 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html{width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}
+        #l-map{height: 95%;width:100%;}
+        #r-search{height:45px;width:100%;}
+    </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BzhKkTniDZS9bPzFpLGTAG2UDSTocLHm"></script>
-    <!-- 控制区域显示js -->
-    <script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
     <script src="/assets/javascripts/jquery-1.10.2.min.js" type="text/javascript"></script>
-
+    <title>本地搜索的结果面板</title>
 </head>
 <body>
-    <div id="container"></div>
-    <div class="search_box">
-        <form method="post">
-            <div>输入搜索的内容:</div><input type="text" id="search" name="topic" autocomplete="off" placeholder="请输入学校名称查询">
-        </form>
-        <ul class="search_results" id="search_results"></ul>
+    <div id="r-search">
+        <label for="" class="serchBtn">
+            <input type="text" id="topic" placeholder="搜索学校" name='keyword' id="schoolName">
+            <i class="submitBtn"></i>
+        </label>
     </div>
-    <script type="text/javascript">
-        var map = new BMap.Map("container");    // 创建Map实例
-        var point = new BMap.Point(120.38, 36.07);    //创建中心点坐标
-        map.centerAndZoom(point,15);
-        map.enableScrollWheelZoom();
-        map.addControl(new BMap.NavigationControl());
-    </script>
+    <div id="l-map"><input type="text" id="topic" placeholder="请输入学校名称"/></div>
+    <link rel="stylesheet" href="/assets/front/css/index.css">
     <script>
-        var pointList = [];
-        var infoList = [];
-        function openMapWindow(infoWindow, point) {
-            map.openInfoWindow(infoWindow, point);
-        }
-
-        function addResultItem(id, title) {
-            $("#search_results").addChild('<li onmousemove="openMapWindow(infoList['+id+'], pointList['+id+'])"><a href="#">'+title+'</a></li>');
-        }
-        function addMarker(id, point){
-            var marker = new BMap.Marker(point);
-            map.addOverlay(marker);
-            marker.enableDragging();
-            marker.addEventListener("mouseover", function(){this.openInfoWindow(infoList[id]);});
-        }
-        $(function(){
-            $('#search').val('');
-            $(window).click(function(event) {
-                $('.search_results').css('display','none');
-            });
-            $('#search, .search_results li').click(function(e) {
-                e.stopPropagation();
-            });
-            $('#search').keyup(function(event) {
-                event.stopPropagation();
-                $.ajax({
-                    url: '{{ route('front.school.district.search') }}',
-                    type: 'post',
-                    data: $("form").serialize(),
-                    success: function(response, status, xhr){
-                        console.log(response);
-                        response = JSON.parse(response)
-                        if (response.code == 0) {
-                            return false;
-                        }
-                        var list = response.result;
-                        for (var sid in list) {
-                            var item = list[sid];
-                            if (item.lng == 0 && item.lat == 0) {
-                                continue;
-                            }
-                            console.log(item);
-                            point = new BMap.Point(item.lng, item.lat);
-                            pointList[sid] = point;
-                            var infoContent =
-                                "<h4>学校名称:</h4>" +item.name + "<br>" +
-                                "<h4>学校地址:</h4>" +item.address + "<br>" +
-                                "<h4>学校电话:</h4>" +item.telent + "<br>" +
-                                "<h4>学校性质:</h4>" +item.property + "<br>" +
-                                "<h4>学校学区:</h4>" +item.district + "<br>";
-                            var infoWindow = new BMap.InfoWindow(infoContent);
-                            infoList[sid] = infoWindow;
-                            addMarker(sid, point);
-                            addResultItem(sid, item.name);
-                        }
-                    }
-                })
-                .done(function() {
-                    console.log("success");
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
-                })
-            });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
     </script>
 </body>
 </html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("l-map");            // 创建Map实例
+    map.centerAndZoom(new BMap.Point(120.38, 36.07), 11);
+    map.enableScrollWheelZoom();
+    map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+    var checkUrl = "{{ route('front.school.district.search') }}";
+    var infoList = {};
+    function search(school) {
+        $(function () {
+            $.post(
+                checkUrl,
+                {topic: school},
+                function (response) {
+                    response = JSON.parse(response);
+                    for(var itemid in response.result){
+                        //alert(data.data[item].longitude);
+                        item = response.result[itemid]
+                        var longitude=item.lng;
+                        var latitude=item.lat;
+                        if(longitude!=0 || latitude!=0 ){
+                            point =new BMap.Point(longitude,latitude);
+                            infoList[itemid] = new BMap.InfoWindow("<div>" +
+                                "<h6 style='margin:0 0 5px 0;padding:0.2em 0'>学校名称:" +item.name + "</h6>" +
+                                "<h6 style='margin:0 0 5px 0;padding:0.2em 0'>学校地址:" +item.address + "</h6>" +
+                                "<h6 style='margin:0 0 5px 0;padding:0.2em 0'>学校电话:" +item.telent + "</h6>" +
+                                "<h6 style='margin:0 0 5px 0;padding:0.2em 0'>学校学区:" +item.district + "</h6>" +
+                                "<h6 style='margin:0 0 5px 0;padding:0.2em 0'>学校属性:" +item.property + "</h6>" +
+                                "</div>");
+                            function addMarker(point){
+                                var marker = new BMap.Marker(point);
+                                map.addOverlay(marker);
+                                marker.enableDragging();
+                                marker.id = itemid
+                                marker.addEventListener("click", function() {
+                                    console.log(itemid)
+                                    console.log(infoList[itemid])
+                                    this.openInfoWindow(infoList[this.id]);
+                                })
+                            }
+                            addMarker(point);
+
+                        }
+                    }//.for(
+                }
+            )
+        })
+    }
+    $(".submitBtn").click(function () {
+        var schoolName = $("#topic").val();
+        search(schoolName);
+    })
+</script>
