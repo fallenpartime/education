@@ -57,7 +57,8 @@
             <div class="col-lg-12">
                 <div class="widget-container fluid-height clearfix">
                     <div class="widget-content padded clearfix">
-                        <p>网络投票活动列表</p>
+                        {!! $pageList !!}
+                        <p>用户意见列表</p>
                         <table class="table table-bordered table-striped" id="dataTable1">
                             <thead>
                                 <th width="5%">ID</th>
@@ -131,6 +132,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {!! $pageList !!}
                     </div>
                 </div>
             </div>
