@@ -38,8 +38,15 @@
     map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
     var checkUrl = "{{ route('front.school.district.search') }}";
     var infoList = {};
+    function clearAll() {
+        for (var i = 0; i < map.getOverlays().length; i++) {
+            if (map.getOverlays()[i].GO == "Marker")
+                map.removeOverlay(map.getOverlays()[i]);
+        }
+    }
     function search(school) {
         $(function () {
+            clearAll();
             $.post(
                 checkUrl,
                 {topic: school},
