@@ -27,7 +27,7 @@
                     @if(!is_null($question->answers))
                         @foreach($question->answers as $answer)
                             <li class="vote-item">
-                                @if($answer->is_checkbox)
+                                @if($question->is_checkbox)
                                 <input type="checkbox" name="answer_box[]" value="{{ "{$question->id}-{$answer->id}" }}" /><span>{{ $answer->title }}</span>
                                 @else
                                 <input type="radio" name="answer_single[{{ $question->id }}]" value="{{ "{$question->id}-{$answer->id}" }}" /><span>{{ $answer->title }}</span>
