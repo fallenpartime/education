@@ -38,10 +38,24 @@ class InfoAction extends BaseAction
     protected function process()
     {
         $votes = [];
-        $answers = $this->request->get('answer');
+        $answerBoxes = $this->request->get('answer_box');
+        $answerSingles = $this->request->get('answer_single');
         $others = $this->request->get('answer_other');
-        if (!empty($answers)) {
-            foreach ($answers as $answer) {
+        if (!empty($answerBoxes)) {
+            foreach ($answerBoxes as $answer) {
+                list($questionId, $answerId) = explode('-', $answer);
+                $unit = [
+                    'activity_id'   =>  array_get($this->record, 'id'),
+                    'user_id'   =>  1,
+                    'type'      =>  0,
+                    'question_id'   =>  $questionId,
+                    'answer_id'     =>  $answerId,
+                ];
+                $votes[] = $unit;
+            }
+        }
+        if (!empty($answerSingles)) {
+            foreach ($answerSingles as $answer) {
                 list($questionId, $answerId) = explode('-', $answer);
                 $unit = [
                     'activity_id'   =>  array_get($this->record, 'id'),
