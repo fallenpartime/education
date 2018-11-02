@@ -68,6 +68,7 @@
                             if (item.lng == 0 && item.lat == 0) {
                                 continue;
                             }
+                            console.log(item);
                             point = new BMap.Point(item.lng, item.lat);
                             pointList[sid] = point;
                             var infoContent =
@@ -79,14 +80,7 @@
                             var infoWindow = new BMap.InfoWindow(infoContent);
                             infoList[sid] = infoWindow;
                             addMarker(sid, point);
-                            // infoList[sid] = "";
-                            // 'name'      =>  $item->name,
-                            //     'address'   =>  $item->address,
-                            //     'telent'    =>  $item->telent,
-                            //     'district'  =>  $districtName,
-                            //     'lng'       =>  $lng,
-                            //     'lat'       =>  $lat,
-                            //     'property'  =>  '',
+                            addResultItem(sid, item.name);
                         }
                     }
                 })

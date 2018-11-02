@@ -21,7 +21,7 @@ class IndexAction extends BaseAction
             return view('front.school.district.index', ['check_url'=>route('front.school.district.search')]);
         }
         $httpTool = $this->getHttpTool();
-        $keyword = $httpTool->getBothSafeParam('keyword');
+        $keyword = $httpTool->getBothSafeParam('topic');
         $list = $this->getList($keyword);
         $code = !empty($list)? 1: 0;
         $this->getJsonTool()->customJson(['code'=>$code, 'result'=>$list]);
