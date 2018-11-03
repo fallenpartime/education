@@ -40,13 +40,14 @@
     var infoList = {};
     function clearAll() {
         for (var i = 0; i < map.getOverlays().length; i++) {
-            if (map.getOverlays()[i].GO == "Marker")
-                map.removeOverlay(map.getOverlays()[i]);
+            map.removeOverlay(map.getOverlays()[i]);
         }
     }
     function search(school) {
         $(function () {
-            clearAll();
+            if (map.getOverlays().length > 0) {
+                clearAll();
+            }
             $.post(
                 checkUrl,
                 {topic: school},
