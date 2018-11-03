@@ -37,7 +37,7 @@
     </div>
 </div>
 </body>
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="/assets/javascripts/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function(){
         $(".sub-btn").click(function(){
