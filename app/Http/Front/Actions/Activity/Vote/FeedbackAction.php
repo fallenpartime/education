@@ -8,15 +8,16 @@ namespace App\Http\Front\Actions\Activity\Vote;
 
 use Front\Actions\BaseAction;
 use Front\Traits\ActivityActionTrait;
+use Front\Traits\ErrorActionTrait;
 
 class FeedbackAction extends BaseAction
 {
-    use ActivityActionTrait;
+    use ActivityActionTrait, ErrorActionTrait;
 
     public function run()
     {
         if (!$this->initRecordByCode()) {
-            dd(404);
+            return $this->errorActivityRedirect('活动不见啦');
         }
         $redirectUrl = $this->getService()->getShowUrl(array_get($this->record, 'type'));
         $result = [

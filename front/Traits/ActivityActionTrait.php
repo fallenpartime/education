@@ -13,6 +13,7 @@ trait ActivityActionTrait
     protected $record = null;
     protected $articleService = null;
     protected $likeUrl = '';
+    protected $recordType = 0;
 
     protected function getService()
     {
@@ -38,6 +39,7 @@ trait ActivityActionTrait
         } else if(count($params) < 2) {
             return false;
         }
+        $this->recordType = intval($params[1]);
         if (isset($this->type) && $this->type > 0) {
             if ($this->type != intval($params[1])) {
                 return false;

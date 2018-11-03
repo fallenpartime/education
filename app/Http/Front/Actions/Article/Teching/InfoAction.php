@@ -8,17 +8,18 @@ namespace App\Http\Front\Actions\Article\Teching;
 
 use Front\Actions\BaseAction;
 use Front\Traits\ArticleActionTrait;
+use Front\Traits\ErrorActionTrait;
 
 class InfoAction extends BaseAction
 {
-    use ArticleActionTrait;
+    use ArticleActionTrait, ErrorActionTrait;
 
     protected $type = 4;
 
     public function run()
     {
         if (!$this->initRecordByCode()) {
-            dd(404);
+            return $this->errorArticleRedirect('文章不见啦');
         }
         $this->getService()->readCounter();
         $result = [

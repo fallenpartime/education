@@ -8,17 +8,18 @@ namespace App\Http\Front\Actions\Activity\Poll;
 
 use Front\Actions\BaseAction;
 use Front\Traits\ActivityActionTrait;
+use Front\Traits\ErrorActionTrait;
 
 class InfoAction extends BaseAction
 {
-    use ActivityActionTrait;
+    use ActivityActionTrait, ErrorActionTrait;
 
     protected $type = 1;
 
     public function run()
     {
         if (!$this->initRecordByCode()) {
-            dd(404);
+            return $this->errorActivityRedirect('活动不见啦');
         }
         $service = $this->getService();
         $service->readCounter();

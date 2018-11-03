@@ -17,7 +17,7 @@ class LikeAction extends BaseAction
     public function run()
     {
         if (!$this->initRecordByCode()) {
-            dd(404);
+            $this->errorJson(500, '文章不见啦');
         }
         $count = $this->getService()->likeCounter();
         $data = [

@@ -11,15 +11,20 @@ use Admin\Services\Activity\Processor\ActivityVoteProcessor;
 use Admin\Traits\ApiActionTrait;
 use Front\Actions\BaseAction;
 use Front\Traits\ActivityActionTrait;
+use Front\Traits\ErrorActionTrait;
 
 class InfoAction extends BaseAction
 {
-    use ActivityActionTrait, ApiActionTrait;
+    use ActivityActionTrait, ApiActionTrait, ErrorActionTrait;
 
     public function run()
     {
         if (!$this->initRecordByCode()) {
-            dd(404);
+            if ($this->request->isMethod('post')) {
+                $this->errorJson(500, '活动不见啦');
+            } else {
+                return $this->errorActivityRedirect('活动不见啦');
+            }
         }
         if ($this->request->isMethod('post')) {
             $this->process();
