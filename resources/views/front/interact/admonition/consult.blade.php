@@ -42,9 +42,6 @@
     $(function(){
         $(".sub-btn").click(function(){
             $(".alert").show();
-            setTimeout(function(){
-                window.location.href('interaction.html');
-            }, 2000);
         });
     });
 </script>
