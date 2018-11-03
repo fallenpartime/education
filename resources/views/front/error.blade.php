@@ -23,7 +23,7 @@
     function redirect() {
         location.href="{{ $url }}";
     }
-    setTimeout(redirect, 3000)
+    setTimeout(redirect, 2000)
 </script>
 @endif
 </body>
