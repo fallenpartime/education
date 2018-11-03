@@ -88,7 +88,9 @@ class InfoAction extends BaseAction
                 $processor->insert($vote);
             }
         }
-        $thankUrl = '';
+        $service = $this->getService();
+        $code = $service->getCode(array_get($this->record, 'id'), array_get($this->record, 'type'));
+        $thankUrl = route('front.activity.feedback', ['code'=>$code]);
         $this->successJson('', ['url'=>$thankUrl]);
     }
 }

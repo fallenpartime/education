@@ -49,13 +49,15 @@
 <script>
     $(function(){
         $('.sub-btn').click(function(){
-            var form = new FormData;
             $.ajax({
                 url:"{{ $vote_url }}",
                 type:"post",
                 data: $("#vote-form").serialize(),
                 success:function(data){
-                    // location.href = './vote2.html';
+                    data = JSON.parse(data)
+                    if (data.code == 200) {
+                        location.href = data.data.url;
+                    }
                 },
                 error:function(e){
                     alert("错误！！");

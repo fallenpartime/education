@@ -7,4 +7,7 @@ Route::middleware(['web'])->group(function () {
     Route::match(['get', 'post'], '/front/interact/admonition/consult', [
         'uses' => '\App\Http\Front\Controllers\Interact\AdmonitionController@consult'
     ])->name('front.admonition.consult');
+    Route::get('/front/interact/admonition/feedback', [
+        'uses' => '\App\Http\Front\Controllers\Interact\AdmonitionController@feedback'
+    ])->name('front.admonition.feedback');
 });

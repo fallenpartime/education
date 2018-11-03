@@ -6,6 +6,7 @@
  */
 namespace App\Http\Front\Controllers\Activity;
 
+use App\Http\Front\Actions\Activity\Vote\FeedbackAction;
 use App\Http\Front\Actions\Activity\Vote\InfoAction;
 use App\Http\Front\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,5 +20,10 @@ class VoteController extends Controller
     public function info(Request $request)
     {
         return (new InfoAction($request))->run();
+    }
+
+    public function feedback(Request $request)
+    {
+        return (new FeedbackAction($request))->run();
     }
 }

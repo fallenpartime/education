@@ -23,7 +23,7 @@ class ConsultAction extends BaseAction
 
     protected function process()
     {
-        $redirectUrl = route('front.admonitions');
+        $redirectUrl = route('front.admonition.feedback');
         $data = [
             'user_id'   =>  $this->userId,
             'name'      =>  $this->request->get('name'),
