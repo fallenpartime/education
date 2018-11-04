@@ -53,8 +53,8 @@
                     if(longitude!=0 || latitude!=0 ){
                         point =new BMap.Point(longitude,latitude);
                         var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
-                            '名称：'+item.name+'<br/>'+'地址：'+item.address+'<br/>'+'电话：'+item.telent+'<br/>'+'学区：'+item.district+'<br/>'+'属性：' + item.property +
-                            '</div>';
+                            '名称：'+item.name+'<br/><hr>'+'地址：'+item.address+'<br/><hr>'+'电话：'+item.telent+'<br/><hr>'+'学区：'+item.district+'<br/><hr>'+'属性：' + item.property +
+                            '<br/><hr></div>';
                         var windowInfo = new BMap.InfoWindow(content);
                         infoList[itemid] = windowInfo;
                         function addMarker(point){
