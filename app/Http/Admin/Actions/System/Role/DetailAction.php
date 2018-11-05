@@ -115,24 +115,34 @@ class DetailAction extends BaseAction
         if (!empty($id) && empty($this->_role)) {
             $this->errorJson(500, '记录不存在');
         }
+        $actions = $this->getActions();
+        if (empty($actions)) {
+            $this->errorJson(500, '权限不能为空');
+        }
+        if (empty($indexUrl)) {
+            $this->errorJson(500, '入口地址为空');
+        }
+        if (!in_array($indexUrl, $actions)) {
+            $this->errorJson(500, '入口地址不属于权限范畴');
+        }
         $data = [
             'role_no'   =>  $roleNo,
             'name'      =>  $name,
             'index_action'  =>  !empty($indexUrl)? $indexUrl: null,
-            'actions'   =>  $this->getActionJson(),
+            'actions'   =>  !empty($actions)? json_encode($actions): null,
         ];
         list($res, $id) = empty($id)? $this->store($data): $this->update($data);
         $this->storeAccess($id);
         $this->successJson();
     }
 
-    protected function getActionJson()
+    protected function getActions()
     {
         $actions = $this->request->get('auth_checked');
         if (empty($actions)) {
             return null;
         }
-        return json_encode(array_unique($actions));
+        return array_unique($actions);
     }
 
     protected function storeAccess($roleNo)

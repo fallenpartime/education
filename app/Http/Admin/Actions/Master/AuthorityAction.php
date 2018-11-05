@@ -111,10 +111,18 @@ class AuthorityAction extends BaseAction
         if (empty($authList)) {
             $this->errorJson(500, '权限为空');
         }
+
         $originalList = array_merge($this->getGroupActions(), $this->getRoleActions());
         $originalList = array_unique($originalList);
         $allowList = array_diff($authList, $originalList);
         $banList = array_diff($originalList, $authList);
+
+        if (!empty($this->_role)) {
+            if (!in_array($this->_role->index_action, $banList)) {
+                $this->errorJson(500, '角色权限不能取消');
+            }
+        }
+
         $data = [
             'user_id'   =>  $this->_owner->user_id,
             'actions'   =>  null,
