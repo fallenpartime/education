@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/front/css/main.css">
     <link rel="stylesheet" type="text/css" href="/assets/front/css/vote.css">
     <link rel="stylesheet" type="text/css" href="/assets/front/css/iconfont.css">
-    <title>我要投票</title>
     <script>
         $.ajaxSetup({
             headers: {

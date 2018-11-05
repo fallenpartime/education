@@ -123,7 +123,7 @@ class DetailAction extends BaseAction
             $this->errorJson(500, '入口地址为空');
         }
 
-        if (!empty($roleNo) && $roleNo != 1) {
+        if ($roleNo != 1) {
             if (!in_array($indexUrl, $actions)) {
                 $this->errorJson(500, '入口地址不属于权限范畴');
             }

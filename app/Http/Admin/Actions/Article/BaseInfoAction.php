@@ -57,6 +57,11 @@ class BaseInfoAction extends BaseAction
         if (!empty($id) && empty($this->_article)) {
             $this->errorJson(500, '文章不存在');
         }
+        if (!empty($this->_article)) {
+            if ($this->_article->is_show && empty($author)) {
+                $this->errorJson(500, '文章作者不能为空');
+            }
+        }
         $data = [
             'type'      =>  $this->_type,
             'title'     =>  $title,

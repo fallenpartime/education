@@ -119,7 +119,7 @@ class AuthorityAction extends BaseAction
 
         if (!empty($this->_role) && $this->_role->role_no != 1) {
             if (!in_array($this->_role->index_action, $authList)) {
-                $this->errorJson(500, '角色权限不能取消');
+                $this->errorJson(500, '角色入口权限不能取消');
             }
         }
 
