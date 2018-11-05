@@ -35,7 +35,7 @@
                                             {{ $value['actions'] }}
                                         </td>
                                         <td>
-                                            {{ $value['group_desc'] }}
+                                            {!! $value['group_desc'] !!}
                                         </td>
                                         {{--<td style="text-align:left;word-break: break-all; word-wrap:break-word;">--}}
                                             {{--@json($value['group_ext'])--}}

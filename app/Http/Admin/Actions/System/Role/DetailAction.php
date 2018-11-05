@@ -137,6 +137,7 @@ class DetailAction extends BaseAction
         ];
         list($res, $id) = empty($id)? $this->store($data): $this->update($data);
         $this->storeAccess($id);
+        dd();
         $this->successJson();
     }
 
@@ -159,7 +160,8 @@ class DetailAction extends BaseAction
             }
             $processor = new AdminUserRoleAccessProcessor();
             foreach ($groups as $group) {
-                $groupNo = $this->request->get("{$group->tip}");
+                $groupNo = request("{$group->tip}");
+                var_dump($groupNo);
 //                $isLeader = $this->request->get("{$group->tip}_leader");
 //                $isLeader = !empty($isLeader)? 1: 0;
 //                $leaderNo = $this->request->get("{$group->tip}_leader_no");
@@ -173,6 +175,7 @@ class DetailAction extends BaseAction
                         'leader_no' =>  0,
                         'is_leader' =>  0,
                     ];
+                    var_dump($data);
                     $processor->insert($data);
                 }
             }
