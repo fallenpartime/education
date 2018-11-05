@@ -16,7 +16,7 @@ input{
     border: none;
 }
 .main{
-    padding: 20px;
+    padding: 20px 15px;
 }
 .serchBtn{
     position: relative;
@@ -46,8 +46,11 @@ input{
     overflow: hidden;
 }
 .result-item {
-    padding: 10px 0;
-    border-bottom: 1px solid #ededed;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #fefefe;
+    border: 1px solid #faeae8;
+    border-radius: 6px;
 }
 .result{
     margin: 15px 0 10px;

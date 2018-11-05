@@ -4,6 +4,7 @@
 .main {
 	padding-left: 18px;
 	padding-right: 18px;
+	font-size: 16px;
 }
 .main .question-title {
 	margin: 15px 0 15px 0;
@@ -21,20 +22,33 @@
 }
 .main .question-list {
 	margin-bottom: 30px;
-    padding: 10px 28px;
+	padding: 5px 20px 10px;
     border-radius: 6px;
-    border: 1px solid #d5d5d5;
+    border: 1px solid #eecbbd;
 }
 .main .question-list .question-item {
-	border-bottom: 1px solid #d5d5d5;
+	border-bottom: 1px solid #eecbbd;
+}
+.main .question-list span{
+	float: right;
+	padding-top: 4px;
+	font-size: 14px;
+	color: #999;
+}
+.main .question-list .question-item:last-child{
+	border-bottom: 0;
 }
 .main .question-list .question-item .title {
 	padding: 12px 0 6px 0;
-    font-size: 15px;
-    color: #3194d0; 
+    font-size: 16px;
+    color: #ea6f5a; 
 }
 .main .question-list .question-item .con {
 	padding-bottom: 6px;
 	font-size: 14px;
-	color: 
+	color: #333;
+}
+.banner img{
+	margin-top: 15px;
+	max-width: 100%;
 }

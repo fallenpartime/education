@@ -17,7 +17,7 @@ class IndexAction extends BaseAction
     public function run()
     {
         $this->init();
-        $list = UserAdmonition::where(['user_id'=>$this->userId, 'is_show'=>1])->select(['content', 'reply_content'])->get();
+        $list = UserAdmonition::where(['user_id'=>$this->userId, 'is_show'=>1])->select(['content', 'reply_content', 'created_at'])->get();
         $result = [
             'list'  =>  $list,
             'consult_url'   =>  route('front.admonition.consult')
