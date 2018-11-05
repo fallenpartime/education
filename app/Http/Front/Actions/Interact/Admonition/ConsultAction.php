@@ -37,7 +37,6 @@ class ConsultAction extends BaseAction
         if (empty($name) || empty($phone) || empty($idea)) {
             $this->errorJson(500, '请完整填写');
         }
-        dd($this->userId);
         $data = [
             'user_id'   =>  $this->userId,
             'name'      =>  !empty($name)? $name: '',
