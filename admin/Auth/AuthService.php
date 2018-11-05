@@ -89,7 +89,7 @@ class AuthService
         if ($validate) {
             return [true, ''];
         }
-        if ($this->request->isMethod('post')) {
+        if ($this->request->ajax()) {
             $result = [
                 'code'  =>  500,
                 'msg'   =>  '权限不足'
