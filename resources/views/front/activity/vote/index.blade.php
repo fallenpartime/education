@@ -29,6 +29,7 @@
     </div>
     <div class="active-con">
         <form method="post" action="" id="vote-form">
+            {{ csrf_field() }}
             <ul class="vote-list">
                 @foreach($questions as $question)
                     <p>@if($question->type==0){{ $question->title }}@else<img src="{{ $question->source }}"/>@endif</p>

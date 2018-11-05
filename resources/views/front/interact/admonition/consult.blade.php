@@ -23,6 +23,7 @@
             <div class="panel-title">意见反馈</div>
             <div class="panel-body">
                 <form action="" method="post" onsubmit="return false;" id="form-data">
+                    {{ csrf_field() }}
                     <div class="row">
                         <label class="form-label">姓名:</label>
                         <input class="input-text" type="text" name="name" value="">
