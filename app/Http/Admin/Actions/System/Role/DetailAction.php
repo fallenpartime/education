@@ -154,6 +154,7 @@ class DetailAction extends BaseAction
         if (!empty($roleNo)) {
             AdminUserRoleAccess::where('role_no', $roleNo)->delete();
             $groups = AdminUserGroup::all();
+            dd($groups);
             if (empty($groups)) {
                 return false;
             }
