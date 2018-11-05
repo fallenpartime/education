@@ -89,6 +89,13 @@ class AuthService
         if ($validate) {
             return [true, ''];
         }
+        if ($this->request->isMethod('post')) {
+            $result = [
+                'code'  =>  500,
+                'msg'   =>  '权限不足'
+            ];
+            exit(json_encode($result));
+        }
         $redirectUrl = route('admin.warn');
         return [false, redirect($redirectUrl)];
     }

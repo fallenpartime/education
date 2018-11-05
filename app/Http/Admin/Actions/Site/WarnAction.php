@@ -10,4 +10,8 @@ use Admin\Actions\BaseAction;
 
 class WarnAction extends BaseAction
 {
+    public function run()
+    {
+        return view('admin.site.warn', ['message'=>'权限不足']);
+    }
 }
