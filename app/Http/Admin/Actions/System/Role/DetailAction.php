@@ -137,7 +137,6 @@ class DetailAction extends BaseAction
         ];
         list($res, $id) = empty($id)? $this->store($data): $this->update($data);
         $this->storeAccess($id);
-        dd('exit');
         $this->successJson();
     }
 
@@ -161,7 +160,6 @@ class DetailAction extends BaseAction
             $processor = new AdminUserRoleAccessProcessor();
             foreach ($groups as $group) {
                 $groupNo = request("{$group->tip}");
-                var_dump($groupNo);
 //                $isLeader = $this->request->get("{$group->tip}_leader");
 //                $isLeader = !empty($isLeader)? 1: 0;
 //                $leaderNo = $this->request->get("{$group->tip}_leader_no");
