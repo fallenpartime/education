@@ -159,7 +159,7 @@ class DetailAction extends BaseAction
             }
             $processor = new AdminUserRoleAccessProcessor();
             foreach ($groups as $group) {
-                $groupNo = request("{$group->tip}");
+                $groupNo = intval(request("{$group->tip}"));
 //                $isLeader = $this->request->get("{$group->tip}_leader");
 //                $isLeader = !empty($isLeader)? 1: 0;
 //                $leaderNo = $this->request->get("{$group->tip}_leader_no");
