@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/front/css/main.css">
     <link rel="stylesheet" type="text/css" href="/assets/front/css/vote.css">
     <link rel="stylesheet" type="text/css" href="/assets/front/css/iconfont.css">
+    <script src="/assets/javascripts/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -16,44 +17,45 @@
     </script>
 </head>
 <body>
-<div class="container">
-    <div class="active-panel">
-        <div class="active-background">
-            <div class="vote-entrance"></div>
-        </div>
-        <div class="active-desc">
-            <h3>{{ array_get($record, 'title') }}</h3>
-            <p>{{ array_get($record, 'description') }}</p>
-        </div>
-    </div>
-    <div class="active-con">
-        <form method="post" action="" id="vote-form">
+    <div class="container">
+        <div class="main">
+            <div class="sug-title">投票</div>
+            <form action="" method="" id="vote-form">
             {{ csrf_field() }}
-            <ul class="vote-list">
-                @foreach($questions as $question)
-                    <p>@if($question->type==0){{ $question->title }}@else<img src="{{ $question->source }}"/>@endif</p>
-                    @if(!is_null($question->answers))
-                        @foreach($question->answers as $answer)
-                            <li class="vote-item">
-                                @if($question->is_checkbox)
-                                <input type="checkbox" name="answer_box[]" value="{{ "{$question->id}-{$answer->id}" }}" /><span>{{ $answer->title }}</span>
-                                @else
-                                <input type="radio" name="answer_single[{{ $question->id }}]" value="{{ "{$question->id}-{$answer->id}" }}" /><span>{{ $answer->title }}</span>
-                                @endif
-                            </li>
-                        @endforeach
-                        <li class="vote-item">
-                            <input type="text" name="answer_other[{{ $question->id }}]" value="" placeholder="其他">
-                        </li>
-                    @endif
-                @endforeach
-            </ul>
-            <a class="sub-btn">提&nbsp;&nbsp;&nbsp;交</a>
-        </form>
+            @foreach($questions as $question)
+                <p>@if($question->type==0){{ $question->title }}@else<img src="{{ $question->source }}"/>@endif</p>
+                <div class="panel vote-panel">
+                    <div class="panel-title">@if($question->type==0){{ $question->title }}@else<img src="{{ $question->source }}"/>@endif</div>
+                    <div class="vote-type">
+                        @if(!is_null($question->answers))
+                            @foreach($question->answers as $answer)
+                                <label for="" class="vote-item">
+                                    @if($question->is_checkbox)
+                                        <input type="checkbox" name="answer_box[]" value="{{ "{$question->id}-{$answer->id}" }}" /><span></span>{{ $answer->title }}
+                                    @else
+                                        <input type="radio" name="answer_single[{{ $question->id }}]" value="{{ "{$question->id}-{$answer->id}" }}" /><span></span>{{ $answer->title }}
+                                    @endif
+                                </label>
+                            @endforeach
+                        @endif
+                        <input type="text" name="answer_other[{{ $question->id }}]" value="" placeholder="其他">
+                    </div>
+                </div>
+            @endforeach
+            <div class="panel vote-panel">
+                <div class="panel-title">请写出您的想法</div>
+                <div class="vote-type">
+                    <textarea name="" id="" cols="10" rows="10" placeholder="请写出您的想法"></textarea>
+                </div>
+            </div>
+            <a href="javascript:void(0)" class="sub-btn">提交</a>
+            </form>
+        </div>
+        <div class="alert" style="display: none">
+            提交成功
+        </div>
     </div>
-</div>
 </body>
-<script src="/assets/javascripts/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script>
     $(function(){
         $('.sub-btn').click(function(){
