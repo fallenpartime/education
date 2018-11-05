@@ -77,3 +77,25 @@ input,textarea{
 	background: url("../images/search.png")no-repeat center;
 	background-size: 25px;
 }
+.nofindPage{
+	padding: 30% 0 0;
+	text-align: center;
+}
+.nofindPage img{
+	max-width: 50%;
+}
+.nofindPage p{
+	font-size: 16px;
+	color: #333;
+}
+.nofindPage a{
+	display: block;
+	width: 200px;
+	margin: 15px auto;
+	height: 42px;
+	line-height: 42px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ea6f5a;
+    border-radius: 4px;
+}

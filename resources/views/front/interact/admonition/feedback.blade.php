@@ -8,24 +8,19 @@
     <link rel="stylesheet" type="text/css" href="/assets/front/css/iconfont.css">
 </head>
 <body>
-    <div class="container">
-        <div class="active-panel">
-            <div class="active-background">
-                <div class="vote-entrance"></div>
-            </div>
-            <div class="active-desc">
-                <div class="active-thumb">
-                    <img src="/assets/front/images/author-thumb.jpg" alt="">
-                </div>
-                <h3>感谢您宝贵的意见</h3>
-            </div>
+<div class="container">
+    <div class="active-panel">
+        <div class="active-desc">
+            <img src="/assets/front/images/fankui.png" alt="" style="width: 80%;">
+            <h3>感谢您宝贵的意见</h3>
         </div>
     </div>
-    <script>
-        function redirect() {
-            location.href="{{ $redirectUrl }}";
-        }
-        setTimeout(redirect, 3000)
-    </script>
+</div>
+<script>
+    function redirect() {
+        location.href="{{ $redirectUrl }}";
+    }
+    setTimeout(redirect, 3000)
+</script>
 </body>
 </html>

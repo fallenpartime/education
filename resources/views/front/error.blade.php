@@ -10,10 +10,8 @@
 <body>
 <div class="container">
     <div class="active-panel">
-        <div class="active-background">
-            <div class="vote-entrance"></div>
-        </div>
         <div class="active-desc">
+            <img src="/assets/front/images/404.jpg" alt="" style="width: 80%;">
             <h3>{{ $msg }}</h3>
         </div>
     </div>

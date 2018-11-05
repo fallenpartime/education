@@ -10,13 +10,8 @@
 <body>
     <div class="container">
         <div class="active-panel">
-            <div class="active-background">
-                <div class="vote-entrance"></div>
-            </div>
             <div class="active-desc">
-                <div class="active-thumb">
-                    <img src="/assets/front/images/author-thumb.jpg" alt="">
-                </div>
+                <img src="/assets/front/images/404.jpg" alt="" style="width: 80%;">
                 <h3>{{ $content }}</h3>
             </div>
         </div>
