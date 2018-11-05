@@ -1,5 +1,5 @@
 @extends('front.activity.infomain')
-@section('title', "文章详情")
+@section('title', "活动详情")
 @section('body_content')
     <div class="container">
         <div class="main">

@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
-    <title>师生风采-详情</title>
+    <title>活动投票</title>
     <link rel="stylesheet" type="text/css" href="/assets/front/css/main.css">
     <link rel="stylesheet" type="text/css" href="/assets/front/css/vote.css">
     <link rel="stylesheet" type="text/css" href="/assets/front/css/iconfont.css">
