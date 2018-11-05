@@ -154,7 +154,6 @@ class DetailAction extends BaseAction
         if (!empty($roleNo)) {
             AdminUserRoleAccess::where('role_no', $roleNo)->delete();
             $groups = AdminUserGroup::all();
-            dd($groups);
             if (empty($groups)) {
                 return false;
             }
@@ -174,6 +173,7 @@ class DetailAction extends BaseAction
                         'leader_no' =>  0,
                         'is_leader' =>  0,
                     ];
+                    var_dump($data);
                     $processor->insert($data);
                 }
             }
