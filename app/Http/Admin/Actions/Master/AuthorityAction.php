@@ -118,7 +118,7 @@ class AuthorityAction extends BaseAction
         $banList = array_diff($originalList, $authList);
 
         if (!empty($this->_role)) {
-            if (!in_array($this->_role->index_action, $banList)) {
+            if (in_array($this->_role->index_action, $banList)) {
                 $this->errorJson(500, '角色权限不能取消');
             }
         }
