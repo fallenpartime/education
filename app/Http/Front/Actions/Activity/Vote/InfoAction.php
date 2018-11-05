@@ -12,13 +12,15 @@ use Admin\Traits\ApiActionTrait;
 use Front\Actions\BaseAction;
 use Front\Traits\ActivityActionTrait;
 use Front\Traits\ErrorActionTrait;
+use Wechat\Traits\WechatDefaultOauthTrait;
 
 class InfoAction extends BaseAction
 {
-    use ActivityActionTrait, ApiActionTrait, ErrorActionTrait;
+    use ActivityActionTrait, ApiActionTrait, WechatDefaultOauthTrait, ErrorActionTrait;
 
     public function run()
     {
+        $this->init();
         if (!$this->initRecordByCode()) {
             if ($this->request->isMethod('post')) {
                 $this->errorJson(500, '活动不见啦');
@@ -51,7 +53,7 @@ class InfoAction extends BaseAction
                 list($questionId, $answerId) = explode('-', $answer);
                 $unit = [
                     'activity_id'   =>  array_get($this->record, 'id'),
-                    'user_id'   =>  1,
+                    'user_id'   =>  $this->userId,
                     'type'      =>  0,
                     'question_id'   =>  $questionId,
                     'answer_id'     =>  $answerId,
@@ -64,7 +66,7 @@ class InfoAction extends BaseAction
                 list($questionId, $answerId) = explode('-', $answer);
                 $unit = [
                     'activity_id'   =>  array_get($this->record, 'id'),
-                    'user_id'   =>  1,
+                    'user_id'   =>  $this->userId,
                     'type'      =>  0,
                     'question_id'   =>  $questionId,
                     'answer_id'     =>  $answerId,
@@ -78,7 +80,7 @@ class InfoAction extends BaseAction
                 if (!empty($other)) {
                     $unit = [
                         'activity_id'   =>  array_get($this->record, 'id'),
-                        'user_id'   =>  1,
+                        'user_id'   =>  $this->userId,
                         'type'      =>  1,
                         'question_id'   =>  $questionId,
                         'other'     =>  $other,

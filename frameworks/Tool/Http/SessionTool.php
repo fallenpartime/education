@@ -19,6 +19,11 @@ class SessionTool
         $this->session = $request->getSession();
     }
 
+    public function getSession()
+    {
+        return $this->session;
+    }
+
     public function set($key, $value)
     {
         $this->session->put($key, $value);

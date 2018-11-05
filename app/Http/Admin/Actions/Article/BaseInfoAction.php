@@ -38,7 +38,7 @@ class BaseInfoAction extends BaseAction
         $title = $httpTool->getBothSafeParam('title');
         $author = $httpTool->getBothSafeParam('author');
         $description = $httpTool->getBothSafeParam('description');
-        $content = $httpTool->getBothSafeParam('content');
+        $content = request('content');
         $publishedAt = $httpTool->getBothSafeParam('pubdate');
         $picPreview = $this->request->get('list_pic_preview');
         $title = trim($title);

@@ -11,16 +11,21 @@ use Admin\Models\Article\Article;
 use Frameworks\Tool\Random\HashTool;
 use Illuminate\Support\Facades\Redis;
 use Vinkla\Hashids\Facades\Hashids;
+use Wechat\Traits\WechatDefaultOauthTrait;
 
 class IndexAction extends BaseAction
 {
+    use WechatDefaultOauthTrait;
+
     public function run()
     {
-        $hashTool = new HashTool();
-        $hash = $hashTool->encode(1,2);
-        var_dump($hash);
-        $hashCode = $hashTool->decode($hash);
-        dd($hashCode);
+        $this->init();
+//        $hashTool = new HashTool();
+//        $hash = $hashTool->encode(1,2);
+//        var_dump($hash);
+//        $hashCode = $hashTool->decode($hash);
+//        dd($hashCode);
+
 //        dd(Article::find(1)->increment('read_count'));
 //        $keyname = 'edu:test:name';
 ////        Redis::set($keyname, time());

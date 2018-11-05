@@ -27,4 +27,4 @@ require __DIR__.'/front/article.php';
 require __DIR__.'/front/activity.php';
 require __DIR__.'/front/school.php';
 require __DIR__.'/front/interact.php';
-require __DIR__.'/wechat/oauth.php';
+require __DIR__.'/wechat/wechat.php';
