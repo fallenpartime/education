@@ -88,8 +88,13 @@ class InfoAction extends BaseAction
             $this->errorJson(500, '活动不存在');
         }
         if (!empty($this->_activity)) {
-            if (($this->_activity->is_show || $this->_activity->is_open) && empty($author)) {
-                $this->errorJson(500, '活动作者不能为空');
+            if ($this->_activity->is_show || $this->_activity->is_open) {
+                if (empty($author)) {
+                    $this->errorJson(500, '活动作者不能为空');
+                }
+                if (empty($publishedAt)) {
+                    $this->errorJson(500, '活动发布时间不能为空');
+                }
             }
         }
         $data = [

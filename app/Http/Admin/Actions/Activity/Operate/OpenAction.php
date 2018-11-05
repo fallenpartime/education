@@ -30,6 +30,9 @@ class OpenAction extends BaseAction
         if (empty($this->_activity)) {
             $this->errorJson(500, '活动不存在');
         }
+        if (empty($this->_activity->published_at)) {
+            $this->errorJson(500, '活动发布时间不能为空');
+        }
         if (empty($this->_activity->author)) {
             $this->errorJson(500, '活动作者不能为空');
         }

@@ -76,12 +76,21 @@ class IndexAction extends BaseAction
             'allow_operate_remove' => 0,
             'allow_operate_fresh'  => 0
         ];
+        $author = $list[$key]->author;
+        $isShow = $list[$key]->is_show;
+        $publishedAt = $list[$key]->published_at;
         $authService = $this->getAuthService();
         if ($authService->isMaster || $authService->validateAction('articleExamInfo')) {
             $operateList['allow_operate_edit'] = 1;
         }
         if ($authService->isMaster || $authService->validateAction('articleShow')) {
-            $operateList['allow_operate_change'] = 1;
+            if ($isShow == 0) {
+                if (!empty($author) && !empty($publishedAt)) {
+                    $operateList['allow_operate_change'] = 1;
+                }
+            } else {
+                $operateList['allow_operate_change'] = 1;
+            }
         }
         if ($authService->isMaster || $authService->validateAction('articleRemove')) {
             $operateList['allow_operate_remove'] = 1;

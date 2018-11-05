@@ -58,8 +58,13 @@ class BaseInfoAction extends BaseAction
             $this->errorJson(500, '文章不存在');
         }
         if (!empty($this->_article)) {
-            if ($this->_article->is_show && empty($author)) {
-                $this->errorJson(500, '文章作者不能为空');
+            if ($this->_article->is_show) {
+                if (empty($author)) {
+                    $this->errorJson(500, '文章作者不能为空');
+                }
+                if (empty($publishedAt)) {
+                    $this->errorJson(500, '文章发布时间不能为空');
+                }
             }
         }
         $data = [

@@ -40,8 +40,13 @@ class ShowAction extends BaseAction
         if ($showValue == 1 && empty($this->_activity->published_at)) {
             $this->errorJson(500, '发布时间未设置，不可设置显示');
         }
-        if ($showValue == 1 && empty($this->_activity->author)) {
-            $this->errorJson(500, '活动作者不能为空');
+        if ($showValue == 1) {
+            if (empty($this->_article->published_at)) {
+                $this->errorJson(500, '活动发布时间不能为空');
+            }
+            if (empty($this->_article->author)) {
+                $this->errorJson(500, '活动作者不能为空');
+            }
         }
         LogService::operateLog($this->request, 24, $this->_activity->id, "活动显示状态修改：{$this->_activity->is_show}=>{$showValue}", $this->getAuthService()->getAdminInfo());
         $res = (new ActivityProcessor())->update($this->_activity->id, ['is_show'=>$showValue]);

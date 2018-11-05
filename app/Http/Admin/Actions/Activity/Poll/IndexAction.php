@@ -91,19 +91,28 @@ class IndexAction extends BaseAction
             'allow_operate_question' => 0,
             'allow_operate_fresh' => 0
         ];
+        $author = $list[$key]->author;
+        $isShow = $list[$key]->is_show;
         $isOpen = $list[$key]->is_open;
         $openAt = $list[$key]->opened_at;
         $overedAt = $list[$key]->overed_at;
+        $publishedAt = $list[$key]->published_at;
         $authService = $this->getAuthService();
         if ($authService->isMaster || $authService->validateAction('activityPollInfo')) {
             $operateList['allow_operate_edit'] = 1;
         }
         if ($authService->isMaster || $authService->validateAction('activityShow')) {
-            $operateList['allow_operate_show'] = 1;
+            if ($isShow == 0) {
+                if (!empty($publishedAt) && !empty($author)) {
+                    $operateList['allow_operate_show'] = 1;
+                }
+            } else {
+                $operateList['allow_operate_show'] = 1;
+            }
         }
         if ($authService->isMaster || $authService->validateAction('activityOpen')) {
             if (empty($isOpen)) {
-                if (empty($openAt)) {
+                if (!empty($publishedAt) && !empty($author) && empty($openAt)) {
                     $operateList['allow_operate_open'] = 1;
                 }
             } else {
