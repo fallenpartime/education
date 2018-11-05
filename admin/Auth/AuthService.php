@@ -72,6 +72,14 @@ class AuthService
         $redirectUrl = route('admin.login');
         if (!empty($this->adminInfo)) {
             $loginStatus = true;
+        } else {
+            if ($this->request->ajax()) {
+                $result = [
+                    'code'  =>  500,
+                    'msg'   =>  '请先登录'
+                ];
+                exit(json_encode($result));
+            }
         }
         return [$loginStatus, $redirectUrl, $this->adminInfo];
     }
