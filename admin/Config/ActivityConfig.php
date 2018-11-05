@@ -10,6 +10,7 @@ class ActivityConfig
 {
     const POLL_TYPE = 1;
     const CACHE_PREFIX = 'edu:activity:';
+    const VOTE_PREFIX = 'edu:activity:vote:';
 
     /**
      * 活动类型
