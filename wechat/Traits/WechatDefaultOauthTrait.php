@@ -18,7 +18,6 @@ trait WechatDefaultOauthTrait
     public function init()
     {
         $this->wechatUser = $this->wechatUser();
-        dd($this->wechatUser, $this->userId);
     }
 
     public function wechatUser()
