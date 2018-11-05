@@ -23,7 +23,7 @@
             @if(!$list->isEmpty())
                 @foreach($list as $key => $item)
                     <li class="question-item">
-                        <p class="title">问题{{ $key + 1 }}：{{ str_limit($item->content, 20, '...') }}{{ $item->content }}<span>{{ $item->created_at->toDateString() }}</span></p>
+                        <p class="title">问题{{ $key + 1 }}：{{ str_limit($item->content, 10, '...') }}{{ $item->content }}<span>{{ $item->created_at->toDateString() }}</span></p>
                         <p class="con">{{ !empty($item->reply_content)? "答复：{$item->reply_content}": '' }}</p>
                     </li>
                 @endforeach
