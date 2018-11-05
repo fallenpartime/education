@@ -14,7 +14,7 @@
         <div class="panel">
             <div class="panel-title">意见反馈</div>
             <div class="panel-body">
-                <form action="" method="post">
+                <form action="" method="post" onsubmit="return false;" id="form-data">
                     <div class="row">
                         <label class="form-label">姓名:</label>
                         <input class="input-text" type="text" name="name" value="">
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="alert" style="display: none">
+    <div class="alert" style="display: none" id="alert">
         提交成功
     </div>
 </div>
@@ -41,7 +41,28 @@
 <script type="text/javascript">
     $(function(){
         $(".sub-btn").click(function(){
-            $(".alert").show();
+            $.post(
+                '{{ $submit_url }}',
+                $("#form-data").serialize(),
+                function (result) {
+                    result = JSON.parse(result)
+                    if (result.code==200) {
+                        $("#alert").html('提交成功');
+                        $(".alert").show();
+                        setTimeout(function(){
+                            $(".alert").css("display","none");
+                            location.href="{{ $redirectUrl }}";
+                        }, 2000);
+                    } else {
+                        $("#alert").html(result.msg);
+                        $(".alert").show();
+                        setTimeout(function(){
+                            $(".alert").css("display","none");
+                        }, 2000);
+                    }
+                }
+            );
+            return false;
         });
     });
 </script>

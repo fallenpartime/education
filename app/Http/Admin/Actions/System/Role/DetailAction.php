@@ -122,8 +122,11 @@ class DetailAction extends BaseAction
         if (empty($indexUrl)) {
             $this->errorJson(500, '入口地址为空');
         }
-        if (!in_array($indexUrl, $actions)) {
-            $this->errorJson(500, '入口地址不属于权限范畴');
+
+        if (!empty($roleNo) && $roleNo != 1) {
+            if (!in_array($indexUrl, $actions)) {
+                $this->errorJson(500, '入口地址不属于权限范畴');
+            }
         }
         $data = [
             'role_no'   =>  $roleNo,

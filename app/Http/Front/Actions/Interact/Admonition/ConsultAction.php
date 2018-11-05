@@ -7,31 +7,42 @@
 namespace App\Http\Front\Actions\Interact\Admonition;
 
 use Admin\Services\User\Processor\UserAdmonitionProcessor;
+use Admin\Traits\ApiActionTrait;
 use Front\Actions\BaseAction;
+use Wechat\Traits\WechatDefaultOauthTrait;
 
 class ConsultAction extends BaseAction
 {
-    protected $userId = 1;
+    use WechatDefaultOauthTrait, ApiActionTrait;
 
     public function run()
     {
         if ($this->request->isMethod('post')) {
             $this->process();
         }
-        return view('front.interact.admonition.consult');
+        $redirectUrl = route('front.admonition.feedback');
+        $result = [
+            'submit_url'    =>  route('front.admonition.consult'),
+            'redirectUrl'   =>  $redirectUrl,
+        ];
+        return view('front.interact.admonition.consult', $result);
     }
 
     protected function process()
     {
-        $redirectUrl = route('front.admonition.feedback');
+        $name = trim(request('name'));
+        $phone = trim(request('phone'));
+        $idea = trim(request('idea'));
+        if (empty($name) || empty($phone) || empty($idea)) {
+            $this->errorJson(500, '请完整填写');
+        }
         $data = [
             'user_id'   =>  $this->userId,
-            'name'      =>  $this->request->get('name'),
-            'phone'     =>  $this->request->get('phone'),
-            'content'   =>  $this->request->get('idea'),
+            'name'      =>  !empty($name)? $name: '',
+            'phone'     =>  !empty($phone)? $phone: '',
+            'content'   =>  !empty($idea)? $idea: '',
         ];
         (new UserAdmonitionProcessor())->insert($data);
-        header("Location: {$redirectUrl}");
-        exit();
+        $this->successJson();
     }
 }
