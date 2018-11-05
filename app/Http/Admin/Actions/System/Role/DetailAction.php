@@ -137,7 +137,7 @@ class DetailAction extends BaseAction
         ];
         list($res, $id) = empty($id)? $this->store($data): $this->update($data);
         $this->storeAccess($id);
-        dd();
+        dd('exit');
         $this->successJson();
     }
 
