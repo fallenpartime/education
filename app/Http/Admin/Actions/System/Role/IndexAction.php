@@ -54,14 +54,14 @@ class IndexAction extends BaseAction
                         $groupName  = $group->name;
                         $leaderStatus   = !empty($access->is_leader)? '是': '否';
                         $unit['group_desc'][] = "分组:{$groupName},是否组长:{$leaderStatus}";
-                        $groupExtList = !empty($group->actions)? json_decode($group->actions, true): [];
-                        if (!empty($groupExtList)) {
-                            $unit['group_ext'] = array_merge($unit['group_ext'], $groupExtList);
-                        }
+//                        $groupExtList = !empty($group->actions)? json_decode($group->actions, true): [];
+//                        if (!empty($groupExtList)) {
+//                            $unit['group_ext'] = array_merge($unit['group_ext'], $groupExtList);
+//                        }
                     }
                 }
                 $unit['group_desc'] = implode('<br>', $unit['group_desc']);
-                $unit['group_ext'] = array_unique($unit['group_ext']);
+//                $unit['group_ext'] = array_unique($unit['group_ext']);
                 $outList[] = $unit;
             }
         }

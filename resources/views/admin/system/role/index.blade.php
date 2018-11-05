@@ -16,7 +16,7 @@
                                 <th width="10%">角色名</th>
                                 <th width="30%">权限列表</th>
                                 <th width="15%">分组情况</th>
-                                <th width="15%">分组权限</th>
+                                {{--<th width="15%">分组权限</th>--}}
                                 <th width="15%">创建时间</th>
                                 <th>操作</th>
                             </thead>
@@ -37,9 +37,9 @@
                                         <td>
                                             {{ $value['group_desc'] }}
                                         </td>
-                                        <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
-                                            @json($value['group_ext'])
-                                        </td>
+                                        {{--<td style="text-align:left;word-break: break-all; word-wrap:break-word;">--}}
+                                            {{--@json($value['group_ext'])--}}
+                                        {{--</td>--}}
                                         <td>
                                             {{ $value['created_at'] }}
                                         </td>

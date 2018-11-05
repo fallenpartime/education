@@ -88,20 +88,20 @@ class AuthorityAction extends BaseAction
     protected function getGroupActions()
     {
         $groupActions = [];
-        if (!empty($this->_role)) {
-            $accesses = $this->_role->accesses;
-            if (!empty($accesses)) {
-                foreach ($accesses as $access) {
-                    $groupActionList = [];
-                    $group = $access->group;
-                    if (!empty($group) && !empty($group->actions)) {
-                        $groupActionList = json_decode($group->actions, true);
-                    }
-                    $groupActions = array_merge($groupActions, $groupActionList);
-                }
-            }
-        }
-        $groupActions = array_unique($groupActions);
+//        if (!empty($this->_role)) {
+//            $accesses = $this->_role->accesses;
+//            if (!empty($accesses)) {
+//                foreach ($accesses as $access) {
+//                    $groupActionList = [];
+//                    $group = $access->group;
+//                    if (!empty($group) && !empty($group->actions)) {
+//                        $groupActionList = json_decode($group->actions, true);
+//                    }
+//                    $groupActions = array_merge($groupActions, $groupActionList);
+//                }
+//            }
+//        }
+//        $groupActions = array_unique($groupActions);
         return $groupActions;
     }
 

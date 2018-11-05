@@ -38,9 +38,10 @@ class DetailAction extends BaseAction
                 return $this->showInfo();
             } else if($workNo == 2) {
                 $this->process();
-            } else {
-                $this->showGroupAuthority();
             }
+//            else {
+//                $this->showGroupAuthority();
+//            }
         }
         $this->errorJson(500, '请求类型不匹配');
     }
@@ -227,28 +228,28 @@ class DetailAction extends BaseAction
         return $processor->update($this->_role->id, $data);
     }
 
-    protected function showGroupAuthority()
-    {
-        $data = ['list'=>[]];
-        $groupList = request('group_list', '');
-        $groupList = trim($groupList);
-        $groupList = trim($groupList, ",");
-        if (empty($groupList)) {
-            $this->successJson('', $data);
-        }
-        $groupList = explode(',', $groupList);
-        $groupList = array_filter($groupList);
-        $groups = AdminUserGroup::whereIn('group_no', $groupList)->select(['group_no', 'actions'])->get();
-        $groupActions = [];
-        foreach ($groups as $group) {
-            $groupActionList = [];
-            if (!empty($group->actions)) {
-                $groupActionList = json_decode($group->actions, true);
-            }
-            $groupActions = array_merge($groupActions, $groupActionList);
-        }
-        $groupActions = array_unique($groupActions);
-        $data['list'] = $groupActions;
-        $this->successJson('', $data);
-    }
+//    protected function showGroupAuthority()
+//    {
+//        $data = ['list'=>[]];
+//        $groupList = request('group_list', '');
+//        $groupList = trim($groupList);
+//        $groupList = trim($groupList, ",");
+//        if (empty($groupList)) {
+//            $this->successJson('', $data);
+//        }
+//        $groupList = explode(',', $groupList);
+//        $groupList = array_filter($groupList);
+//        $groups = AdminUserGroup::whereIn('group_no', $groupList)->select(['group_no', 'actions'])->get();
+//        $groupActions = [];
+//        foreach ($groups as $group) {
+//            $groupActionList = [];
+//            if (!empty($group->actions)) {
+//                $groupActionList = json_decode($group->actions, true);
+//            }
+//            $groupActions = array_merge($groupActions, $groupActionList);
+//        }
+//        $groupActions = array_unique($groupActions);
+//        $data['list'] = $groupActions;
+//        $this->successJson('', $data);
+//    }
 }

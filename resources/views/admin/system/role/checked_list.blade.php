@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-6" style="float:left;">
+    <div class="col-lg-12" style="float:left;">
         <div class="widget-container fluid-height clearfix">
             <div class="widget-content padded clearfix">
                 <p>角色权限</p>
@@ -65,6 +65,7 @@
             </div>
         </div>
     </div>
+    @if(false)
     <div class="col-lg-6" style="float:left;">
         <div class="widget-container fluid-height clearfix">
             <div class="widget-content padded clearfix">
@@ -131,4 +132,5 @@
             </div>
         </div>
     </div>
+    @endif
 </div>

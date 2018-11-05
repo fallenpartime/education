@@ -43,7 +43,7 @@ class DetailAction extends BaseAction
     {
         $result = [
             'record'        => $this->_group,
-            'authorities'   => $this->getAuthorities(),
+//            'authorities'   => $this->getAuthorities(),
             'menu'  =>  ['manageCenter', 'groupManage', 'groupInfo'],
             'actionUrl'     => route('groupInfo', ['work_no'=>2]),
             'redirectUrl'   => route('groups'),
@@ -51,16 +51,16 @@ class DetailAction extends BaseAction
         return $this->createView('admin.system.group.detail', $result);
     }
 
-    protected function getAuthorities()
-    {
-        $service = new AuthorityService();
-        $menus = $service->relateMenu();
-        if (!empty($this->_group)) {
-            $groupActions = !empty($this->_group->actions)? json_decode($this->_group->actions, true): [];
-            list($status, $count, $menus) = (new RelateAuthoritiesCheckedIntegration($menus, $groupActions))->process();
-        }
-        return $menus;
-    }
+//    protected function getAuthorities()
+//    {
+//        $service = new AuthorityService();
+//        $menus = $service->relateMenu();
+//        if (!empty($this->_group)) {
+//            $groupActions = !empty($this->_group->actions)? json_decode($this->_group->actions, true): [];
+//            list($status, $count, $menus) = (new RelateAuthoritiesCheckedIntegration($menus, $groupActions))->process();
+//        }
+//        return $menus;
+//    }
 
     protected function process()
     {

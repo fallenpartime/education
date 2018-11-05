@@ -141,6 +141,7 @@
             }
         }
     </script>
+    @if(false)
     <script>
         function changeGroupAuth() {
             var groupCheckedList = "";
@@ -174,6 +175,7 @@
             })
         })
     </script>
+    @endif
     <script>
         $(".first_all_check").click(function () {
             var checkedValue = $(this).prop('checked')
