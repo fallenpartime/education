@@ -20,8 +20,8 @@
             @if(!$list->isEmpty())
                 @foreach($list as $item)
                 <li class="question-item">
-                    <p class="title">{{ $item->content }}</p>
-                    <p class="con">{{ $item->reply_content }}</p>
+                    <p class="title">问题：{{ $item->content }}</p>
+                    <p class="con">{{ !empty($item->reply_content)? "答复：{$item->reply_content}": '' }}</p>
                 </li>
                 @endforeach
             @endif
