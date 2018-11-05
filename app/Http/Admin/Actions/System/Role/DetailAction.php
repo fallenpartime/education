@@ -173,7 +173,6 @@ class DetailAction extends BaseAction
                         'leader_no' =>  0,
                         'is_leader' =>  0,
                     ];
-                    var_dump($data);
                     $processor->insert($data);
                 }
             }
