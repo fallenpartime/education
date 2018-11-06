@@ -36,12 +36,12 @@
                         <label class="form-label">意见:</label>
                         <textarea name="idea"></textarea>
                     </div>
-                    <input class="sub-btn" type="submit" value="提&nbsp;&nbsp;&nbsp;交" style="padding: 0px 18px;">
+                    <input class="sub-btn" type="submit" value="提&nbsp;&nbsp;&nbsp;交">
                 </form>
             </div>
         </div>
     </div>
-    <div class="alert" style="display: none; left: 35%; top: 35%;" id="alert">
+    <div class="alert" style="display: none;">
         提交成功
     </div>
 </div>

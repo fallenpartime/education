@@ -28,7 +28,10 @@
                                 @endif
                             </label>
                         @endforeach
-                        <input type="text" name="answer_other[{{ $question->id }}]" value="" placeholder="其他"><span></span>
+                        <label for=""  class="vote-item">
+                            <input type="checkbox" value="其他" class="other"><span></span>其他
+                            <input type="text" name="answer_other[{{ $question->id }}]" class="oContent" placeholder="请填写其他选项">
+                        </label>
                     @endif
                 </div>
             </div>
@@ -57,7 +60,11 @@
                 }
             })
         })
-
+        $(".other").click(function(){
+            console.log($(this));
+            var a = $(this).parent('label').find('.oContent');
+            a.toggle();
+        })
     })
 </script>
 </html>
