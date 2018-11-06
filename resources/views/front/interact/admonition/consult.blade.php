@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="alert" style="display: none; left: 35%;" id="alert">
+    <div class="alert" style="display: none; left: 35%; top: 35%;" id="alert">
         提交成功
     </div>
 </div>
