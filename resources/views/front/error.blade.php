@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="nofindPage">
-        <img src="/assets/front/images/404.jpg" alt="">
+        <img src="/assets/front/images/404.png" alt="">
         <p>{{ $msg }}</p>
         <a href="@if(!empty($url)){{ $url }}@else javascript:go(-1)@endif">返回</a>
     </div>
