@@ -56,14 +56,14 @@
                 function (result) {
                     result = JSON.parse(result)
                     if (result.code==200) {
-                        $("#alert").html('提交成功');
+                        $(".alert").html('提交成功');
                         $(".alert").show();
                         setTimeout(function(){
                             $(".alert").css("display","none");
                             location.href="{{ $redirectUrl }}";
                         }, 2000);
                     } else {
-                        $("#alert").html(result.msg);
+                        $(".alert").html(result.msg);
                         $(".alert").show();
                         setTimeout(function(){
                             $(".alert").css("display","none");
