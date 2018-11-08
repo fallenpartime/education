@@ -10,7 +10,7 @@ class Activity extends Model
     use SoftDeletes;
 
     protected $table = "activities";
-    protected $appends = ['open_status', 'edit_url', 'operate_list'];
+    protected $appends = ['open_status', 'edit_url', 'show_url', 'operate_list'];
 
     public function getOpenStatusAttribute()
     {
@@ -20,6 +20,11 @@ class Activity extends Model
     public function getEditUrlAttribute()
     {
         return array_get($this->attributes, 'edit_url', '');
+    }
+
+    public function getShowUrlAttribute()
+    {
+        return array_get($this->attributes, 'show_url', '');
     }
 
     public function getOperateListAttribute()

@@ -70,7 +70,7 @@
                                         {{ $value->id }}
                                     </td>
                                     <td style="text-align:left;word-break: break-all; word-wrap:break-word;">
-                                        {{ $value->title }}<br>
+                                        <a href="{{ $value->show_url }}" target="_blank">{{ $value->title }}</a><br>
                                         @if(!empty($value->author))作者：{{ $value->author }}@endif
                                     </td>
                                     <td style="color:@if($value->is_show) green @else red @endif;">

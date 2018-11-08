@@ -121,7 +121,7 @@ class ActivityService
         return Redis::hincrby($cacheKeyword, 'like_count', 1);
     }
 
-    public function getRecord($id = 0)
+    public function getRecord($id = 0, $isPreview = false)
     {
         if (empty($id)) {
             $id = intval($this->id);
@@ -129,13 +129,20 @@ class ActivityService
         if ($id <= 0) {
             return [];
         }
+        if ($isPreview) {
+            $record = Activity::find($id);
+            return !empty($record)? $record: [];
+        }
         $record = $this->getCacheRecord($id);
         if (empty($record)) {
             $record = Activity::find($id);
+            if ($record && $record->is_show == 0) {
+                return [];
+            }
         } else if(array_get($record, 'is_show') == 0) {
             return [];
         }
-        return $record;
+        return !empty($record)? $record: [];
     }
 
     /**
@@ -156,6 +163,30 @@ class ActivityService
         }
         if (!empty($routeName)) {
             return route($routeName, ['code'=>$code]);
+        }
+        return '';
+    }
+
+    /**
+     * 生成对外显示预览地址
+     * @param $type
+     * @return string
+     */
+    public function getPreviewShowUrl($type)
+    {
+        $hashTool = $this->getHashTool();
+        $code = $hashTool->encode($this->id, $type);
+        $timeOutCode = $hashTool->encode(time() + 60);
+        $routeName = '';
+        switch ($type) {
+            case 1:
+                $routeName = 'front.poll.info';
+                break;
+            default:
+                ;
+        }
+        if (!empty($routeName)) {
+            return route($routeName, ['code'=>$code, 'precode'=>$timeOutCode]);
         }
         return '';
     }

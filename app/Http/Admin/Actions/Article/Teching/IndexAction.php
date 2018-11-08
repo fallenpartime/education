@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Article\Teching;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Article\Article;
+use Admin\Services\Article\ArticleService;
 use Admin\Services\Common\CommonService;
 use Admin\Services\Sql\Article\TechingSqlProcessor;
 
@@ -104,8 +105,10 @@ class IndexAction extends BaseAction
 
     protected function processList($list)
     {
+        $service = new ArticleService();
         foreach ($list as $key => $item) {
             $list[$key]->edit_url = route('articleTechingInfo', ['work_no'=>1, 'id'=>$item->id]);
+            $list[$key]->show_url = $service->_init($item->id)->getPreviewShowUrl($item->type);
             $list = $this->listAllowOperate($list, $key);
         }
         return $list;

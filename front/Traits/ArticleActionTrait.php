@@ -29,11 +29,23 @@ trait ArticleActionTrait
     protected function initRecordByCode()
     {
         $code = request('code');
+        $precode = request('precode');
         if (empty($code)) {
             return false;
         }
         $service = $this->getService();
-        $params = $service->getHashTool()->decode($code);
+        $hashTool = $service->getHashTool();
+        $allowPreview = false;
+        if (!empty($previewCode)) {
+            $previewParams = $hashTool->decode($previewCode);
+            if (!empty($previewParams)) {
+                $outTime = array_get($previewParams, 0);
+                if ($outTime >= time()) {
+                    $allowPreview = true;
+                }
+            }
+        }
+        $params = $hashTool->decode($code);
         if (empty($params)) {
             return false;
         } else if(count($params) < 2) {
@@ -45,7 +57,7 @@ trait ArticleActionTrait
                 return false;
             }
         }
-        $this->record = $service->getRecord($params[0]);
+        $this->record = $service->getRecord($params[0], $allowPreview);
         if (!empty($this->record)) {
             $this->likeUrl = route('front.article.like', ['code'=>$service->getCode(array_get($this->record, 'id'), array_get($this->record, 'type'))]);
             return true;

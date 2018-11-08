@@ -8,6 +8,7 @@ namespace App\Http\Admin\Actions\Activity\Poll;
 
 use Admin\Actions\BaseAction;
 use Admin\Models\Activity\Activity;
+use Admin\Services\Activity\ActivityService;
 use Admin\Services\Common\CommonService;
 use Admin\Services\Sql\Activity\Poll\IndexSqlProcessor;
 
@@ -136,8 +137,10 @@ class IndexAction extends BaseAction
 
     protected function processList($list)
     {
+        $service = new ActivityService();
         foreach ($list as $key => $item) {
             $list[$key]->edit_url = route('activityPollInfo', ['work_no'=>1, 'id'=>$item->id]);
+            $list[$key]->show_url = $service->_init($item->id)->getPreviewShowUrl($item->type);
             $list = $this->getActivityOpenStatus($list, $key);
             $list = $this->listAllowOperate($list, $key);
         }
