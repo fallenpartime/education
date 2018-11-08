@@ -29,7 +29,7 @@ trait ArticleActionTrait
     protected function initRecordByCode()
     {
         $code = request('code');
-        $precode = request('precode');
+        $previewCode = request('precode');
         if (empty($code)) {
             return false;
         }
