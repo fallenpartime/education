@@ -48,7 +48,7 @@
                 currentPage++;
                 var html = '';
                 $.each(data,function(index,item){
-                    html+='<li class="list-item">'+
+                    html+='<li class="list-item list-shadow">'+
                         '<a href="'+item.link+'" class="itemContain">'+
                         '<div class="cover">'+
                         '<img src="'+item.image+'" alt="">'+
