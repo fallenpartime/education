@@ -45,10 +45,10 @@ trait ErrorActionTrait
         $url = '';
         $type = array_get($this->record, 'type');
         if (empty($type)) {
-            $type = array_get($this, 'type', 0);
+            $type = isset($this->type)? $this->type: 0;
         }
         if (empty($type)) {
-            $type = array_get($this, 'recordType', 0);
+            $type = isset($this->recordType)? $this->recordType: 0;
         }
         switch ($type) {
             case 1:
