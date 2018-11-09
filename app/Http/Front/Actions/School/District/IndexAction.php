@@ -17,11 +17,11 @@ class IndexAction extends BaseAction
 
     public function run()
     {
-        if (!$this->request->isMethod('post')) {
-            return view('front.school.district.index', ['check_url'=>route('front.school.district.search')]);
-        }
         $httpTool = $this->getHttpTool();
         $keyword = $httpTool->getBothSafeParam('topic');
+        if (!$this->request->isMethod('post')) {
+            return view('front.school.district.index', ['check_url'=>route('front.school.district.search'), 'topic'=>!empty($keyword)? $keyword: '']);
+        }
         $list = $this->getList($keyword);
         $code = !empty($list)? 1: 0;
         $this->getJsonTool()->customJson(['code'=>$code, 'result'=>$list]);

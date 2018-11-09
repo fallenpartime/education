@@ -21,7 +21,7 @@
 <body>
     <div class="search">
         <label for="" class="mapSearch">
-            <input type="text" value="" id="topic" placeholder="请输入您要查询的学校">
+            <input type="text" value="{{ !empty($topic)? $topic: '' }}" id="topic" placeholder="请输入您要查询的学校">
             <!-- <button id="searchBtn" onclick="search()">搜索</button> -->
             <button id="searchBtn"></button>
         </label>
@@ -74,4 +74,7 @@
         )
     }
     document.getElementById('searchBtn').addEventListener('click', search);
+    @if(!empty($topic))
+        search();
+    @endif
 </script>
