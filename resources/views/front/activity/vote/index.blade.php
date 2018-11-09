@@ -16,7 +16,7 @@
             {{ csrf_field() }}
             @foreach($questions as $question)
             <div class="panel vote-panel">
-                <div class="panel-title">@if($question->type==0){{ $question->title }}@else<img src="{{ $question->source }}"/>@endif</div>
+                <div class="panel-title">@if($question->type==0){{ $question->title }}@else<img src="{{ $question->source }}" style="width: 100%; height: 60px;"/>@endif</div>
                 <div class="vote-type">
                     @if(!is_null($question->answers))
                         @foreach($question->answers as $answer)
