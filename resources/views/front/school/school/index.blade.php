@@ -48,12 +48,16 @@
             })
         });
     })
+    function redirectMap(object) {
+        object = $(object);
+        location.href="{{ route('front.school.district.search') }}?topic="+object.attr('address-value');
+    }
     function schoolList(data){
         $(".serResult").show();
         if(data.length>0){
             var html = '';
             $.each(data, function(index, item){
-                html+='<div class="result-item">'+
+                html+='<div class="result-item" address-value="'+item.address+'" onclick="redirectMap(this)">'+
                     '<h4>'+item.name+'</h4>'+
                     '<p class="item-address">地区：'+item.address+'</p>'+
                     '<p class="item-property">性质：'+item.property+'</p>'+
@@ -62,7 +66,6 @@
             })
             $(".schooleList").html(html)
         }
-
     }
 </script>
 </body>
