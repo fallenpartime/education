@@ -23,7 +23,6 @@ trait ErrorActionTrait
         if (empty($type)) {
             $type = array_get($this, 'recordType', 0);
         }
-        dd($type);
         switch ($type) {
             case 1:
                $url = route('front.news');
