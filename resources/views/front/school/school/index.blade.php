@@ -58,7 +58,7 @@
         if(data.length>0){
             var html = '';
             $.each(data, function(index, item){
-                html+='<div class="result-item list-shadow" address-value="'+item.address+'" onclick="redirectMap(this)">'+
+                html+='<div class="result-item list-shadow" address-value="'+item.name+'" onclick="redirectMap(this)">'+
                     '<h4>'+item.name+'</h4>'+
                     '<p class="item-address">地区：'+item.address+'</p>'+
                     '<p class="item-property">性质：'+item.property+'</p>'+
