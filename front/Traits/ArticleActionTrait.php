@@ -46,6 +46,7 @@ trait ArticleActionTrait
             }
         }
         $params = $hashTool->decode($code);
+        dd($params);
         if (empty($params)) {
             return false;
         } else if(count($params) < 2) {
