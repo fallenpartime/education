@@ -11,7 +11,7 @@
 <body>
 <div class="container">
     <div class="main">
-        <div class="sug-title">投票</div>
+        <div class="sug-title">{{ array_get($record, 'title') }}</div>
         <form action="" method="" id="vote-form">
             {{ csrf_field() }}
             @foreach($questions as $question)

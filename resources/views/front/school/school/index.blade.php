@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="/assets/front/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/assets/front/css/shadow.css">
     <script src="/assets/javascripts/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script>
         $.ajaxSetup({
@@ -57,7 +58,7 @@
         if(data.length>0){
             var html = '';
             $.each(data, function(index, item){
-                html+='<div class="result-item" address-value="'+item.address+'" onclick="redirectMap(this)">'+
+                html+='<div class="result-item list-shadow" address-value="'+item.address+'" onclick="redirectMap(this)">'+
                     '<h4>'+item.name+'</h4>'+
                     '<p class="item-address">地区：'+item.address+'</p>'+
                     '<p class="item-property">性质：'+item.property+'</p>'+
