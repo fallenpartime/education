@@ -34,7 +34,7 @@ trait ErrorActionTrait
                $url = route('front.practices');
                break;
             case 4:
-               $url = route('front.practices');
+               $url = route('front.techings');
                break;
         }
         return $this->errorRedirect($errorMsg, $url);
